@@ -1,0 +1,48 @@
+name: tools
+description: Usefull Tools For Flutter Developers
+version: 0.0.1
+homepage: ''
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_adaptive_ui: 0.8.0+1
+  url_launcher: 6.1.5
+  shared_preferences: any #2.0.15
+  cached_network_image: any #3.2.1
+  toast: any #0.3.0
+  share_plus: any #4.0.10
+  clipboard: any #0.1.3
+  url_strategy: 0.2.0
+  auto_size_text: 3.0.0
+  # connectivity_plus: any #2.3.6
+  device_info_plus: any #4.0.1
+  infinite_scroll_pagination: any #3.2.0
+  flutter_slidable: any #2.0.0
+  image_picker: any #0.8.5+3
+  photo_view: any #0.14.0
+  shamsi_date: 1.0.1
+  http: any #0.13.4
+  dio: any #4.0.4
+  # dartz: any
+
+
+
+  jiffy: ^5.0.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.1
+  dart_code_metrics: ^4.21.2
+
+  # flutter packages pub run build_runner build
+
+flutter:
+
