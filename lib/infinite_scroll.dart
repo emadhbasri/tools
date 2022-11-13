@@ -317,6 +317,8 @@ List<DataColumn> makeColumn(List<DataTableMy> data) => data
 
 DataRow makeRow(
   List<DataTableMy> data, {
+    Function? onTap,
+    List<DataCell>? addCells,
   ValueChanged<bool?>? onSelectChanged,
   GestureLongPressCallback? onLongPress,
   bool selected = false,
@@ -327,16 +329,22 @@ DataRow makeRow(
         onLongPress: onLongPress,
         onSelectChanged: onSelectChanged,
         color: color != null ? MaterialStatePropertyAll(color) : null,
-        cells: data
-            .map((e) => DataCell(Text(e.content), showEditIcon: e.editIcon))
-            .toList());
+        cells:[
+          ...data
+            .map((e) => DataCell(Text(e.content),
+            onTap: e.click==true?(){onTap!();}:null, showEditIcon: e.editIcon))
+            .toList(),
+            if(addCells!=null)
+            ...addCells!
+        ]
+        );
 
 class DataTableMy {
   final String head;
   final String content;
-  final bool numeric, editIcon;
+  final bool numeric, editIcon,click;
   final String tooltip;
 
   DataTableMy(this.head, this.content,
-      {this.numeric = false, this.tooltip = '', this.editIcon = false});
+      {this.numeric = false,this.click=false, this.tooltip = '', this.editIcon = false});
 }
