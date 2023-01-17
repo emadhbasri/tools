@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 
-Future<List<String>> getKeys()async{
+Future<List<String>> getKeys() async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   return pref.getKeys().toList();
 }
@@ -16,7 +16,7 @@ Future<void> setBool(String key, bool value) async {
   pref.setBool(key, value);
 }
 
-Future<bool?> getBool(String key) async {
+Future<bool?> getBool(String key, {bool? def}) async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   if (pref.containsKey(key)) {
     return pref.getBool(key)!;
@@ -30,13 +30,13 @@ Future<void> setInt(String key, int value) async {
   pref.setInt(key, value);
 }
 
-Future<int?> getInt(String key) async {
+Future<int?> getInt(String key, {int? def}) async {
   SharedPreferences pref = await SharedPreferences.getInstance();
-  
+
   if (pref.containsKey(key)) {
     return pref.getInt(key)!;
   } else {
-    return null;
+    return def;
   }
 }
 
@@ -45,7 +45,7 @@ Future<void> setString(String key, String value) async {
   pref.setString(key, value);
 }
 
-Future<String?> getString(String key) async {
+Future<String?> getString(String key, {String? def}) async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   if (pref.containsKey(key)) {
     return pref.getString(key)!;

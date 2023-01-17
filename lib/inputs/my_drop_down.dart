@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tools/layouts.dart';
 
+import '../text.dart';
 import 'my_input_maker.dart';
 
 class ToolsDropDown<T> extends StatelessWidget {
@@ -11,11 +12,13 @@ class ToolsDropDown<T> extends StatelessWidget {
     this.itemAlignment = Alignment.centerRight,
     this.mainAlignment = AlignmentDirectional.centerStart,
     required this.onChanged,
+    this.onChangedNull,
     this.borderRadius = const BorderRadius.all(Radius.circular(10)),
     this.isDense = false,
     this.isExpanded = false,
     this.hint,
     this.disabledHint,
+    this.hintTitle,
     this.underline,
     this.textStyle,
     this.elevation = 8,
@@ -26,6 +29,7 @@ class ToolsDropDown<T> extends StatelessWidget {
     this.screenWidth,
     this.screenHeight,
     this.hasDecorBorder = true,
+    this.allowNull = false,
     required this.data,
   }) : super(key: key);
   final ToolsDataDropDown data;
@@ -34,52 +38,81 @@ class ToolsDropDown<T> extends StatelessWidget {
   final bool hasDecorBorder;
   final AlignmentGeometry itemAlignment, mainAlignment;
   final ValueChanged<T> onChanged;
+  final ValueChanged<T?>? onChangedNull;
   final BorderRadius borderRadius;
   final Color? dropdownColor;
   final bool isExpanded, isDense;
   final Widget icon;
   final Widget? hint, disabledHint;
+  final String? hintTitle;
   late Widget? underline;
   final int elevation;
   final double itemHeight;
   final TextStyle? textStyle;
-  final double? screenWidth,screenHeight;
+  final double? screenWidth, screenHeight;
+  final bool allowNull;
   // final T? value;
 
   @override
   Widget build(BuildContext context) {
     if (hasDecorBorder) {
-      return ToolsContainerBox(
-        padHorizontal: 1,
-        padVertical: 0,
-        screenWidth: screenWidth,
-        screenHeight: screenHeight,
-        child: DropdownButton<T>(
-        items: List.generate(
-            data.titles.length,
-            (index) => DropdownMenuItem(
-                value: data.values[index],
-                alignment: itemAlignment,
-                child: Text(data.titles[index]))),
-        onChanged: (T? value) {
-          if (value != null) {
-            onChanged(value);
-          }
-        },
-        alignment: mainAlignment,
-        borderRadius: borderRadius,
-        isDense: isDense,
-        isExpanded: isExpanded,
-        dropdownColor: dropdownColor,
-        icon: icon,
-        hint: hint,
-        disabledHint: disabledHint,
-        elevation: elevation,
-        itemHeight: itemHeight,
-        style: textStyle,
-        underline: const SizedBox.shrink(),
-        value: data.value,
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (hintTitle != null)
+            Text(
+              hintTitle!,
+              style: toolstitleStyle(screenWidth: screenWidth, num: 3),
+            ),
+          ToolsContainerBox(
+            padHorizontal: 1,
+            padVertical: 0,
+            screenWidth: screenWidth,
+            screenHeight: screenHeight,
+            child: DropdownButton<T>(
+              items: [
+                if (allowNull)
+                  DropdownMenuItem(
+                      value: null,
+                      alignment: itemAlignment,
+                      child: const Text(
+                        '',
+                        textDirection: TextDirection.rtl,
+                      )),
+                ...List.generate(
+                    data.titles.length,
+                    (index) => DropdownMenuItem(
+                        value: data.values[index],
+                        alignment: itemAlignment,
+                        child: Text(
+                          data.titles[index],
+                          textDirection: TextDirection.rtl,
+                        )))
+              ],
+              onChanged: (T? value) {
+                if (allowNull) {
+                  onChangedNull!(value);
+                } else if (value != null) {
+                  onChanged(value);
+                }
+              },
+              alignment: mainAlignment,
+              borderRadius: borderRadius,
+              isDense: isDense,
+              isExpanded: isExpanded,
+              dropdownColor: dropdownColor,
+              icon: icon,
+              hint: hint,
+              disabledHint: disabledHint,
+              elevation: elevation,
+              itemHeight: itemHeight,
+              style: textStyle,
+              underline: const SizedBox.shrink(),
+              value: data.value,
+            ),
           ),
+        ],
       );
     } else {
       underline ??= Container(
@@ -93,34 +126,55 @@ class ToolsDropDown<T> extends StatelessWidget {
           ),
         ),
       );
-      return DropdownButton<T>(
-      items: List.generate(
-          data.titles.length,
-          (index) => DropdownMenuItem(
-              value: data.values[index],
-              alignment: itemAlignment,
-              child: Text(data.titles[index]))),
-      onChanged: (T? value) {
-        if (value != null) {
-          onChanged(value);
-        }
-      },
-      alignment: mainAlignment,
-      borderRadius: borderRadius,
-      isDense: isDense,
-      isExpanded: isExpanded,
-      dropdownColor: dropdownColor,
-      icon: icon,
-      hint: hint,
-      disabledHint: disabledHint,
-      elevation: elevation,
-      itemHeight: itemHeight,
-      style: textStyle,
-      underline: underline,
-      value: data.value,
-    );
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (hintTitle != null)
+            Text(
+              hintTitle!,
+              style: toolstitleStyle(screenWidth: screenWidth, num: 3),
+            ),
+          DropdownButton<T>(
+            items: [
+              if (allowNull)
+                DropdownMenuItem(
+                    value: null,
+                    alignment: itemAlignment,
+                    child: const Text(
+                      '',
+                      textDirection: TextDirection.rtl,
+                    )),
+              ...List.generate(
+                  data.titles.length,
+                  (index) => DropdownMenuItem(
+                      value: data.values[index],
+                      alignment: itemAlignment,
+                      child: Text(data.titles[index])))
+            ],
+            onChanged: (T? value) {
+              if (allowNull) {
+                onChangedNull!(value);
+              } else if (value != null) {
+                onChanged(value);
+              }
+            },
+            alignment: mainAlignment,
+            borderRadius: borderRadius,
+            isDense: isDense,
+            isExpanded: isExpanded,
+            dropdownColor: dropdownColor,
+            icon: icon,
+            hint: hint,
+            disabledHint: disabledHint,
+            elevation: elevation,
+            itemHeight: itemHeight,
+            style: textStyle,
+            underline: underline,
+            value: data.value,
+          ),
+        ],
+      );
     }
-
-    
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ToolsSwitch<T> extends StatelessWidget {
   const ToolsSwitch({
     Key? key,
-    this.textDirection=TextDirection.rtl,
+    this.textDirection = TextDirection.rtl,
     this.isMaterial = true,
     required this.onChanged,
     required this.value,
@@ -14,15 +14,15 @@ class ToolsSwitch<T> extends StatelessWidget {
     this.text,
     this.textStyle,
     this.child,
-    this.textDirectionItem=TextDirection.ltr,
+    this.textDirectionItem = TextDirection.ltr,
     this.activeTrackColor,
     this.thumbColor,
     this.trackColor,
-  })  : 
-  // assert(
-  //           (text != null && child == null) || (text == null && child != null)),
-  //       assert((text != null && textDirection != null) ||
-  //           (child != null && textDirection != null)),
+  }) :
+        // assert(
+        //           (text != null && child == null) || (text == null && child != null)),
+        //       assert((text != null && textDirection != null) ||
+        //           (child != null && textDirection != null)),
         super(key: key);
   final ValueChanged<bool> onChanged;
   final TextDirection? textDirection;
@@ -38,19 +38,22 @@ class ToolsSwitch<T> extends StatelessWidget {
   final bool isMaterial;
   @override
   Widget build(BuildContext context) {
-
     Widget mySwitch;
     if (isMaterial) {
       mySwitch = Directionality(
         textDirection: textDirectionItem,
-        child: Switch(
-          value: value,
-          onChanged: onChanged,
-          activeColor: activeColor,
-          activeTrackColor: activeTrackColor,
-          inactiveThumbColor: thumbColor,
-          inactiveTrackColor: trackColor,
-          materialTapTargetSize: materialTapTargetSize,
+        child: SizedBox(
+          width: Checkbox.width,
+          height: Checkbox.width,
+          child: Switch(
+            value: value,
+            onChanged: onChanged,
+            activeColor: activeColor,
+            activeTrackColor: activeTrackColor,
+            inactiveThumbColor: thumbColor,
+            inactiveTrackColor: trackColor,
+            materialTapTargetSize: materialTapTargetSize,
+          ),
         ),
       );
     } else {
@@ -65,7 +68,6 @@ class ToolsSwitch<T> extends StatelessWidget {
         ),
       );
     }
-
 
     if (textDirection != null) {
       return ToolsSwitchItem(
@@ -99,12 +101,11 @@ class ToolsSwitchItem extends StatelessWidget {
   final TextDirection textDirection;
   @override
   Widget build(BuildContext context) {
-
     return Row(
       mainAxisSize: MainAxisSize.min,
       textDirection: textDirection,
       children: [
-        if(text!=null || child!=null)
+        if (text != null || child != null)
           if (text != null)
             Text(
               text!,
@@ -112,11 +113,9 @@ class ToolsSwitchItem extends StatelessWidget {
               style: textStyle,
             )
           else
-            child!
-            ,
+            child!,
         SizedBox(width: space),
         mySwitch,
-        
       ],
     );
   }

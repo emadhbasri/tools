@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 export 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-
+import 'text.dart';
+import 'size.dart';
 class ToolsListViewData<T> {
   List<T>? data;
   final bool isLastPage;
@@ -14,6 +15,8 @@ class ToolsListView<T> extends StatefulWidget {
       {Key? key,
       required this.onLoad,
       required this.itemBuilder,
+      required this.realHeight,
+      required this.screenWidth,
       this.separatorBuilder,
       this.animateTransitions = false,
       this.transitionDuration = const Duration(milliseconds: 500),
@@ -43,6 +46,7 @@ class ToolsListView<T> extends StatefulWidget {
   final Axis scrollDirection;
   final EdgeInsets padding;
   final ScrollPhysics? physics;
+  final double realHeight,screenWidth;
   final ScrollController? scrollController;
   final Widget? firstPageProgressIndicatorBuilder,
       newPageProgressIndicatorBuilder,
@@ -95,6 +99,7 @@ class _ToolsListViewState<T> extends State<ToolsListView<T>> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: RefreshIndicator(
         onRefresh: () async {
           _pagingController.refresh();
@@ -122,9 +127,33 @@ class _ToolsListViewState<T> extends State<ToolsListView<T>> {
                           ? (context) => widget.newPageProgressIndicatorBuilder!
                           : null,
                   noItemsFoundIndicatorBuilder:
-                      widget.noItemsFoundIndicatorBuilder != null
-                          ? (context) => widget.noItemsFoundIndicatorBuilder!
-                          : null,
+
+                           (context) =>widget.noItemsFoundIndicatorBuilder != null? widget.noItemsFoundIndicatorBuilder!
+                          : SizedBox(
+                              width: double.maxFinite,
+                              height: doubleHeight(100, widget.realHeight),
+                              child: Center(
+                                  child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  ToolsText(
+                                    'متاسفانه محتوایی جهت نمایش وجود ندارد',
+                                    style: toolstitleStyle(
+                                        screenWidth: widget.screenWidth),
+                                  ),
+                                  TextButton.icon(
+                                      onPressed: () {
+                                        _pagingController.refresh();
+                                      },
+                                      icon: const Icon(Icons.refresh),
+                                      label: ToolsText(
+                                        'تلاش دوباره',
+                                        style: toolscontentStyle(
+                                            screenWidth: widget.screenWidth,
+                                            color: Colors.blue),
+                                      ))
+                                ],
+                              ))),
                   noMoreItemsIndicatorBuilder:
                       widget.noMoreItemsIndicatorBuilder != null
                           ? (context) => widget.noMoreItemsIndicatorBuilder!
@@ -155,9 +184,33 @@ class _ToolsListViewState<T> extends State<ToolsListView<T>> {
                           ? (context) => widget.newPageProgressIndicatorBuilder!
                           : null,
                   noItemsFoundIndicatorBuilder:
-                      widget.noItemsFoundIndicatorBuilder != null
-                          ? (context) => widget.noItemsFoundIndicatorBuilder!
-                          : null,
+
+                           (context) =>widget.noItemsFoundIndicatorBuilder != null? widget.noItemsFoundIndicatorBuilder!
+                          : SizedBox(
+                              width: double.maxFinite,
+                              height: doubleHeight(100, widget.realHeight),
+                              child: Center(
+                                  child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  ToolsText(
+                                    'متاسفانه محتوایی جهت نمایش وجود ندارد',
+                                    style: toolstitleStyle(
+                                        screenWidth: widget.screenWidth),
+                                  ),
+                                  TextButton.icon(
+                                      onPressed: () {
+                                        _pagingController.refresh();
+                                      },
+                                      icon: const Icon(Icons.refresh),
+                                      label: ToolsText(
+                                        'تلاش دوباره',
+                                        style: toolscontentStyle(
+                                            screenWidth: widget.screenWidth,
+                                            color: Colors.blue),
+                                      ))
+                                ],
+                              ))),
                   noMoreItemsIndicatorBuilder:
                       widget.noMoreItemsIndicatorBuilder != null
                           ? (context) => widget.noMoreItemsIndicatorBuilder!
@@ -180,17 +233,17 @@ class _ToolsListViewState<T> extends State<ToolsListView<T>> {
   }
 }
 
-
-
-
-
 abstract class ToolsTableData {
   List<DataTableMy> headers(int index);
 }
 
 class ToolsTableList extends StatefulWidget {
   const ToolsTableList(
-      {Key? key, required this.list, this.step = 20, required this.isLastPage, required this.loadMore})
+      {Key? key,
+      required this.list,
+      this.step = 20,
+      required this.isLastPage,
+      required this.loadMore})
       : super(key: key);
   final List<ToolsTableData> list;
   final bool isLastPage;
@@ -236,9 +289,9 @@ class _ToolsTableListState extends State<ToolsTableList>
         }
       });
     } else {
-      if(widget.isLastPage==false){
+      if (widget.isLastPage == false) {
         widget.loadMore();
-      }else{
+      } else {
         out = widget.list;
       }
     }
@@ -309,16 +362,18 @@ class _ToolsTableListState extends State<ToolsTableList>
 List<DataColumn> makeColumn(List<DataTableMy> data) => data
     .map(
       (e) => DataColumn(
-          label: Text(e.head),
-          numeric: e.numeric,
-          tooltip: e.tooltip != '' ? e.tooltip : e.head),
+        label: Text(e.head),
+        numeric: e.numeric,
+        // tooltip: e.tooltip != '' ? e.tooltip : e.head
+      ),
     )
     .toList();
 
 DataRow makeRow(
   List<DataTableMy> data, {
-    Function? onTap,
-    List<DataCell>? addCells,
+  Function? onTap,
+  List<DataCell>? firstCells,
+  List<DataCell>? addCells,
   ValueChanged<bool?>? onSelectChanged,
   GestureLongPressCallback? onLongPress,
   bool selected = false,
@@ -329,22 +384,37 @@ DataRow makeRow(
         onLongPress: onLongPress,
         onSelectChanged: onSelectChanged,
         color: color != null ? MaterialStatePropertyAll(color) : null,
-        cells:[
+        cells: [
+          if (firstCells != null) ...firstCells,
           ...data
-            .map((e) => DataCell(Text(e.content),
-            onTap: e.click==true?(){onTap!();}:null, showEditIcon: e.editIcon))
-            .toList(),
-            if(addCells!=null)
-            ...addCells!
-        ]
-        );
+              .map((e) => DataCell(e.child == null ? Text(e.content) : e.child!,
+                  onTap: e.doIt != null
+                      ? () {
+                          e.doIt!();
+                        }
+                      : e.click == true
+                          ? () {
+                              onTap!();
+                            }
+                          : null,
+                  showEditIcon: e.editIcon))
+              .toList(),
+          if (addCells != null) ...addCells!
+        ]);
 
 class DataTableMy {
+  final Function? doIt;
   final String head;
   final String content;
-  final bool numeric, editIcon,click;
+  final Widget? child;
+  final bool numeric, editIcon, click;
   final String tooltip;
 
   DataTableMy(this.head, this.content,
-      {this.numeric = false,this.click=false, this.tooltip = '', this.editIcon = false});
+      {this.numeric = false,
+      this.click = false,
+      this.child,
+      this.tooltip = '',
+      this.doIt,
+      this.editIcon = false});
 }

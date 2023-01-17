@@ -4,9 +4,6 @@ import 'package:tools/text.dart';
 
 import '../colors.dart';
 
-
-
-
 class ToolsAddRemoveWidget extends StatefulWidget {
   const ToolsAddRemoveWidget({
     Key? key,
@@ -21,6 +18,8 @@ class ToolsAddRemoveWidget extends StatefulWidget {
     this.removeIconColor = black,
     this.addIconSize = 17,
     this.removeIconSize = 17,
+    this.textDirection = TextDirection.rtl,
+    this.textStyle = const TextStyle(),
   }) : super(key: key);
   final Function? addFunc, removeFunc;
   final ValueChanged<int> onChanged;
@@ -29,6 +28,8 @@ class ToolsAddRemoveWidget extends StatefulWidget {
   final IconData addIcon, removeIcon;
   final Color addIconColor, removeIconColor;
   final double addIconSize, removeIconSize;
+  final TextDirection textDirection;
+  final TextStyle textStyle;
   @override
   State<ToolsAddRemoveWidget> createState() => _ToolsAddRemoveWidgetState();
 }
@@ -44,6 +45,7 @@ class _ToolsAddRemoveWidgetState extends State<ToolsAddRemoveWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      textDirection: widget.textDirection,
       mainAxisSize: MainAxisSize.min,
       children: [
         GestureDetector(
@@ -69,7 +71,7 @@ class _ToolsAddRemoveWidgetState extends State<ToolsAddRemoveWidget> {
           ),
         ),
         SizedBox(width: doubleWidth(3)),
-        Text(count.toString().toPrice),
+        Text(count.toString().toPrice, style: widget.textStyle),
         SizedBox(width: doubleWidth(3)),
         GestureDetector(
           onTap: () {

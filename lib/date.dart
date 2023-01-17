@@ -113,7 +113,7 @@ class YMDW {
   YMDW(this.year, this.month, this.day, [this.weak]);
 }
 
-String toolsmakeDate({
+String toolsMakeDate({
   dynamic date,
   bool dateIsJalali = false,
   String char = '/',

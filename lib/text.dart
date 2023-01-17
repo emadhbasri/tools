@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+export 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'colors.dart';
 import 'size.dart';
@@ -73,8 +74,8 @@ class ToolsRichText extends StatelessWidget {
       this.group,
       this.stepGranularity = 1,
       this.overflowReplacement})
-      : 
-      // assert(minFontSize != null && overflow != null),
+      :
+        // assert(minFontSize != null && overflow != null),
         super(key: key);
 
   final int? maxLines;
@@ -117,7 +118,7 @@ class ToolsRichText extends StatelessWidget {
 
 class DataRich {
   final String text;
-  final TextStyle style;
+  final TextStyle? style;
 
   const DataRich({required this.text, required this.style});
 }
@@ -133,10 +134,33 @@ String _priceMake(dynamic price) {
   String out = priceS;
 
   for (int j = tempString.length - 1; j >= 0; j--) {
-    out += '،';
+    out += ',';
     out += tempString[j];
   }
   return out;
+}
+
+String _priceMakeString(dynamic price) {
+  String priceS = price.toString();
+
+  int? pi = int.tryParse(priceS);
+  if (pi != null) {
+    double result;
+    if (priceS.length > 6 && priceS.length <= 9) {
+      result = pi / 1000000;
+      return '${result.toStringAsFixed(1)} میلیون';
+    } else if (priceS.length > 9 && priceS.length <= 12) {
+      result = pi / 1000000000;
+      return '${result.toStringAsFixed(1)} میلیون';
+    } else if (priceS.length > 12 && priceS.length <= 15) {
+      result = pi / 1000000000000;
+      return '${result.toStringAsFixed(1)} میلیون';
+    } else {
+      return _priceMake(price);
+    }
+  } else {
+    return _priceMake(price);
+  }
 }
 
 String engNumToPer(String data) {
@@ -206,7 +230,7 @@ String _toEnglish1(String data) {
   for (int j = 0; j < data.length; j++) {
     out += perNumToEng(data[j]);
   }
-  
+
   return out;
 }
 
@@ -214,62 +238,125 @@ extension Persian on String {
   String get toEng => _toEnglish1(this);
   String get toPersian => _toPersian1(this);
   String get toPrice => _priceMake(this);
+  String get toPriceString => _priceMakeString(this);
 }
 
 TextStyle toolstitleStyle(
-    {
-      int num=4,
-      Color color = black1,
+    {int num = 4,
+    Color color = black1,
     FontWeight fontWeight = FontWeight.bold,
     double? fontSize,
     double? screenWidth}) {
-      switch(num){
-        case 1:fontSize ??= w4(screenWidth);break;
-        case 15:fontSize ??= w4(screenWidth)+w2(screenWidth);break;
-        case 2:fontSize ??= w8(screenWidth);break;
-        case 25:fontSize ??= w8(screenWidth)+w2(screenWidth);break;
-        case 3:fontSize ??= w12(screenWidth);break;
-        case 35:fontSize ??= w12(screenWidth)+w2(screenWidth);break;
-        case 4:fontSize ??= w16(screenWidth);break;
-        case 45:fontSize ??= w16(screenWidth)+w2(screenWidth);break;
-        case 5:fontSize ??= w20(screenWidth);break;
-        case 55:fontSize ??= w20(screenWidth)+w2(screenWidth);break;
-        case 6:fontSize ??= w24(screenWidth);break;
-        case 65:fontSize ??= w24(screenWidth)+w2(screenWidth);break;
-        case 7:fontSize ??= w28(screenWidth);break;
-        case 75:fontSize ??= w28(screenWidth)+w2(screenWidth);break;
-        case 8:fontSize ??= w32(screenWidth);break;
-        case 85:fontSize ??= w32(screenWidth)+w2(screenWidth);break;
-      }
+  switch (num) {
+    case 1:
+      fontSize ??= w4(screenWidth);
+      break;
+    case 15:
+      fontSize ??= w4(screenWidth) + w2(screenWidth);
+      break;
+    case 2:
+      fontSize ??= w8(screenWidth);
+      break;
+    case 25:
+      fontSize ??= w8(screenWidth) + w2(screenWidth);
+      break;
+    case 3:
+      fontSize ??= w12(screenWidth);
+      break;
+    case 35:
+      fontSize ??= w12(screenWidth) + w2(screenWidth);
+      break;
+    case 4:
+      fontSize ??= w16(screenWidth);
+      break;
+    case 45:
+      fontSize ??= w16(screenWidth) + w2(screenWidth);
+      break;
+    case 5:
+      fontSize ??= w20(screenWidth);
+      break;
+    case 55:
+      fontSize ??= w20(screenWidth) + w2(screenWidth);
+      break;
+    case 6:
+      fontSize ??= w24(screenWidth);
+      break;
+    case 65:
+      fontSize ??= w24(screenWidth) + w2(screenWidth);
+      break;
+    case 7:
+      fontSize ??= w28(screenWidth);
+      break;
+    case 75:
+      fontSize ??= w28(screenWidth) + w2(screenWidth);
+      break;
+    case 8:
+      fontSize ??= w32(screenWidth);
+      break;
+    case 85:
+      fontSize ??= w32(screenWidth) + w2(screenWidth);
+      break;
+  }
   fontSize ??= w32(screenWidth);
   return TextStyle(color: color, fontWeight: fontWeight, fontSize: fontSize);
 }
 
 TextStyle toolscontentStyle(
-    {
-      int num=3,
-      Color color = black1,
+    {int num = 3,
+    Color color = black1,
     FontWeight fontWeight = FontWeight.normal,
     double? fontSize,
     double? screenWidth}) {
-      switch(num){
-        case 1:fontSize ??= w4(screenWidth);break;
-        case 15:fontSize ??= w4(screenWidth)+w2(screenWidth);break;
-        case 2:fontSize ??= w8(screenWidth);break;
-        case 25:fontSize ??= w8(screenWidth)+w2(screenWidth);break;
-        case 3:fontSize ??= w12(screenWidth);break;
-        case 35:fontSize ??= w12(screenWidth)+w2(screenWidth);break;
-        case 4:fontSize ??= w16(screenWidth);break;
-        case 45:fontSize ??= w16(screenWidth)+w2(screenWidth);break;
-        case 5:fontSize ??= w20(screenWidth);break;
-        case 55:fontSize ??= w20(screenWidth)+w2(screenWidth);break;
-        case 6:fontSize ??= w24(screenWidth);break;
-        case 65:fontSize ??= w24(screenWidth)+w2(screenWidth);break;
-        case 7:fontSize ??= w28(screenWidth);break;
-        case 75:fontSize ??= w28(screenWidth)+w2(screenWidth);break;
-        case 8:fontSize ??= w32(screenWidth);break;
-        case 85:fontSize ??= w32(screenWidth)+w2(screenWidth);break;
-      }
+  switch (num) {
+    case 1:
+      fontSize ??= w4(screenWidth);
+      break;
+    case 15:
+      fontSize ??= w4(screenWidth) + w2(screenWidth);
+      break;
+    case 2:
+      fontSize ??= w8(screenWidth);
+      break;
+    case 25:
+      fontSize ??= w8(screenWidth) + w2(screenWidth);
+      break;
+    case 3:
+      fontSize ??= w12(screenWidth);
+      break;
+    case 35:
+      fontSize ??= w12(screenWidth) + w2(screenWidth);
+      break;
+    case 4:
+      fontSize ??= w16(screenWidth);
+      break;
+    case 45:
+      fontSize ??= w16(screenWidth) + w2(screenWidth);
+      break;
+    case 5:
+      fontSize ??= w20(screenWidth);
+      break;
+    case 55:
+      fontSize ??= w20(screenWidth) + w2(screenWidth);
+      break;
+    case 6:
+      fontSize ??= w24(screenWidth);
+      break;
+    case 65:
+      fontSize ??= w24(screenWidth) + w2(screenWidth);
+      break;
+    case 7:
+      fontSize ??= w28(screenWidth);
+      break;
+    case 75:
+      fontSize ??= w28(screenWidth) + w2(screenWidth);
+      break;
+    case 8:
+      fontSize ??= w32(screenWidth);
+      break;
+    case 85:
+      fontSize ??= w32(screenWidth) + w2(screenWidth);
+      break;
+  }
   fontSize ??= w32(screenWidth);
   return TextStyle(color: color, fontWeight: fontWeight, fontSize: fontSize);
 }

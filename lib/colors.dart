@@ -17,7 +17,7 @@ const trans = Colors.transparent;
 const blue = Colors.blue;
 const gold = Color.fromRGBO(255, 203, 5, 1);
 final con = Container(color: red);
-
+Color scaffoldColor = Colors.grey[700]!;
 const black1 = Color(0xFF292826);
 
 const colorPrimaryLighter = Color.fromRGBO(231, 239, 255, 1);
@@ -74,6 +74,19 @@ const colorGray6 = Color.fromRGBO(111, 117, 145, 1);
 const colorGray7 = Color.fromRGBO(95, 100, 124, 1);
 const colorGray8 = Color.fromRGBO(73, 77, 95, 1);
 const colorGray9 = Color.fromRGBO(40, 42, 52, 1);
+
+const grayLight = Color.fromRGBO(239, 239, 239, 1);
+const grayLight1 = Color.fromRGBO(200, 200, 200, 1);
+const grayBold = Color.fromRGBO(159, 159, 159, 1);
+
+const colorGray80 = Color.fromRGBO(80, 80, 80, 1);
+const colorGray93 = Color.fromRGBO(93, 93, 93, 1);
+const colorGray206 = Color.fromRGBO(206, 206, 206, 1);
+const colorGray110 = Color.fromRGBO(110, 110, 110, 1);
+const colorGray156 = Color.fromRGBO(156, 156, 156, 1);
+const colorGray241 = Color.fromRGBO(241, 241, 241, 1);
+const colorGray248 = Color.fromRGBO(248, 248, 248, 1);
+
 
 const colorOtherOverlay = Color.fromRGBO(0, 0, 0, 0.4);
 const colorPurplePink = Color.fromRGBO(182, 32, 224, 1);

@@ -14,7 +14,8 @@ Widget imageNetwork(String url,
     BoxFit? fit,
     Color? loadingBackColor,
     Color? loadingColor,
-    String? errorImage,
+    Widget? errorImage,
+    String? type,
     bool noCatch = false}) {
   if (noCatch) {
     return Image.network(
@@ -55,48 +56,64 @@ Widget imageNetwork(String url,
       },
       errorBuilder: (context, error, stackTrace) {
         return errorImage != null
-            ? Image.asset(errorImage, fit: BoxFit.fill)
+            ? errorImage
             : const SizedBox();
       },
     );
   }
-
   return CachedNetworkImage(
-    imageUrl: url,
-    color: color,
-    fit: fit,
-    progressIndicatorBuilder: (context, url, DownloadProgress progress) {
-      if (progress.totalSize != null) {
-        return Center(
-          child: SizedBox(
-            width: 50,
-            height: 50,
-            child: CircularProgressIndicator(
-              value: (progress.downloaded / progress.totalSize!).toDouble(),
-              backgroundColor: loadingBackColor,
-              valueColor: loadingColor == null
-                  ? null
-                  : AlwaysStoppedAnimation<Color>(loadingColor),
+      imageUrl: url,
+      color: color,
+      fit: fit,
+      progressIndicatorBuilder: (context, url, DownloadProgress progress) {
+        if (progress.totalSize != null) {
+          return Center(
+            child: SizedBox(
+              width: 50,
+              height: 50,
+              child: CircularProgressIndicator(
+                value: (progress.downloaded / progress.totalSize!).toDouble(),
+                backgroundColor: loadingBackColor,
+                valueColor: loadingColor == null
+                    ? null
+                    : AlwaysStoppedAnimation<Color>(loadingColor),
+              ),
             ),
-          ),
-        );
-      } else {
-        return Center(
-          child: SizedBox(
-            width: 50,
-            height: 50,
-            child: CircularProgressIndicator(
-              backgroundColor: loadingBackColor,
-              valueColor: loadingColor == null
-                  ? null
-                  : AlwaysStoppedAnimation<Color>(loadingColor),
+          );
+        } else {
+          return Center(
+            child: SizedBox(
+              width: 50,
+              height: 50,
+              child: CircularProgressIndicator(
+                backgroundColor: loadingBackColor,
+                valueColor: loadingColor == null
+                    ? null
+                    : AlwaysStoppedAnimation<Color>(loadingColor),
+              ),
             ),
-          ),
-        );
-      }
-    },
-    errorWidget: (context, url, error) => errorImage != null
-        ? Image.asset(errorImage, fit: BoxFit.fill)
-        : const SizedBox(),
-  );
+          );
+        }
+      },
+      errorWidget: (context, url, error) {
+        return errorImage != null
+            ? errorImage
+            : const SizedBox();
+        // switch (type) {
+        //   case 'person':
+        //     return Image.asset('assets/images/person/person_icons.png', fit: BoxFit.fill);
+        //   case 'brand':
+        //     return Image.asset('assets/images/brand.jpg', fit: BoxFit.fill);
+        //   case 'ravand':
+        //     return Image.asset('assets/images/buildsmall.jpg',
+        //         fit: BoxFit.fill);
+        //   case 'ravandbig': //todo
+        //     return Image.asset('assets/images/buildbig.jpg', fit: BoxFit.fill);
+        //   case 'map': //todo
+        //     return Image.asset('assets/images/MAP_BASTAR.jpg',
+        //         fit: BoxFit.fill);
+        //   default:
+        //     return Image.asset('assets/images/logo.png', fit: BoxFit.fill);
+        // }
+      });
 }

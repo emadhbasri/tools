@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_ui/flutter_adaptive_ui.dart';
 
-enum DeviceType { mobile, tablet, desktop }
+enum DeviceType { mobile, mobileTablet, tablet, tabletDesktop, desktop }
 
 ///(context, widgets, deviceType, screenWidth, screenHeight, realWidth, realHeight){}
 typedef MyResponsiveBuild = Widget Function(
   BuildContext context,
-  Widget? widgets,
+  // Widget? widgets,
   DeviceType deviceType,
   double screenWidth,
   double screenHeight,
@@ -24,15 +24,15 @@ typedef MyResponsiveBuildSimple = Widget? Function(
 );
 
 late Size screenSize;
-double doubleHeight1(double value, {double height = 0}) {
-  if (height == 0) height = screenSize.height;
-  return (height * value) / 100;
-}
+// double doubleHeight1(double value, {double height = 0}) {
+//   if (height == 0) height = screenSize.height;
+//   return (height * value) / 100;
+// }
 
-double doubleWidth1(double value, {double width = 0}) {
-  if (width == 0) width = screenSize.width;
-  return (width * value) / 100;
-}
+// double doubleWidth1(double value, {double width = 0}) {
+//   if (width == 0) width = screenSize.width;
+//   return (width * value) / 100;
+// }
 
 double doubleHeight(double value, [double screenHeight = 0]) {
   if (screenHeight == 0) screenHeight = screenSize.height;
@@ -100,15 +100,15 @@ class MySizer extends StatefulWidget {
   const MySizer(
       {Key? key,
       required this.builder,
-      this.mobile,
-      this.tablet,
-      this.desktop,
+      // this.mobile,
+      // this.tablet,
+      // this.desktop,
       this.makeItMobile = false,
       this.backColor})
       : super(key: key);
 
   ///(context, screenWidth, screenHeight, realWidth, realHeight) {}
-  final MyResponsiveBuildSimple? mobile, tablet, desktop;
+  // final MyResponsiveBuildSimple? mobile, tablet, desktop;
 
   ///(context, widgets, deviceType, screenWidth, screenHeight, realWidth, realHeight){}
   final MyResponsiveBuild builder;
@@ -145,9 +145,9 @@ class _MySizerState extends State<MySizer> {
 
         return widget.builder(
             context,
-            widget.mobile == null
-                ? null
-                : widget.mobile!(context, width, height, width, height),
+            // widget.mobile == null
+            //     ? null
+            //     : widget.mobile!(context, width, height, width, height),
             DeviceType.mobile,
             width,
             height,
@@ -155,6 +155,7 @@ class _MySizerState extends State<MySizer> {
             height);
       },
       small: (BuildContext context, Screen screen) {
+        print('small');
         double width = screen.mediaQueryData.size.width;
         double height = screen.mediaQueryData.size.height;
         double screenHeight = height;
@@ -170,10 +171,10 @@ class _MySizerState extends State<MySizer> {
                   constraints: BoxConstraints(maxWidth: screenWidth),
                   child: widget.builder(
                       context,
-                      widget.mobile == null
-                          ? null
-                          : widget.mobile!(
-                              context, width, height, width, height),
+                      // widget.mobile == null
+                      //     ? null
+                      //     : widget.mobile!(
+                      //         context, width, height, width, height),
                       DeviceType.tablet,
                       screenWidth,
                       screenHeight,
@@ -184,18 +185,32 @@ class _MySizerState extends State<MySizer> {
             );
           }
         }
-        return widget.builder(
-            context,
-            widget.tablet == null
-                ? null
-                : widget.tablet!(context, width, height, width, height),
-            DeviceType.tablet,
-            screenWidth,
-            screenHeight,
-            width,
-            height);
+        if (width > 500 && width <= 800) {
+          return widget.builder(
+              context,
+              // widget.tablet == null
+              //     ? null
+              //     : widget.tablet!(context, width, height, width, height),
+              DeviceType.mobileTablet,
+              screenWidth,
+              screenHeight,
+              width,
+              height);
+        } else {
+          return widget.builder(
+              context,
+              // widget.tablet == null
+              //     ? null
+              //     : widget.tablet!(context, width, height, width, height),
+              DeviceType.tablet,
+              screenWidth,
+              screenHeight,
+              width,
+              height);
+        }
       },
       defaultBuilder: (BuildContext context, Screen screen) {
+        print('default');
         double width = screen.mediaQueryData.size.width;
         double height = screen.mediaQueryData.size.height;
         double screenHeight = height;
@@ -211,10 +226,10 @@ class _MySizerState extends State<MySizer> {
                   constraints: BoxConstraints(maxWidth: screenWidth),
                   child: widget.builder(
                       context,
-                      widget.mobile == null
-                          ? null
-                          : widget.mobile!(
-                              context, width, height, width, height),
+                      // widget.mobile == null
+                      //     ? null
+                      //     : widget.mobile!(
+                      //         context, width, height, width, height),
                       DeviceType.desktop,
                       screenWidth,
                       screenHeight,
@@ -225,16 +240,32 @@ class _MySizerState extends State<MySizer> {
             );
           }
         }
-        return widget.builder(
+
+        if (width >= 1000 && width <= 1200) {
+          return widget.builder(
             context,
-            widget.desktop == null
-                ? null
-                : widget.desktop!(context, width, height, width, height),
+            // widget.desktop == null
+            //     ? null
+            //     : widget.desktop!(context, width, height, width, height),
+            DeviceType.tabletDesktop,
+            screenWidth,
+            screenHeight,
+            width,
+            height);
+        } else {
+          return widget.builder(
+            context,
+            // widget.desktop == null
+            //     ? null
+            //     : widget.desktop!(context, width, height, width, height),
             DeviceType.desktop,
             screenWidth,
             screenHeight,
             width,
             height);
+        }
+
+
       },
     );
   }

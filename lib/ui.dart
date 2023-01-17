@@ -1,42 +1,83 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tools/colors.dart';
+import 'package:tools/size.dart';
+import 'package:tools/text.dart';
 
+class DividerName extends StatelessWidget {
+  const DividerName(
+      {Key? key,
+      this.textDirection = TextDirection.rtl,
+      required this.text,
+      required this.screenWidth, this.size=2, this.color=colorGray156})
+      : super(key: key);
+  final TextDirection textDirection;
+  final Widget text;
+  final double screenWidth,size;
+  final Color color;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      textDirection: textDirection,
+      children: [
+        text,
+        sw2(screenWidth),
+        Expanded(
+          child: Container(
+            width: double.maxFinite,
+            height: size,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              color: color,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
 
 
 MaterialStateProperty<T> toolsmakeStyle<T>(value) =>
     MaterialStateProperty.all<T>(value);
 
-Widget toolscircleLoader()=>Scaffold(body: Center(child: CircularProgressIndicator()));
+Widget toolscircleLoader() =>
+    Scaffold(body: Center(child: CircularProgressIndicator()));
 
-Widget toolsprogressSimple({Color? color, double? size,bool justProgress=false}) {
-  
+Widget toolsprogressSimple(
+    {Color? color, double? size, bool justProgress = false}) {
   if (size != null) {
-    if(justProgress)return SizedBox(
-      width: size,
-      height: size,
-      child: CircularProgressIndicator(
-            color: color,
-          ),
-    );
-    
+    if (justProgress) {
+      return SizedBox(
+        width: size,
+        height: size,
+        child: CircularProgressIndicator(
+          color: color,
+        ),
+      );
+    }
+
     return SizedBox(
       width: size,
       height: size,
       child: Center(
           child: CircularProgressIndicator(
-            color: color,
-          )),
+        color: color,
+      )),
     );
   } else {
-    if(justProgress)return CircularProgressIndicator(
-          color: color,
-        );
+    if (justProgress) {
+      return CircularProgressIndicator(
+        color: color,
+      );
+    }
     return Center(
         child: CircularProgressIndicator(
-          color: color,
-        ));
+      color: color,
+    ));
   }
 }
+
 toolscircleSmall(Color color, {double size = 15}) => Container(
       width: size,
       height: size,
@@ -79,18 +120,22 @@ toolsstatusSet({
   }
 }
 
-Widget toolsphoneText(String data, {TextStyle? style, differetColor = Colors.pink}) {
+Widget toolsphoneText(String data,
+    {TextStyle? style, Color differetColor = Colors.pink}) {
+  style ??= const TextStyle();
   if (data.length < 11) return Text(data);
-  return RichText(
+  return ToolsRichText(
+    [
+      DataRich(text: data.substring(0, 4), style: style),
+      DataRich(text: ' ', style: style),
+      DataRich(
+          text: data.substring(4, 7),
+          style: style.copyWith(color: differetColor)),
+      DataRich(text: ' ', style: style),
+      DataRich(text: data.substring(7, 11), style: style),
+    ],
+    style: style,
     textDirection: TextDirection.ltr,
-    text: TextSpan(style: style, children: [
-      TextSpan(text: data.substring(0, 4)),
-      const TextSpan(text: ' '),
-      TextSpan(
-          text: data.substring(4, 7), style: TextStyle(color: differetColor)),
-      const TextSpan(text: ' '),
-      TextSpan(text: data.substring(7, 11)),
-    ]),
   );
 }
 
@@ -99,8 +144,3 @@ String toolsmakePhoneStar(String phoneNumber) {
   String suff = phoneNumber.substring(7, 11);
   return '$pre***$suff';
 }
-
-
-
-
-

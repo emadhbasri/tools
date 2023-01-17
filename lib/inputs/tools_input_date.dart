@@ -52,7 +52,7 @@ class ToolsInputDate extends StatelessWidget {
                   initialDay: Jalali.now().day,
                   initialMonth: Jalali.now().month,
                   initialYear: Jalali.now().year,
-                  maxYear: Jalali.now().year - 5,
+                  maxYear: Jalali.now().year,
                   // minYear: Jalali.now().year - ,
                   onConfirm: (int? year, int? month, int? day) {
                 if (year != null && month != null && day != null) {
