@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tools/date.dart';
+import 'package:tools/text.dart';
 
 import '../size.dart';
 import 'my_input.dart';
+import 'my_input_maker.dart';
+import 'tools_input_date.dart';
 
 class ToolsInputTwoData extends StatelessWidget {
   const ToolsInputTwoData(
@@ -53,6 +57,53 @@ class ToolsInputTwoData extends StatelessWidget {
           textDirection: textDirectionEnd,
         ),
       ),
+    ]);
+  }
+}
+
+class ToolsInputTwoDataDate extends StatelessWidget {
+  const ToolsInputTwoDataDate(
+      {Key? key,
+      required this.screenWidth,
+      required this.screenHeight,
+      required this.onChangedStart,
+      required this.onChangedEnd,
+      required this.title, required this.data})
+      : super(key: key);
+  final double screenWidth, screenHeight;
+  final ValueChanged<DateTime> onChangedStart, onChangedEnd;
+  final ToolsDataTwo<DateTime?> data;
+  final Widget title;
+  @override
+  Widget build(BuildContext context) {
+    return Row(children: [
+      title,
+      sw3(screenWidth),
+      ToolsInputDate(
+          text: '',
+          screenWidth: screenWidth,
+          screenHeight: screenHeight,
+          onChange: (year, month, day) {
+            DateTime tempDate = DateTime(year, month, day);
+            onChangedStart(tempDate);
+          },
+          showText: data.data1 != null
+              ? ToolsText(toolsMakeDate(isJalali: false, date: data.data1))
+              : null),
+      sw2(screenWidth),
+      const Center(child: Text('تا')),
+      sw2(screenWidth),
+      ToolsInputDate(
+          text: '',
+          screenWidth: screenWidth,
+          screenHeight: screenHeight,
+          onChange: (year, month, day) {
+            DateTime tempDate = DateTime(year, month, day);
+            onChangedEnd(tempDate);
+          },
+          showText: data.data2 != null
+              ? ToolsText(toolsMakeDate(isJalali: false, date: data.data2))
+              : null),
     ]);
   }
 }

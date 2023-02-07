@@ -62,7 +62,7 @@ class ToolsGalMobileState extends State<ToolsGalMobile> {
   @override
   Widget build(BuildContext context) {
     return MySizer(
-      builder: (context, widgets, deviceType, screenWidth, screenHeight,
+      builder: (context,  deviceType, screenWidth, screenHeight,
           realWidth, realHeight) {
         return Scaffold(
             backgroundColor: white,

@@ -399,7 +399,7 @@ DataRow makeRow(
                           : null,
                   showEditIcon: e.editIcon))
               .toList(),
-          if (addCells != null) ...addCells!
+          if (addCells != null) ...addCells
         ]);
 
 class DataTableMy {

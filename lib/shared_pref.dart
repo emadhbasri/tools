@@ -4,7 +4,7 @@ export 'package:shared_preferences/shared_preferences.dart';
 Future<List<String>> getKeys() async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   return pref.getKeys().toList();
-}
+} 
 
 Future<void> deleteKey(String key) async {
   SharedPreferences pref = await SharedPreferences.getInstance();

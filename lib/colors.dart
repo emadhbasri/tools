@@ -85,6 +85,7 @@ const colorGray206 = Color.fromRGBO(206, 206, 206, 1);
 const colorGray110 = Color.fromRGBO(110, 110, 110, 1);
 const colorGray156 = Color.fromRGBO(156, 156, 156, 1);
 const colorGray241 = Color.fromRGBO(241, 241, 241, 1);
+const colorGray220 = Color.fromRGBO(220, 220, 220, 1);
 const colorGray248 = Color.fromRGBO(248, 248, 248, 1);
 
 

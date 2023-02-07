@@ -16,6 +16,7 @@ abstract class Go {
             },
             transitionsBuilder: (context, Animation<double> animation,
                 Animation<double> secendAnimation, Widget widget) {
+
               return SlideTransition(
                 position: Tween(begin: const Offset(1, 0), end: const Offset(0, 0))
                     .animate(CurvedAnimation(
@@ -42,7 +43,8 @@ abstract class Go {
     } else {
       route = MaterialPageRoute(builder: (context) => page);
     }
-    return await Navigator.push(context, route).catchError((e) => debugPrint('Error push $e'));
+    return await Navigator.push(context, route).catchError((e) =>
+    debugPrint('Error push $e'));
   }
 
   static Future<dynamic> replace(BuildContext context, Widget page,

@@ -126,6 +126,11 @@ class DataRich {
 String _priceMake(dynamic price) {
   List<String> tempString = [];
   String priceS = price.toString();
+  bool isNegetive = false;
+  if (priceS.contains('-')) {
+    isNegetive = true;
+    priceS=priceS.replaceAll('-', '');
+  }
   if (priceS.length <= 3) return priceS;
   while (priceS.length > 3) {
     tempString.add(priceS.substring(priceS.length - 3, priceS.length));
@@ -137,7 +142,26 @@ String _priceMake(dynamic price) {
     out += ',';
     out += tempString[j];
   }
+  if(isNegetive){
+    return '$out-';
+  }
   return out;
+}
+
+String toFix(String str, int fix) {
+  int index = str.indexOf('.');
+  if (index == -1) {
+    return str;
+  } else {
+    if (fix == 0) {
+      return str.substring(0, index);
+    }
+    if (str.length >= index + fix + 1) {
+      return str.substring(0, index + fix + 1);
+    } else {
+      return str;
+    }
+  }
 }
 
 String _priceMakeString(dynamic price) {
@@ -148,13 +172,13 @@ String _priceMakeString(dynamic price) {
     double result;
     if (priceS.length > 6 && priceS.length <= 9) {
       result = pi / 1000000;
-      return '${result.toStringAsFixed(1)} میلیون';
+      return '${result.toString().toFixString(1)} میلیون';
     } else if (priceS.length > 9 && priceS.length <= 12) {
       result = pi / 1000000000;
-      return '${result.toStringAsFixed(1)} میلیون';
+      return '${result.toString().toFixString(1)} میلیارد';
     } else if (priceS.length > 12 && priceS.length <= 15) {
       result = pi / 1000000000000;
-      return '${result.toStringAsFixed(1)} میلیون';
+      return '${result.toString().toFixString(1)} بیلیون';
     } else {
       return _priceMake(price);
     }
@@ -239,6 +263,9 @@ extension Persian on String {
   String get toPersian => _toPersian1(this);
   String get toPrice => _priceMake(this);
   String get toPriceString => _priceMakeString(this);
+  String toFixString(int fix) {
+    return toFix(this, fix);
+  }
 }
 
 TextStyle toolstitleStyle(
@@ -305,6 +332,7 @@ TextStyle toolscontentStyle(
     {int num = 3,
     Color color = black1,
     FontWeight fontWeight = FontWeight.normal,
+    String? fontFamily,
     double? fontSize,
     double? screenWidth}) {
   switch (num) {
@@ -358,5 +386,9 @@ TextStyle toolscontentStyle(
       break;
   }
   fontSize ??= w32(screenWidth);
-  return TextStyle(color: color, fontWeight: fontWeight, fontSize: fontSize);
+  return TextStyle(
+      color: color,
+      fontWeight: fontWeight,
+      fontSize: fontSize,
+      fontFamily: fontFamily);
 }

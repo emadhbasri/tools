@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 export 'package:shamsi_date/shamsi_date.dart';
+
 String toolsmakeDurationToString(DateTime date) {
   if (date.isAfter(DateTime.now())) {
     return '';
@@ -113,16 +114,20 @@ class YMDW {
   YMDW(this.year, this.month, this.day, [this.weak]);
 }
 
-String toolsMakeDate({
-  dynamic date,
-  bool dateIsJalali = false,
-  String char = '/',
-  String space = ' ',
-  required bool isJalali,
-  bool isWeekDay = false,
-  bool isWeekDayLeft = false,
-}) {
+String makeHourMin(int hour, int min) =>
+    '${hour.toString().padLeft(2, '0')}:${min.toString().padLeft(2, '0')}';
+
+String toolsMakeDate(
+    {dynamic date,
+    bool dateIsJalali = false,
+    String char = '/',
+    String space = ' ',
+    required bool isJalali,
+    bool isWeekDay = false,
+    bool isWeekDayLeft = false,
+    }) {
   DateTime outDate;
+
   if (date == null) return '';
 
   if (date is String) {
@@ -137,9 +142,9 @@ String toolsMakeDate({
         outDate = temp;
       }
     }
-  } else if(date is Jalali){
-    outDate=date.toDateTime();
-  }else{
+  } else if (date is Jalali) {
+    outDate = date.toDateTime();
+  } else {
     outDate = date;
   }
   YMDW out;
