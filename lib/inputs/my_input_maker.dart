@@ -22,13 +22,15 @@ class ToolsDataDropDown<T> {
   List<String> titles;
   late List<T> values;
   T? value;
-  ToolsDataDropDown(this.titles, this.value,
-      {List<T>? values, bool titleValueSame = true}) {
+  ToolsDataDropDown(this.titles, this.value, {List<T>? values, bool titleValueSame = true}) {
     if (titleValueSame) {
       this.values = titles.cast<T>();
     } else {
       this.values = values!;
     }
+  }
+  clear(){
+    value=null;
   }
 }
 
@@ -37,13 +39,15 @@ class ToolsDataPopUp<T> {
   late List<T> values;
   List<T> enables = [];
   T? initialValue;
-  ToolsDataPopUp(this.titles, this.initialValue,
-      {List<T>? values, bool titleValueSame = true, this.enables = const []}) {
+  ToolsDataPopUp(this.titles, this.initialValue, {List<T>? values, bool titleValueSame = true, this.enables = const []}) {
     if (titleValueSame) {
       this.values = titles.cast<T>();
     } else {
       this.values = values!;
     }
+  }
+  clear(){
+    values.clear();
   }
 }
 

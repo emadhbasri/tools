@@ -68,6 +68,7 @@ class ToolsDropDown<T> extends StatelessWidget {
           ToolsContainerBox(
             padHorizontal: 1,
             padVertical: 0,
+            color: Colors.transparent,
             screenWidth: screenWidth,
             screenHeight: screenHeight,
             child: DropdownButton<T>(

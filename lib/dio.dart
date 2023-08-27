@@ -36,10 +36,13 @@ class Services {
     //   }
     // }
     dynamic data;
+    // print('parametersparameters ${parameters.runtimeType}');
+    // print('jsonEncode(parameters) ${jsonEncode(parameters).runtimeType}');
     if (isDataJson) {
       headers ??= {};
       headers['Content-Type'] = 'application/json';
       data = jsonEncode(parameters);
+      // print('dataJson ${data}');
     } else {
       data = parameters;
     }
@@ -52,10 +55,8 @@ class Services {
     Options options = Options(
       headers: headers,
     );
-    FutureOr<Response> fail = Response(
-        requestOptions: RequestOptions(path: url),
-        data: 'nonet catch',
-        statusCode: 400);
+    FutureOr<Response> fail =
+        Response(requestOptions: RequestOptions(path: url), data: 'nonet catch', statusCode: 400);
     switch (kind) {
       case ServiceKind.get:
         return await dio
@@ -65,23 +66,17 @@ class Services {
           return fail;
         });
       case ServiceKind.post:
-        return await dio
-            .post(url, options: options, data: data)
-            .catchError((e) async {
+        return await dio.post(url, options: options, data: data).catchError((e) async {
           debugPrint('catch error $e');
           return fail;
         });
       case ServiceKind.put:
-        return await dio
-            .put(url, options: options, data: data)
-            .catchError((e) async {
+        return await dio.put(url, options: options, data: data).catchError((e) async {
           debugPrint('catch error $e');
           return fail;
         });
       case ServiceKind.delete:
-        return await dio
-            .delete(url, options: options, data: data)
-            .catchError((e) async {
+        return await dio.delete(url, options: options, data: data).catchError((e) async {
           debugPrint('catch error $e');
           return fail;
         });
@@ -96,9 +91,7 @@ class Services {
           }
         });
         FormData data = FormData.fromMap(map);
-        return await dio
-            .post(url, options: options, data: data)
-            .catchError((e) async {
+        return await dio.post(url, options: options, data: data).catchError((e) async {
           debugPrint('catch error $e');
           return fail;
         });
@@ -116,17 +109,13 @@ class Services {
           return fail;
         });
       case ServiceKind.rawPost:
-        return await dio
-            .post(url, options: options, data: parameters)
-            .catchError((e) async {
+        return await dio.post(url, options: options, data: parameters).catchError((e) async {
           debugPrint('catch error $e');
           return fail;
         });
       default:
         return Response(
-            requestOptions: RequestOptions(path: url),
-            data: 'nonet default',
-            statusCode: 400);
+            requestOptions: RequestOptions(path: url), data: 'nonet default', statusCode: 400);
     }
   }
 
@@ -151,13 +140,15 @@ class Services {
     getJson ??= this.getJson;
     doPrint ??= this.doPrint;
     kind ??= this.kind;
-
-    debugPrint('start');
     url = '$server$url';
-    debugPrint('url $url');
-    debugPrint('parameters $parameters');
-    debugPrint('headers $headers');
-    debugPrint('kind $kind');
+
+    if (doPrint) {
+      debugPrint('start');
+      debugPrint('url $url');
+      debugPrint('parameters $parameters');
+      debugPrint('headers $headers');
+      debugPrint('kind $kind');
+    }
     var response = await makeRequest_(
         isDataJson: isDataJson,
         // noCheckNet: noCheckNet,
@@ -242,6 +233,14 @@ class DataFailed<T> extends DataState<T> {
   }
 }
 
-showError(context) {
-  toast('مشکل در برقراری ارتباط با سرور', context);
+showSuccessCreate(BuildContext? context) {
+  if (context != null) toast('دیتا با موفقیت ثبت شد', context);
+}
+
+showSuccessUpdate(BuildContext? context) {
+  if (context != null) toast('دیتا با موفقیت ویرایش شد', context);
+}
+
+showError(BuildContext? context) {
+  if (context != null) toast('مشکل در برقراری ارتباط با سرور', context,isLong: true);
 }

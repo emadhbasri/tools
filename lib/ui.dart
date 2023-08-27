@@ -41,8 +41,8 @@ class DividerName extends StatelessWidget {
 MaterialStateProperty<T> toolsmakeStyle<T>(value) =>
     MaterialStateProperty.all<T>(value);
 
-Widget toolscircleLoader() =>
-    Scaffold(body: Center(child: CircularProgressIndicator()));
+Widget toolscircleLoader([Color? color]) =>
+    Scaffold(body: Center(child: CircularProgressIndicator(color:color)));
 
 Widget toolsprogressSimple(
     {Color? color, double? size, bool justProgress = false}) {
@@ -121,16 +121,18 @@ toolsstatusSet({
 }
 
 Widget toolsphoneText(String data,
-    {TextStyle? style, Color differetColor = Colors.pink}) {
+    {TextStyle? style, Color differetColor = Colors.pink,bool hasSpace=true}) {
   style ??= const TextStyle();
   if (data.length < 11) return Text(data);
   return ToolsRichText(
     [
       DataRich(text: data.substring(0, 4), style: style),
+      if(hasSpace)
       DataRich(text: ' ', style: style),
       DataRich(
           text: data.substring(4, 7),
           style: style.copyWith(color: differetColor)),
+      if(hasSpace)
       DataRich(text: ' ', style: style),
       DataRich(text: data.substring(7, 11), style: style),
     ],

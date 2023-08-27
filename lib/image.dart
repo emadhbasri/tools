@@ -117,3 +117,55 @@ Widget imageNetwork(String url,
         // }
       });
 }
+
+/// center
+CachedNetworkImage imageNetworkC(String url,
+    {Color? color,
+    BoxFit? fit,
+    Color? loadingBackColor,
+    Color? loadingColor,
+    Widget? errorImage,
+    String? type,
+    bool noCatch = false}) {
+
+  var out = CachedNetworkImage(
+      imageUrl: url,
+      color: color,
+      fit: fit,
+      progressIndicatorBuilder: (context, url, DownloadProgress progress) {
+        if (progress.totalSize != null) {
+          return Center(
+            child: SizedBox(
+              width: 50,
+              height: 50,
+              child: CircularProgressIndicator(
+                value: (progress.downloaded / progress.totalSize!).toDouble(),
+                backgroundColor: loadingBackColor,
+                valueColor: loadingColor == null
+                    ? null
+                    : AlwaysStoppedAnimation<Color>(loadingColor),
+              ),
+            ),
+          );
+        } else {
+          return Center(
+            child: SizedBox(
+              width: 50,
+              height: 50,
+              child: CircularProgressIndicator(
+                backgroundColor: loadingBackColor,
+                valueColor: loadingColor == null
+                    ? null
+                    : AlwaysStoppedAnimation<Color>(loadingColor),
+              ),
+            ),
+          );
+        }
+      },
+      errorWidget: (context, url, error) {
+        return errorImage != null
+            ? errorImage
+            : const SizedBox();
+      });
+      return out;
+}

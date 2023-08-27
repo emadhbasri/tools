@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../size.dart';
 class ToolsButtonNative extends StatelessWidget {
   const ToolsButtonNative(
       {Key? key,
@@ -15,19 +15,24 @@ class ToolsButtonNative extends StatelessWidget {
       this.elevation,
       this.side,
       this.textStyle,
+      this.screenWidth,
+      this.screenHeight,
+      this.loading = false,
       this.padding})
       : super(key: key);
   final ValueChanged<bool>? onHover;
   final Widget? child;
   final Widget? icon, label;
   final VoidCallback? onPressed, onLongPress;
-
+  final bool loading;
   final Color? backgroundColor, shadowColor;
   final double radius;
   final double? elevation;
   final BorderSide? side;
   final TextStyle? textStyle;
   final EdgeInsets? padding;
+  final double? screenWidth;
+  final double? screenHeight;
   @override
   Widget build(BuildContext context) {
     ButtonStyle style = ButtonStyle(
@@ -37,11 +42,28 @@ class ToolsButtonNative extends StatelessWidget {
       elevation: MaterialStatePropertyAll(elevation),
       side: MaterialStatePropertyAll(side),
       textStyle: MaterialStatePropertyAll(textStyle),
-      padding: MaterialStatePropertyAll(padding),
+      padding: MaterialStatePropertyAll(padding??EdgeInsets.symmetric(vertical: h12(screenHeight),horizontal: w8(screenWidth),)),
       shadowColor: MaterialStatePropertyAll(shadowColor),
-    ); 
- 
+    );
 
+    if (loading) {
+      return ElevatedButton(
+        onPressed: onPressed,
+        onLongPress: onLongPress,
+        onHover: onHover,
+        style: style,
+        child: SizedBox(
+          width: w12(screenWidth),
+          height: w12(screenWidth),
+          child: const CircularProgressIndicator(
+            strokeWidth: 2,
+            valueColor: AlwaysStoppedAnimation(
+              Colors.white,
+            ),
+          ),
+        ),
+      );
+    }
     if (child != null) {
       return ElevatedButton(
         onPressed: onPressed,

@@ -10,11 +10,28 @@ library tools;
 // export 'toast.dart';
 // export 'ui.dart';
 // export 'colors.dart';
-
+import 'dart:ui';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:url_strategy/url_strategy.dart';
+import 'package:flutter/material.dart';
 
-toolsMain(kIsWeb) {
+import 'colors.dart';
+
+Color mainColor = black1;
+WebBrowserInfo? webBrowserInfo;
+toolsMain(kIsWeb, {Color? newmainColor}) async {
+  if (newmainColor != null) mainColor = newmainColor;
   if (kIsWeb) {
     setPathUrlStrategy();
+    webBrowserInfo = await DeviceInfoPlugin().webBrowserInfo;
   }
+}
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.trackpad,
+      };
 }

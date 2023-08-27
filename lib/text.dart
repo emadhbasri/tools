@@ -3,6 +3,7 @@ export 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'colors.dart';
 import 'size.dart';
+import 'tools.dart';
 
 const String yekan = 'IRANYekanMobileRegular';
 const String aviny = 'aviny';
@@ -97,10 +98,7 @@ class ToolsRichText extends StatelessWidget {
     double minFontSize1 = minFontSize ?? 12;
     double maxFontSize1 = minFontSize ?? double.infinity;
     return AutoSizeText.rich(
-      TextSpan(
-          children: texts
-              .map((e) => TextSpan(text: e.text, style: e.style))
-              .toList()),
+      TextSpan(children: texts.map((e) => TextSpan(text: e.text, style: e.style)).toList()),
       textAlign: textAlign,
       maxFontSize: maxFontSize1,
       minFontSize: minFontSize1,
@@ -124,12 +122,13 @@ class DataRich {
 }
 
 String _priceMake(dynamic price) {
+  if (price == 'NaN') return '0';
   List<String> tempString = [];
   String priceS = price.toString();
   bool isNegetive = false;
   if (priceS.contains('-')) {
     isNegetive = true;
-    priceS=priceS.replaceAll('-', '');
+    priceS = priceS.replaceAll('-', '');
   }
   if (priceS.length <= 3) return priceS;
   while (priceS.length > 3) {
@@ -142,7 +141,7 @@ String _priceMake(dynamic price) {
     out += ',';
     out += tempString[j];
   }
-  if(isNegetive){
+  if (isNegetive) {
     return '$out-';
   }
   return out;
@@ -164,21 +163,51 @@ String toFix(String str, int fix) {
   }
 }
 
+textrtl(String text) {
+  print('webBrowserInfo!.platform ${webBrowserInfo}');
+  if (webBrowserInfo != null) print('webBrowserInfo!.platform ${webBrowserInfo!.platform}');
+  if (webBrowserInfo != null &&
+      webBrowserInfo!.platform != null &&
+      (webBrowserInfo!.platform!.toString().toLowerCase().contains('ipho') ||
+          webBrowserInfo!.platform!.toString().toLowerCase().contains('ipad') ||
+          webBrowserInfo!.platform!.toString().toLowerCase().contains('mac') ||
+          webBrowserInfo!.platform!.toString().toLowerCase().contains('linux'))) {
+    text = text.replaceAll('(', '!@#');
+    text = text.replaceAll(')', '#@!');
+
+    text = text.replaceAll('!@#', ')');
+    text = text.replaceAll('#@!', '(');
+  }
+
+  return text;
+}
+
 String _priceMakeString(dynamic price) {
   String priceS = price.toString();
-
   int? pi = int.tryParse(priceS);
+  int fix=1;
   if (pi != null) {
     double result;
     if (priceS.length > 6 && priceS.length <= 9) {
       result = pi / 1000000;
-      return '${result.toString().toFixString(1)} میلیون';
+      if (result == result.toInt().toDouble()) {
+        fix=0;
+      }
+      return '${result.toString().toFixString(fix)} میلیون';
     } else if (priceS.length > 9 && priceS.length <= 12) {
       result = pi / 1000000000;
-      return '${result.toString().toFixString(1)} میلیارد';
+      if (result == result.toInt().toDouble()) {
+       fix=0;
+      }
+
+      return '${result.toString().toFixString(fix)} میلیارد';
     } else if (priceS.length > 12 && priceS.length <= 15) {
       result = pi / 1000000000000;
-      return '${result.toString().toFixString(1)} بیلیون';
+      if (result == result.toInt().toDouble()) {
+        fix=0;
+      }
+
+      return '${result.toString().toFixString(fix)} بیلیون';
     } else {
       return _priceMake(price);
     }
@@ -258,8 +287,19 @@ String _toEnglish1(String data) {
   return out;
 }
 
+String _toFarsi(String data) {
+  String out = data
+      .replaceAll('ي', 'ی')
+      .replaceAll('ا', 'ا')
+      .replaceAll('آ', 'آ')
+      .replaceAll('ک', 'ک')
+      .replaceAll('گ', 'گ');
+  return out;
+}
+
 extension Persian on String {
   String get toEng => _toEnglish1(this);
+  String get toFarsi => _toFarsi(this);
   String get toPersian => _toPersian1(this);
   String get toPrice => _priceMake(this);
   String get toPriceString => _priceMakeString(this);
@@ -270,10 +310,11 @@ extension Persian on String {
 
 TextStyle toolstitleStyle(
     {int num = 4,
-    Color color = black1,
+    Color? color,
     FontWeight fontWeight = FontWeight.bold,
     double? fontSize,
     double? screenWidth}) {
+color??=mainColor;
   switch (num) {
     case 1:
       fontSize ??= w4(screenWidth);
@@ -330,11 +371,12 @@ TextStyle toolstitleStyle(
 
 TextStyle toolscontentStyle(
     {int num = 3,
-    Color color = black1,
+    Color? color,
     FontWeight fontWeight = FontWeight.normal,
     String? fontFamily,
     double? fontSize,
     double? screenWidth}) {
+      color??=mainColor;
   switch (num) {
     case 1:
       fontSize ??= w4(screenWidth);
@@ -387,8 +429,5 @@ TextStyle toolscontentStyle(
   }
   fontSize ??= w32(screenWidth);
   return TextStyle(
-      color: color,
-      fontWeight: fontWeight,
-      fontSize: fontSize,
-      fontFamily: fontFamily);
+      color: color, fontWeight: fontWeight, fontSize: fontSize, fontFamily: fontFamily);
 }

@@ -6,6 +6,7 @@ import '../date.dart';
 import '../jalali_calendar.dart';
 import '../layouts/container_box.dart';
 import '../text.dart';
+import '../tools.dart';
 
 class ToolsInputDate extends StatelessWidget {
   const ToolsInputDate(
@@ -13,6 +14,7 @@ class ToolsInputDate extends StatelessWidget {
       this.padding,
       this.hasDecorBorder = true,
       this.backColor,
+      this.borderColor,
       this.icon,
       this.iconColor,
       this.iconSize,
@@ -30,7 +32,7 @@ class ToolsInputDate extends StatelessWidget {
   final Color? backColor;
 
   final IconData? icon;
-  final Color? iconColor;
+  final Color? iconColor,borderColor;
   final double? iconSize;
 
   final double? screenWidth, screenHeight;
@@ -70,7 +72,7 @@ class ToolsInputDate extends StatelessWidget {
                   else
                     Icon(
                       icon ?? Icons.calendar_month,
-                      color: iconColor ?? black1,
+                      color: iconColor ?? mainColor,
                       size: iconSize,
                     ),
                   sw2(screenWidth),
@@ -100,6 +102,8 @@ class ToolsInputDate extends StatelessWidget {
       return Padding(
         padding: padding ?? EdgeInsets.zero,
         child: ToolsContainerBox(
+          color: Colors.transparent,
+          borderColor: borderColor??Colors.black,
           padHorizontal: 1,
           padVertical: 2.3,
           screenWidth: screenWidth,

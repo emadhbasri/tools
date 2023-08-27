@@ -20,3 +20,23 @@ bool isInRange({
   }
   return false;
 }
+
+String makeCount(int num) {
+  if (num < 1000) {
+    return num.toString();
+  } else if (num < 1000000) {
+    return '${(num ~/ 1000)}k';
+  } else {
+    return '${(num ~/ 1000000)}m';
+  }
+}
+
+// extension ToolsList on List {
+//   bool containsWhere<E>(bool test(E element)) {
+//     int index = this.indexWhere(test);
+//     if (index == -1)
+//       return false;
+//     else
+//       return true;
+//   }
+// }

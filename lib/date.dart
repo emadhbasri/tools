@@ -122,10 +122,10 @@ String toolsMakeDate(
     bool dateIsJalali = false,
     String char = '/',
     String space = ' ',
-    required bool isJalali,
+    required bool isJalali, //out
     bool isWeekDay = false,
     bool isWeekDayLeft = false,
-    }) {
+    bool weekEnter = false}) {
   DateTime outDate;
 
   if (date == null) return '';
@@ -145,28 +145,27 @@ String toolsMakeDate(
   } else if (date is Jalali) {
     outDate = date.toDateTime();
   } else {
-    outDate = date;
+    if (dateIsJalali) {
+      outDate = Jalali(date.year, date.month, date.day).toDateTime();
+    } else {
+      outDate = date;
+    }
   }
   YMDW out;
   if (isJalali) {
     Jalali jal = Jalali.fromDateTime(outDate);
-    out = YMDW(
-        jal.year.toString().padLeft(4, '0'),
-        jal.month.toString().padLeft(2, '0'),
-        jal.day.toString().padLeft(2, '0'),
-        toolsintToWeekDayJalali(jal.weekDay));
+    out = YMDW(jal.year.toString().padLeft(4, '0'), jal.month.toString().padLeft(2, '0'),
+        jal.day.toString().padLeft(2, '0'), toolsintToWeekDayJalali(jal.weekDay));
   } else {
-    out = YMDW(
-        outDate.year.toString().padLeft(4, '0'),
-        outDate.month.toString().padLeft(2, '0'),
+    out = YMDW(outDate.year.toString().padLeft(4, '0'), outDate.month.toString().padLeft(2, '0'),
         outDate.day.toString().padLeft(2, '0'));
   }
 
   if (isWeekDay) {
     if (isWeekDayLeft) {
-      return '${out.weak}$space${out.year}$char${out.month}$char${out.day}';
+      return '${out.weak}${weekEnter ? '\n' : space}${out.year}$char${out.month}$char${out.day}';
     } else {
-      return '${out.year}$char${out.month}$char${out.day}$space${out.weak}';
+      return '${out.year}$char${out.month}$char${out.day}${weekEnter ? '\n' : space}${out.weak}';
     }
   } else {
     return '${out.year}$char${out.month}$char${out.day}';

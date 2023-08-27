@@ -24,6 +24,8 @@ typedef MyResponsiveBuildSimple = Widget? Function(
 );
 
 late Size screenSize;
+late double realWidth;
+late double realHeight;
 // double doubleHeight1(double value, {double height = 0}) {
 //   if (height == 0) height = screenSize.height;
 //   return (height * value) / 100;
@@ -44,42 +46,36 @@ double doubleWidth(double value, [double screenWidth = 0]) {
   return (screenWidth * value) / 100;
 }
 
-double h8([double? screenHeight]) => screenHeight != null
-    ? doubleHeight(0.95, screenHeight)
-    : doubleHeight(0.95, screenSize.height);
+double h8([double? screenHeight]) =>
+    screenHeight != null ? doubleHeight(0.95, screenHeight) : doubleHeight(0.95, screenSize.height);
 double h4([double? screenHeight]) => h8(screenHeight) / 2;
 double h2([double? screenHeight]) => h4(screenHeight) / 2;
-double h12([double? screenHeight]) => screenHeight != null
-    ? doubleHeight(1.45, screenHeight)
-    : doubleHeight(1.45, screenSize.height);
-double h16([double? screenHeight]) => screenHeight != null
-    ? doubleHeight(1.9, screenHeight)
-    : doubleHeight(1.9, screenSize.height);
+double h12([double? screenHeight]) =>
+    screenHeight != null ? doubleHeight(1.45, screenHeight) : doubleHeight(1.45, screenSize.height);
+double h16([double? screenHeight]) =>
+    screenHeight != null ? doubleHeight(1.9, screenHeight) : doubleHeight(1.9, screenSize.height);
 double h20([double? screenHeight]) => h4(screenHeight) * 5;
 double h24([double? screenHeight]) => h12(screenHeight) * 2;
 double h28([double? screenHeight]) => h24(screenHeight) + h4(screenHeight);
 double h32([double? screenHeight]) => h16(screenHeight) * 2;
 
-Widget sh05([double? screenHeight]) => SizedBox(height: h4(screenHeight));
-Widget sh1([double? screenHeight]) => SizedBox(height: h8(screenHeight));
-Widget sh15([double? screenHeight]) => SizedBox(height: h12(screenHeight));
-Widget sh2([double? screenHeight]) => SizedBox(height: h16(screenHeight));
-Widget sh25([double? screenHeight]) => SizedBox(height: h20(screenHeight));
-Widget sh3([double? screenHeight]) => SizedBox(height: h24(screenHeight));
-Widget sh35([double? screenHeight]) => SizedBox(height: h28(screenHeight));
-Widget sh4([double? screenHeight]) => SizedBox(height: h32(screenHeight));
+Widget sh1([double? screenHeight]) => SizedBox(height: h4(screenHeight));
+Widget sh2([double? screenHeight]) => SizedBox(height: h8(screenHeight));
+Widget sh3([double? screenHeight]) => SizedBox(height: h12(screenHeight));
+Widget sh4([double? screenHeight]) => SizedBox(height: h16(screenHeight));
+Widget sh5([double? screenHeight]) => SizedBox(height: h20(screenHeight));
+Widget sh6([double? screenHeight]) => SizedBox(height: h24(screenHeight));
+Widget sh7([double? screenHeight]) => SizedBox(height: h28(screenHeight));
+Widget sh8([double? screenHeight]) => SizedBox(height: h32(screenHeight));
 
-double w8([double? screenWidth]) => screenWidth != null
-    ? doubleWidth(2.1, screenWidth)
-    : doubleWidth(2.1, screenSize.width);
+double w8([double? screenWidth]) =>
+    screenWidth != null ? doubleWidth(2.1, screenWidth) : doubleWidth(2.1, screenSize.width);
 double w4([double? screenWidth]) => w8(screenWidth) / 2;
 double w2([double? screenWidth]) => w4(screenWidth) / 2;
-double w12([double? screenWidth]) => screenWidth != null
-    ? doubleWidth(3.1, screenWidth)
-    : doubleWidth(3.1, screenSize.width);
-double w16([double? screenWidth]) => screenWidth != null
-    ? doubleWidth(4.1, screenWidth)
-    : doubleWidth(4.1, screenSize.width);
+double w12([double? screenWidth]) =>
+    screenWidth != null ? doubleWidth(3.1, screenWidth) : doubleWidth(3.1, screenSize.width);
+double w16([double? screenWidth]) =>
+    screenWidth != null ? doubleWidth(4.1, screenWidth) : doubleWidth(4.1, screenSize.width);
 double w20([double? screenWidth]) => w4(screenWidth) * 5;
 double w24([double? screenWidth]) => w12(screenWidth) * 2;
 double w28([double? screenWidth]) => w24(screenWidth) + w4(screenWidth);
@@ -142,7 +138,8 @@ class _MySizerState extends State<MySizer> {
       xSmall: (BuildContext context, Screen screen) {
         double width = screen.mediaQueryData.size.width;
         double height = screen.mediaQueryData.size.height;
-
+        realHeight = height;
+        realWidth = width;
         return widget.builder(
             context,
             // widget.mobile == null
@@ -160,12 +157,12 @@ class _MySizerState extends State<MySizer> {
         double height = screen.mediaQueryData.size.height;
         double screenHeight = height;
         double screenWidth = makeWidth(width);
-
+        realHeight = height;
+        realWidth = width;
         if (width > 500) {
           if (widget.makeItMobile) {
             return Material(
-              color:
-                  widget.backColor ?? Theme.of(context).scaffoldBackgroundColor,
+              color: widget.backColor ?? Theme.of(context).scaffoldBackgroundColor,
               child: Center(
                 child: Container(
                   constraints: BoxConstraints(maxWidth: screenWidth),
@@ -185,7 +182,7 @@ class _MySizerState extends State<MySizer> {
             );
           }
         }
-        if (width > 500 && width <= 800) {
+        if (width > 500 && width <= 700) {
           return widget.builder(
               context,
               // widget.tablet == null
@@ -215,12 +212,12 @@ class _MySizerState extends State<MySizer> {
         double height = screen.mediaQueryData.size.height;
         double screenHeight = height;
         double screenWidth = makeWidth(width);
-
+        realHeight = height;
+        realWidth = width;
         if (width > 500) {
           if (widget.makeItMobile) {
             return Material(
-              color:
-                  widget.backColor ?? Theme.of(context).scaffoldBackgroundColor,
+              color: widget.backColor ?? Theme.of(context).scaffoldBackgroundColor,
               child: Center(
                 child: Container(
                   constraints: BoxConstraints(maxWidth: screenWidth),
@@ -243,36 +240,33 @@ class _MySizerState extends State<MySizer> {
 
         if (width >= 1000 && width <= 1200) {
           return widget.builder(
-            context,
-            // widget.desktop == null
-            //     ? null
-            //     : widget.desktop!(context, width, height, width, height),
-            DeviceType.tabletDesktop,
-            screenWidth,
-            screenHeight,
-            width,
-            height);
+              context,
+              // widget.desktop == null
+              //     ? null
+              //     : widget.desktop!(context, width, height, width, height),
+              DeviceType.tabletDesktop,
+              screenWidth,
+              screenHeight,
+              width,
+              height);
         } else {
           return widget.builder(
-            context,
-            // widget.desktop == null
-            //     ? null
-            //     : widget.desktop!(context, width, height, width, height),
-            DeviceType.desktop,
-            screenWidth,
-            screenHeight,
-            width,
-            height);
+              context,
+              // widget.desktop == null
+              //     ? null
+              //     : widget.desktop!(context, width, height, width, height),
+              DeviceType.desktop,
+              screenWidth,
+              screenHeight,
+              width,
+              height);
         }
-
-
       },
     );
   }
 }
 
-double sizeText3(double screenWidth1, DeviceType deviceType,
-    {bool forceDo = false}) {
+double sizeText3(double screenWidth1, DeviceType deviceType, {bool forceDo = false}) {
   if (forceDo) return doubleWidth(3, screenWidth1);
   double screenWidth = makeWidth(screenWidth1);
   if (deviceType == DeviceType.desktop) {
@@ -282,8 +276,7 @@ double sizeText3(double screenWidth1, DeviceType deviceType,
   }
 }
 
-double sizeText35(double screenWidth1, DeviceType deviceType,
-    {bool forceDo = false}) {
+double sizeText35(double screenWidth1, DeviceType deviceType, {bool forceDo = false}) {
   if (forceDo) return doubleWidth(3.5, screenWidth1);
   double screenWidth = makeWidth(screenWidth1);
   if (deviceType == DeviceType.desktop) {
@@ -293,8 +286,7 @@ double sizeText35(double screenWidth1, DeviceType deviceType,
   }
 }
 
-double sizeText37(double screenWidth1, DeviceType deviceType,
-    {bool forceDo = false}) {
+double sizeText37(double screenWidth1, DeviceType deviceType, {bool forceDo = false}) {
   if (forceDo) return doubleWidth(3.75, screenWidth1);
   double screenWidth = makeWidth(screenWidth1);
   if (deviceType == DeviceType.desktop) {
@@ -304,8 +296,7 @@ double sizeText37(double screenWidth1, DeviceType deviceType,
   }
 }
 
-double sizeText4(double screenWidth1, DeviceType deviceType,
-    {bool forceDo = false}) {
+double sizeText4(double screenWidth1, DeviceType deviceType, {bool forceDo = false}) {
   if (forceDo) return doubleWidth(4, screenWidth1);
   double screenWidth = makeWidth(screenWidth1);
   if (deviceType == DeviceType.desktop) {
@@ -315,8 +306,7 @@ double sizeText4(double screenWidth1, DeviceType deviceType,
   }
 }
 
-double sizeText45(double screenWidth1, DeviceType deviceType,
-    {bool forceDo = false}) {
+double sizeText45(double screenWidth1, DeviceType deviceType, {bool forceDo = false}) {
   if (forceDo) return doubleWidth(4.5, screenWidth1);
   double screenWidth = makeWidth(screenWidth1);
   if (deviceType == DeviceType.desktop) {
@@ -326,8 +316,7 @@ double sizeText45(double screenWidth1, DeviceType deviceType,
   }
 }
 
-double sizeText5(double screenWidth1, DeviceType deviceType,
-    {bool forceDo = false}) {
+double sizeText5(double screenWidth1, DeviceType deviceType, {bool forceDo = false}) {
   if (forceDo) return doubleWidth(5, screenWidth1);
   double screenWidth = makeWidth(screenWidth1);
   if (deviceType == DeviceType.desktop) {
@@ -337,8 +326,7 @@ double sizeText5(double screenWidth1, DeviceType deviceType,
   }
 }
 
-double sizeText6(double screenWidth1, DeviceType deviceType,
-    {bool forceDo = false}) {
+double sizeText6(double screenWidth1, DeviceType deviceType, {bool forceDo = false}) {
   if (forceDo) return doubleWidth(6, screenWidth1);
   double screenWidth = makeWidth(screenWidth1);
   if (deviceType == DeviceType.desktop) {

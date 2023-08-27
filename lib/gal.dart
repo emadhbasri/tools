@@ -9,6 +9,7 @@ import 'colors.dart';
 import 'image.dart';
 import 'navigator.dart';
 import 'size.dart';
+import 'tools.dart';
 
 enum ToolsGalType { asset, network, file }
 
@@ -70,15 +71,15 @@ class ToolsGalMobileState extends State<ToolsGalMobile> {
               backgroundColor: Colors.white,
               title: ToolsText(
                 widget.title ?? '',
-                style: const TextStyle(color: Colors.black),
+                style: TextStyle(color: mainColor),
               ),
               leading: IconButton(
                 onPressed: () {
                   Go.pop(context);
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.arrow_back_ios,
-                  color: Colors.black,
+                  color: mainColor,
                 ),
               ),
             ),

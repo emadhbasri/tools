@@ -8,10 +8,13 @@ class ToolsImagePickerData {
   final ImageProvider imageProvider;
   final File? file;
   final Uint8List bytes;
-  final String? mimeType;
-  final String name, path;
+  final String? mimeType,path;
+  final String name;
+
   final int length;
-  final DateTime lastModified;
+  final DateTime? lastModified;
+
+
 
   ToolsImagePickerData(
       {required this.image,
@@ -22,13 +25,14 @@ class ToolsImagePickerData {
       required this.name,
       required this.path,
       required this.length,
-      required this.lastModified});
+       this.lastModified});
 }
 
 Future<List<ToolsImagePickerData>> toolsimagePicker(
     {required bool kIsWeb,
     bool isVideo = false,
     bool isMulti = false,
+    ///true
     bool isGallery = true,
     bool isCameraRear = true,
     BoxFit? fit}) async {

@@ -82,10 +82,10 @@ class _DatePickerHeader extends StatelessWidget {
         yearColor = mode == DatePickerMode.year ? Colors.white : Colors.white70;
         break;
     }
-    final TextStyle dayStyle = headerTextTheme.bodyText1!
+    final TextStyle dayStyle = headerTextTheme.bodyLarge!
         .copyWith(color: dayColor, height: 1.4, fontSize: 23.0);
     final TextStyle yearStyle =
-        headerTextTheme.subtitle1!.copyWith(color: yearColor, height: 1.4);
+        headerTextTheme.titleMedium!.copyWith(color: yearColor, height: 1.4);
 
     Color? backgroundColor;
     switch (themeData.brightness) {
@@ -93,7 +93,7 @@ class _DatePickerHeader extends StatelessWidget {
         backgroundColor = themeData.primaryColor;
         break;
       case Brightness.dark:
-        backgroundColor = themeData.backgroundColor;
+        backgroundColor = themeData.colorScheme.background;
         break;
     }
 
@@ -243,7 +243,7 @@ class DayPicker extends StatelessWidget {
     required this.lastDate,
     required this.displayedMonth,
     this.selectableDayPredicate,
-  })  : 
+  })  :
         assert(!firstDate.isAfter(lastDate)),
         assert(selectedDate.isAfter(firstDate) ||
             selectedDate.isAtSameMomentAs(firstDate)),
@@ -555,7 +555,7 @@ class MonthPicker extends StatefulWidget {
     required this.firstDate,
     required this.lastDate,
     this.selectableDayPredicate,
-  })  : 
+  })  :
         assert(!firstDate.isAfter(lastDate)),
         assert(selectedDate.isAfter(firstDate) ||
             selectedDate.isAtSameMomentAs(firstDate)),

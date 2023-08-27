@@ -51,7 +51,7 @@ class ToolsPopUp<T> extends StatelessWidget {
   final EdgeInsets padding, menuItemPadding;
   final Widget title;
   final bool hasDecorBorder;
-  final TextDirection textDirection,decorDirection;
+  final TextDirection textDirection, decorDirection;
   final double iconSize;
   @override
   Widget build(BuildContext context) {
@@ -103,20 +103,22 @@ class ToolsPopUp<T> extends StatelessWidget {
       onSelected: onSelected,
       splashRadius: splashRadius,
       padding: padding,
-      child: 
-      data.enables.isNotEmpty?
-      ToolsText(data.enables.join('،'),textDirection: textDirection,)
-      :Row(
-        textDirection: decorDirection,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [title, icon],
-      ),
+      child: data.enables.isNotEmpty
+          ? ToolsText(
+              data.enables.join('،'),
+              textDirection: textDirection,
+            )
+          : Row(
+              textDirection: decorDirection,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [title, icon],
+            ),
     );
 
     if (hasDecorBorder) {
       return ToolsContainerBox(
         padHorizontal: 1,
-        padVertical: 2,
+        padVertical: 3,
         screenWidth: screenWidth,
         screenHeight: screenHeight,
         child: out,

@@ -19,6 +19,7 @@ const gold = Color.fromRGBO(255, 203, 5, 1);
 final con = Container(color: red);
 Color scaffoldColor = Colors.grey[700]!;
 const black1 = Color(0xFF292826);
+const black2 = Color(0xFF181818);//chatr
 
 const colorPrimaryLighter = Color.fromRGBO(231, 239, 255, 1);
 const colorPrimaryLight = Color.fromRGBO(161, 184, 242, 1);

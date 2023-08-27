@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tools/size.dart';
-import 'package:tools/text.dart';
+import 'package:tools/tools.dart';
 
 import '../colors.dart';
 
 class ToolsAddRemoveWidget extends StatefulWidget {
-  const ToolsAddRemoveWidget({
+  ToolsAddRemoveWidget({
     Key? key,
     this.addFunc,
     this.removeFunc,
@@ -14,19 +14,21 @@ class ToolsAddRemoveWidget extends StatefulWidget {
     this.step = 1,
     this.addIcon = Icons.add,
     this.removeIcon = Icons.remove,
-    this.addIconColor = black,
-    this.removeIconColor = black,
+    this.addIconColor,
+    this.removeIconColor,
     this.addIconSize = 17,
     this.removeIconSize = 17,
+    this.negative = false,
     this.textDirection = TextDirection.rtl,
     this.textStyle = const TextStyle(),
   }) : super(key: key);
+  final bool negative;
   final Function? addFunc, removeFunc;
   final ValueChanged<int> onChanged;
   final int count;
   final int step;
   final IconData addIcon, removeIcon;
-  final Color addIconColor, removeIconColor;
+  Color? addIconColor, removeIconColor;
   final double addIconSize, removeIconSize;
   final TextDirection textDirection;
   final TextStyle textStyle;
@@ -39,6 +41,8 @@ class _ToolsAddRemoveWidgetState extends State<ToolsAddRemoveWidget> {
   @override
   void initState() {
     super.initState();
+    widget.addIconColor ??= mainColor;
+    widget.removeIconColor ??= mainColor;
     count = widget.count;
   }
 
@@ -61,17 +65,21 @@ class _ToolsAddRemoveWidgetState extends State<ToolsAddRemoveWidget> {
             padding: const EdgeInsets.all(3),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
-              border: Border.all(width: .5, color: Colors.black),
+              border: Border.all(width: .5, color: mainColor),
             ),
             child: Icon(
               widget.addIcon,
-              color: black,
+              color: mainColor,
               size: widget.addIconSize,
             ),
           ),
         ),
         SizedBox(width: doubleWidth(3)),
-        Text(count.toString().toPrice, style: widget.textStyle),
+        Text(
+          count.toString(),
+          style: widget.textStyle,
+          textDirection: TextDirection.ltr,
+        ),
         SizedBox(width: doubleWidth(3)),
         GestureDetector(
           onTap: () {
@@ -79,14 +87,23 @@ class _ToolsAddRemoveWidgetState extends State<ToolsAddRemoveWidget> {
               widget.removeFunc!();
             } else {
               count -= widget.step;
-              widget.onChanged(count);
+              if (widget.negative) {
+                widget.onChanged(count);
+              } else {
+                if (count < 1) {
+                  count = 1;
+                  widget.onChanged(count);
+                } else {
+                  widget.onChanged(count);
+                }
+              }
             }
           },
           child: Container(
             padding: const EdgeInsets.all(2),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
-              border: Border.all(width: .5, color: Colors.black),
+              border: Border.all(width: .5, color: mainColor)
             ),
             child: Icon(
               widget.removeIcon,
