@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
 
   flutter_adaptive_ui: 0.8.0+1
-  url_launcher: 6.1.11
+  url_launcher: 6.1.14
   shared_preferences: 2.1.1
   cached_network_image: 3.2.3
   toast: 0.3.0
@@ -22,7 +22,7 @@ dependencies:
   url_strategy: 0.2.0
   auto_size_text: 3.0.0
   # connectivity_plus: any #2.3.6
-  device_info_plus: any #9.0.2
+  # device_info_plus: 4.1.2 #9.0.2
   infinite_scroll_pagination: 3.2.0 #3.2.0
   # flutter_slidable: any #2.0.0
   image_picker: 0.8.7+5
@@ -47,14 +47,15 @@ dependencies:
 
 
 
-  jiffy: ^5.0.0
+  # jiffy: 5.0.0
+  jiffy: 6.2.1
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.1
-  dart_code_metrics: ^5.6.0
+  flutter_lints: 2.0.1
+  # dart_code_metrics: ^5.6.0
 
   # flutter packages pub run build_runner build
 

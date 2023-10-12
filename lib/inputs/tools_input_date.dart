@@ -9,7 +9,7 @@ import '../text.dart';
 import '../tools.dart';
 
 class ToolsInputDate extends StatelessWidget {
-  const ToolsInputDate(
+   ToolsInputDate(
       {Key? key,
       this.padding,
       this.hasDecorBorder = true,
@@ -22,6 +22,7 @@ class ToolsInputDate extends StatelessWidget {
       this.text,
       this.textWidget,
       this.iconWidget,
+      this.maxYear,
       required this.onChange,
       required this.showText,
       this.screenHeight})
@@ -32,7 +33,7 @@ class ToolsInputDate extends StatelessWidget {
   final Color? backColor;
 
   final IconData? icon;
-  final Color? iconColor,borderColor;
+  final Color? iconColor, borderColor;
   final double? iconSize;
 
   final double? screenWidth, screenHeight;
@@ -42,8 +43,12 @@ class ToolsInputDate extends StatelessWidget {
   final Widget? showText;
   final void Function(int year, int month, int dya) onChange;
   final bool hasDecorBorder;
+  int? maxYear;
   @override
   Widget build(BuildContext context) {
+    if(maxYear==null){
+      maxYear=Jalali.now().year;
+    }
     Widget out = Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         textDirection: TextDirection.rtl,
@@ -54,7 +59,7 @@ class ToolsInputDate extends StatelessWidget {
                   initialDay: Jalali.now().day,
                   initialMonth: Jalali.now().month,
                   initialYear: Jalali.now().year,
-                  maxYear: Jalali.now().year,
+                  maxYear: maxYear!,
                   // minYear: Jalali.now().year - ,
                   onConfirm: (int? year, int? month, int? day) {
                 if (year != null && month != null && day != null) {
@@ -63,7 +68,7 @@ class ToolsInputDate extends StatelessWidget {
               });
             },
             child: Ink(
-              color: backColor ?? Colors.white,
+              color: backColor ?? Colors.transparent,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -81,8 +86,7 @@ class ToolsInputDate extends StatelessWidget {
                   else
                     Text(
                       text ?? '',
-                      style: toolscontentStyle(
-                              num: 35, screenWidth: screenWidth),
+                      style: toolscontentStyle(num: 35, screenWidth: screenWidth),
                     )
                 ],
               ),
@@ -93,8 +97,7 @@ class ToolsInputDate extends StatelessWidget {
           else
             Text(
               '0000/00/00',
-              style: toolscontentStyle(
-                  num: 35, screenWidth: screenWidth, color: colorGray6),
+              style: toolscontentStyle(num: 35, screenWidth: screenWidth, color: colorGray6),
             )
         ]);
 
@@ -103,7 +106,7 @@ class ToolsInputDate extends StatelessWidget {
         padding: padding ?? EdgeInsets.zero,
         child: ToolsContainerBox(
           color: Colors.transparent,
-          borderColor: borderColor??Colors.black,
+          borderColor: borderColor ?? Colors.black,
           padHorizontal: 1,
           padVertical: 2.3,
           screenWidth: screenWidth,

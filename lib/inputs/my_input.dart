@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tools/text.dart';
 
 import '../input.dart';
 
@@ -81,19 +82,30 @@ class ToolsInput extends StatelessWidget {
         expands: expands,
         focusNode: focusNode,
         obscureText: obscureText,
-        onChanged: onChanged,
+        onChanged: (e) {
+          int? isInt = int.tryParse(e.toEng);
+          if (isInt != null) {
+            e = e.toEng;
+            if (controller != null) {
+              controller!.text = e;
+            }
+          }
+          if (onChanged != null) {
+            onChanged!(e);
+          }
+        },
         onEditingComplete: onEditingComplete,
         onSubmitted: onSubmitted,
         style: textStyle,
         textAlign: textAlign,
         onTap: () {
-          if (controller != null) {
-            if (controller!.selection ==
-                TextSelection.fromPosition(TextPosition(offset: controller!.text.length - 1))) {
-              controller!.selection =
-                  TextSelection.fromPosition(TextPosition(offset: controller!.text.length));
-            }
-          }
+          // if (controller != null) {
+          //   if (controller!.selection ==
+          //       TextSelection.fromPosition(TextPosition(offset: controller!.text.length - 1))) {
+          //     controller!.selection =
+          //         TextSelection.fromPosition(TextPosition(offset: controller!.text.length));
+          //   }
+          // }
           if (onTap != null) {
             onTap!();
           }
@@ -112,7 +124,8 @@ class ToolsInput extends StatelessWidget {
             prefix: prefix,
             prefixText: prefixText,
             prefixStyle: prefixStyle,
-            suffixIcon: suffixIcon ?? (clearSuffix
+            suffixIcon: suffixIcon ??
+                (clearSuffix
                     ? IconButton(
                         onPressed: () {
                           controller?.clear();

@@ -31,12 +31,14 @@ class ToolsPopUp<T> extends StatelessWidget {
       this.decorDirection = TextDirection.rtl,
       this.checkColor = Colors.blue,
       this.iconSize = 20,
+      this.hintTitle,
       this.screenHeight})
       : super(key: key);
   // final List<String> titles;
   // final List<T> values;
   // final T? initialValue;
   final ToolsDataPopUp<T> data;
+  final String? hintTitle;
   final Widget icon;
   final Color? backgroundColor;
   final Color checkColor;
@@ -116,15 +118,37 @@ class ToolsPopUp<T> extends StatelessWidget {
     );
 
     if (hasDecorBorder) {
-      return ToolsContainerBox(
-        padHorizontal: 1,
-        padVertical: 3,
-        screenWidth: screenWidth,
-        screenHeight: screenHeight,
-        child: out,
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (hintTitle != null)
+            Text(
+              hintTitle!,
+              style: toolstitleStyle(screenWidth: screenWidth, num: 3),
+            ),
+          ToolsContainerBox(
+            padHorizontal: 1,
+            padVertical: 3,
+            screenWidth: screenWidth,
+            screenHeight: screenHeight,
+            child: out,
+          ),
+        ],
       );
     } else {
-      return out;
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (hintTitle != null)
+            Text(
+              hintTitle!,
+              style: toolstitleStyle(screenWidth: screenWidth, num: 3),
+            ),
+          out,
+        ],
+      );
     }
   }
 }

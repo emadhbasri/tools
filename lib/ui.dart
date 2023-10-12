@@ -121,12 +121,17 @@ toolsstatusSet({
 }
 
 Widget toolsphoneText(String data,
-    {TextStyle? style, Color differetColor = Colors.pink,bool hasSpace=true}) {
+    {
+      TextDirection textDirection =TextDirection.ltr,
+      TextAlign? textAlign,
+      TextStyle? style, Color differetColor = Colors.pink,bool hasSpace=true}) {
   style ??= const TextStyle();
   if (data.length < 11) return Text(data);
   return ToolsRichText(
+    textAlign: textAlign,
+
     [
-      DataRich(text: data.substring(0, 4), style: style),
+      DataRich(text: data.substring(0, 4), style: style,),
       if(hasSpace)
       DataRich(text: ' ', style: style),
       DataRich(
@@ -137,7 +142,7 @@ Widget toolsphoneText(String data,
       DataRich(text: data.substring(7, 11), style: style),
     ],
     style: style,
-    textDirection: TextDirection.ltr,
+    textDirection: textDirection,
   );
 }
 

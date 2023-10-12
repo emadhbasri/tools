@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 export 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'colors.dart';
 import 'size.dart';
 import 'tools.dart';
 
@@ -163,25 +162,94 @@ String toFix(String str, int fix) {
   }
 }
 
-textrtl(String text) {
-  print('webBrowserInfo!.platform ${webBrowserInfo}');
-  if (webBrowserInfo != null) print('webBrowserInfo!.platform ${webBrowserInfo!.platform}');
-  if (webBrowserInfo != null &&
-      webBrowserInfo!.platform != null &&
-      (webBrowserInfo!.platform!.toString().toLowerCase().contains('ipho') ||
-          webBrowserInfo!.platform!.toString().toLowerCase().contains('ipad') ||
-          webBrowserInfo!.platform!.toString().toLowerCase().contains('mac') ||
-          webBrowserInfo!.platform!.toString().toLowerCase().contains('linux'))) {
-    text = text.replaceAll('(', '!@#');
-    text = text.replaceAll(')', '#@!');
+// textrtl(String text) {
+//   print('webBrowserInfo!.platform ${webBrowserInfo}');
+//   if (webBrowserInfo != null) print('webBrowserInfo!.platform ${webBrowserInfo!.platform}');
+//   if (webBrowserInfo != null &&
+//       webBrowserInfo!.platform != null &&
+//       (webBrowserInfo!.platform!.toString().toLowerCase().contains('ipho') ||
+//           webBrowserInfo!.platform!.toString().toLowerCase().contains('ipad') ||
+//           webBrowserInfo!.platform!.toString().toLowerCase().contains('mac') ||
+//           webBrowserInfo!.platform!.toString().toLowerCase().contains('linux'))) {
+//     text = text.replaceAll('(', '!@#');
+//     text = text.replaceAll(')', '#@!');
 
-    text = text.replaceAll('!@#', ')');
-    text = text.replaceAll('#@!', '(');
+//     text = text.replaceAll('!@#', ')');
+//     text = text.replaceAll('#@!', '(');
+//   }
+
+//   return text;
+// }
+// textrtl(String text, {bool? kIsWeb}) {
+//   print('webBrowserInfo!.platform ${webBrowserInfo}');
+//   if (webBrowserInfo != null) {
+//     print('webBrowserInfo!.platform ${webBrowserInfo!.platform}');
+//   }
+//   if (webBrowserInfo != null && webBrowserInfo!.platform != null) {
+//     if ((webBrowserInfo!.platform!.toString().toLowerCase().contains('ipho') ||
+//         webBrowserInfo!.platform!.toString().toLowerCase().contains('ipad'))) {
+//       text = text.replaceAll('(', '!@#');
+//       text = text.replaceAll(')', '#@!');
+
+//       text = text.replaceAll('!@#', ')');
+//       text = text.replaceAll('#@!', '(');
+//     }
+
+//     return text;
+//   } else {
+//     if (kIsWeb != null && kIsWeb == true) {
+//       text = text.replaceAll('(', '!@#');
+//       text = text.replaceAll(')', '#@!');
+
+//       text = text.replaceAll('!@#', ')');
+//       text = text.replaceAll('#@!', '(');
+//       return text;
+//     } else {
+//       return text;
+//     }
+//   }
+// }
+
+String _priceMakeStr(dynamic price) {
+  String priceS = price.toString();
+  int? pi = int.tryParse(priceS);
+  int fix=1;
+  if (pi != null) {
+    double result;
+    if (priceS.length > 3 && priceS.length <= 6) {
+      result = pi / 1000;
+      if (result == result.toInt().toDouble()) {
+        fix=0;
+      }
+      return '${result.toString().toFixString(fix)} ه';
+    }
+    else if (priceS.length > 6 && priceS.length <= 9) {
+      result = pi / 1000000;
+      if (result == result.toInt().toDouble()) {
+        fix=0;
+      }
+      return '${result.toString().toFixString(fix)} م';
+    } else if (priceS.length > 9 && priceS.length <= 12) {
+      result = pi / 1000000000;
+      if (result == result.toInt().toDouble()) {
+       fix=0;
+      }
+
+      return '${result.toString().toFixString(fix)} م';
+    } else if (priceS.length > 12 && priceS.length <= 15) {
+      result = pi / 1000000000000;
+      if (result == result.toInt().toDouble()) {
+        fix=0;
+      }
+
+      return '${result.toString().toFixString(fix)} ت';
+    } else {
+      return _priceMake(price);
+    }
+  } else {
+    return _priceMake(price);
   }
-
-  return text;
 }
-
 String _priceMakeString(dynamic price) {
   String priceS = price.toString();
   int? pi = int.tryParse(priceS);
@@ -303,6 +371,7 @@ extension Persian on String {
   String get toPersian => _toPersian1(this);
   String get toPrice => _priceMake(this);
   String get toPriceString => _priceMakeString(this);
+  String get toPriceStr => _priceMakeStr(this);
   String toFixString(int fix) {
     return toFix(this, fix);
   }

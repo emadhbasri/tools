@@ -40,3 +40,9 @@ String makeCount(int num) {
 //       return true;
 //   }
 // }
+
+toolsDelay(int sec, {Duration? dur,Function()? doIt}) async {
+  await Future.delayed(dur ?? Duration(seconds: sec),doIt!=null?(){
+    doIt()!;
+  }:null);
+}

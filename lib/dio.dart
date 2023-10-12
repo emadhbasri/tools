@@ -36,11 +36,13 @@ class Services {
     //   }
     // }
     dynamic data;
+    print('parameters $parameters');
     // print('parametersparameters ${parameters.runtimeType}');
     // print('jsonEncode(parameters) ${jsonEncode(parameters).runtimeType}');
     if (isDataJson) {
       headers ??= {};
       headers['Content-Type'] = 'application/json';
+      // print('parameters ${parameters}');
       data = jsonEncode(parameters);
       // print('dataJson ${data}');
     } else {

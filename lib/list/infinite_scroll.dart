@@ -39,7 +39,9 @@ class ToolsListView<T> extends StatefulWidget {
       this.firstPageProgressIndicatorBuilder,
       this.newPageProgressIndicatorBuilder,
       this.noItemsFoundIndicatorBuilder,
-      this.noMoreItemsIndicatorBuilder})
+      this.noMoreItemsIndicatorBuilder,
+      this.pageController,
+      })
       : super(key: key);
   final Future<ToolsListViewData<T>> Function(int page) onLoad;
   final Widget Function(
@@ -61,6 +63,7 @@ class ToolsListView<T> extends StatefulWidget {
       newPageProgressIndicatorBuilder,
       noItemsFoundIndicatorBuilder,
       noMoreItemsIndicatorBuilder;
+final ToolMyPagingController<T>? pageController;
 
   @override
   State<ToolsListView<T>> createState() => _ToolsListViewState<T>();
@@ -72,20 +75,48 @@ class _ToolsListViewState<T> extends State<ToolsListView<T>> {
 
   @override
   void initState() {
-    _pagingController = PagingController(firstPageKey: widget.firstPage);
-
-    _pagingController.addPageRequestListener((pageKey) async {
-      ToolsListViewData<T> data = await widget.onLoad(pageKey);
-      if (data.data == null) {
-        _pagingController.error = 'error';
-      } else {
-        if (data.isLastPage) {
-          _pagingController.appendLastPage(data.data!);
-        } else {
-          _pagingController.appendPage(data.data!, pageKey + 1);
-        }
+    if (widget.pageController != null && widget.pageController!.controller != null) {
+      _pagingController = widget.pageController!.controller!;
+      _pagingController.refresh();
+    } else {
+      _pagingController = PagingController(firstPageKey: widget.firstPage);
+    }
+    if (widget.pageController != null) {
+      if (widget.pageController!.hasListener == false) {
+        widget.pageController!.hasListener = true;
+        _pagingController.addPageRequestListener((pageKey) async {
+          if (pageKey == 1) _pagingController.itemList?.clear();
+          ToolsListViewData<T> data = await widget.onLoad(pageKey);
+          if (data.data == null) {
+            _pagingController.error = 'error';
+          } else {
+            if (data.isLastPage) {
+              _pagingController.appendLastPage(data.data!);
+            } else if (data.data!.isEmpty) {
+              _pagingController.appendLastPage(data.data!);
+            } else {
+              _pagingController.appendPage(data.data!, pageKey + 1);
+            }
+          }
+        });
       }
-    });
+    } else {
+      _pagingController.addPageRequestListener((pageKey) async {
+        if (pageKey == 1) _pagingController.itemList?.clear();
+        ToolsListViewData<T> data = await widget.onLoad(pageKey);
+        if (data.data == null) {
+          _pagingController.error = 'error';
+        } else {
+          if (data.isLastPage) {
+            _pagingController.appendLastPage(data.data!);
+          } else if (data.data!.isEmpty) {
+            _pagingController.appendLastPage(data.data!);
+          } else {
+            _pagingController.appendPage(data.data!, pageKey + 1);
+          }
+        }
+      });
+    }
     super.initState();
   }
 
@@ -298,19 +329,18 @@ class _ToolsGridViewState<T> extends State<ToolsGridView<T>> {
     } else {
       _pagingController = PagingController(firstPageKey: widget.firstPage);
     }
-    print('widget.pageController ${widget.pageController}');
     if (widget.pageController != null) {
-      print('widget.pageController!.hasListener ${widget.pageController!.hasListener}');
       if (widget.pageController!.hasListener == false) {
         widget.pageController!.hasListener = true;
         _pagingController.addPageRequestListener((pageKey) async {
-          print('check request');
           if (pageKey == 1) _pagingController.itemList?.clear();
           ToolsListViewData<T> data = await widget.onLoad(pageKey);
           if (data.data == null) {
             _pagingController.error = 'error';
           } else {
             if (data.isLastPage) {
+              _pagingController.appendLastPage(data.data!);
+            } else if (data.data!.isEmpty) {
               _pagingController.appendLastPage(data.data!);
             } else {
               _pagingController.appendPage(data.data!, pageKey + 1);
@@ -326,6 +356,8 @@ class _ToolsGridViewState<T> extends State<ToolsGridView<T>> {
           _pagingController.error = 'error';
         } else {
           if (data.isLastPage) {
+            _pagingController.appendLastPage(data.data!);
+          } else if (data.data!.isEmpty) {
             _pagingController.appendLastPage(data.data!);
           } else {
             _pagingController.appendPage(data.data!, pageKey + 1);

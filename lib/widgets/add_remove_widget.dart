@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tools/size.dart';
 import 'package:tools/tools.dart';
 
-import '../colors.dart';
 
 class ToolsAddRemoveWidget extends StatefulWidget {
   ToolsAddRemoveWidget({
