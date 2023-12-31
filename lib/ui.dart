@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:tools/colors.dart';
 import 'package:tools/size.dart';
 import 'package:tools/text.dart';
+import 'package:flutter/material.dart';
 
 class DividerName extends StatelessWidget {
   const DividerName(
@@ -46,6 +47,8 @@ Widget toolscircleLoader([Color? color]) =>
 
 Widget toolsprogressSimple(
     {Color? color, double? size, bool justProgress = false}) {
+
+
   if (size != null) {
     if (justProgress) {
       return SizedBox(
@@ -150,4 +153,37 @@ String toolsmakePhoneStar(String phoneNumber) {
   String pre = phoneNumber.substring(0, 4);
   String suff = phoneNumber.substring(7, 11);
   return '$pre***$suff';
+}
+
+
+class asds extends StatefulWidget {
+    const asds({Key? key}) : super(key: key);
+
+  @override
+  State<asds> createState() => _asdsState();
+}
+
+class _asdsState extends State<asds> {
+    @override
+    Widget build(BuildContext context) {
+    return MySizer(builder: (context,
+    deviceType, screenWidth, screenHeight, realWidth, realHeight) {
+    return Scaffold(
+          body: Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: h8(screenHeight),
+              horizontal: w8(screenWidth)
+            ),
+            child: Column(
+              children: [
+                Text('asd'),
+                sh8(screenHeight),
+              Text('asd'),
+              ],
+            ),
+          ),
+         );
+       },
+    );
+  }
 }

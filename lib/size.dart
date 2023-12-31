@@ -37,6 +37,7 @@ late double realHeight;
 // }
 
 double doubleHeight(double value, [double screenHeight = 0]) {
+ 
   if (screenHeight == 0) screenHeight = screenSize.height;
   return (screenHeight * value) / 100;
 }

@@ -1069,11 +1069,11 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
       children: <Widget>[
         TextButton(
           onPressed: _handleCancel,
-          child: const Text("لغو"),
+          child: const Text("بستن"),
         ),
         TextButton(
           onPressed: _handleOk,
-          child: const Text("تایید"),
+          child: const Text("انجام"),
         ),
       ],
     );

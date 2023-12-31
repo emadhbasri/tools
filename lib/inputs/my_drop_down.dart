@@ -4,6 +4,7 @@ import 'package:tools/layouts.dart';
 import '../text.dart';
 import 'my_input_maker.dart';
 
+// ignore: must_be_immutable
 class ToolsDropDown<T> extends StatelessWidget {
   ToolsDropDown({
     Key? key,
@@ -28,6 +29,8 @@ class ToolsDropDown<T> extends StatelessWidget {
     this.dropdownColor,
     this.screenWidth,
     this.screenHeight,
+    this.borderWidth,
+    this.borderColor,
     this.hasDecorBorder = true,
     this.allowNull = false,
     required this.data,
@@ -40,12 +43,13 @@ class ToolsDropDown<T> extends StatelessWidget {
   final ValueChanged<T> onChanged;
   final ValueChanged<T?>? onChangedNull;
   final BorderRadius borderRadius;
-  final Color? dropdownColor;
+  final Color? dropdownColor, borderColor;
+  final double? borderWidth;
   final bool isExpanded, isDense;
   final Widget icon;
   final Widget? hint, disabledHint;
   final String? hintTitle;
-  late  Widget? underline;
+  late Widget? underline;
   final int elevation;
   final double itemHeight;
   final TextStyle? textStyle;
@@ -67,7 +71,9 @@ class ToolsDropDown<T> extends StatelessWidget {
             ),
           ToolsContainerBox(
             padHorizontal: 1,
+            borderWidth: borderWidth ?? 1,
             padVertical: 0,
+            borderColor: borderColor ?? Colors.black,
             color: Colors.transparent,
             screenWidth: screenWidth,
             screenHeight: screenHeight,

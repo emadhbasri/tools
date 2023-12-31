@@ -8,7 +8,5 @@ export 'inputs/my_radio.dart';
 export 'inputs/my_switch.dart';
 export 'inputs/my_two_data.dart';
 export 'inputs/tools_input_date.dart';
-
+enum Data3 {on,off,normal}
 enum ToolsInputBorder { outline, underline, none }
-
-

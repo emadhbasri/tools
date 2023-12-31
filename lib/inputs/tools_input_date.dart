@@ -105,7 +105,7 @@ class ToolsInputDate extends StatelessWidget {
       return Padding(
         padding: padding ?? EdgeInsets.zero,
         child: ToolsContainerBox(
-          color: Colors.transparent,
+          color: backColor??Colors.transparent,
           borderColor: borderColor ?? Colors.black,
           padHorizontal: 1,
           padVertical: 2.3,

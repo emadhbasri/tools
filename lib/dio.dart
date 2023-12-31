@@ -236,11 +236,12 @@ class DataFailed<T> extends DataState<T> {
 }
 
 showSuccessCreate(BuildContext? context) {
-  if (context != null) toast('دیتا با موفقیت ثبت شد', context);
+  if (context != null) toast('داده‌ها ثبت شد', context);
 }
 
 showSuccessUpdate(BuildContext? context) {
-  if (context != null) toast('دیتا با موفقیت ویرایش شد', context);
+  if (context != null) toast('داده‌ها بروزرسانی شد', context);
+
 }
 
 showError(BuildContext? context) {

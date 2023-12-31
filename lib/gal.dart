@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
+export 'package:photo_view/photo_view.dart';
+export 'package:photo_view/photo_view_gallery.dart';
+
 import 'text.dart';
 import 'colors.dart';
 import 'image.dart';
@@ -24,6 +27,8 @@ class ToolsGalMobile extends StatefulWidget {
       {Key? key,
       required this.images,
       this.title,
+      this.screenWidth,
+      this.screenHeight,
       this.minScale,
       this.maxScale,
       this.initialScale,
@@ -31,8 +36,10 @@ class ToolsGalMobile extends StatefulWidget {
       this.reverse,
       this.enableRotation,
       this.scrollDirection,
+      this.page = 0,
       this.scrollPhysics})
       : super(key: key);
+  final double? screenWidth, screenHeight;
   final List<ToolsGalItem> images;
   final String? title;
   final double? minScale, maxScale, initialScale;
@@ -40,13 +47,20 @@ class ToolsGalMobile extends StatefulWidget {
   final bool? reverse, enableRotation;
   final Axis? scrollDirection;
   final ScrollPhysics? scrollPhysics;
+  final int page;
   @override
   ToolsGalMobileState createState() => ToolsGalMobileState();
 }
 
 class ToolsGalMobileState extends State<ToolsGalMobile> {
-  final PageController _controller = PageController();
+  late PageController _controller;
   int page = 0;
+  @override
+  void initState() {
+    page = widget.page;
+    _controller = PageController(initialPage: widget.page);
+    super.initState();
+  }
 
   ImageProvider makeImage(ToolsGalItem image) {
     if (image.type == ToolsGalType.asset) {
@@ -63,8 +77,7 @@ class ToolsGalMobileState extends State<ToolsGalMobile> {
   @override
   Widget build(BuildContext context) {
     return MySizer(
-      builder: (context,  deviceType, screenWidth, screenHeight,
-          realWidth, realHeight) {
+      builder: (context, deviceType, screenWidth, screenHeight, realWidth, realHeight) {
         return Scaffold(
             backgroundColor: white,
             appBar: AppBar(
@@ -93,58 +106,37 @@ class ToolsGalMobileState extends State<ToolsGalMobile> {
                       page = e;
                     });
                   },
-                  scrollPhysics:
-                      widget.scrollPhysics ?? const BouncingScrollPhysics(),
+                  scrollPhysics: widget.scrollPhysics ?? const BouncingScrollPhysics(),
                   builder: (BuildContext context, int index) {
                     return PhotoViewGalleryPageOptions(
                       minScale: widget.minScale ?? 0.0,
                       maxScale: widget.maxScale ?? 2.0,
                       imageProvider: makeImage(widget.images[index]),
-                      initialScale: PhotoViewComputedScale.contained *
-                          (widget.initialScale ?? 0.8),
+                      initialScale: PhotoViewComputedScale.contained * (widget.initialScale ?? 0.8),
                       // heroAttributes: PhotoViewHeroAttributes(tag: galleryItems[index].id),
                     );
                   },
                   itemCount: widget.images.length,
                   scrollDirection: widget.scrollDirection ?? Axis.horizontal,
                   reverse: widget.reverse ?? false,
-                  backgroundDecoration: widget.backgroundDecoration ??
-                      const BoxDecoration(color: white),
+                  backgroundDecoration:
+                      widget.backgroundDecoration ?? const BoxDecoration(color: white),
                 ),
-                // if(page==0)
-                //   Align(
-                //     alignment: Alignment.centerRight,
-                //     child: GestureDetector(
-                //       onTap: (){
-                //         _controller.animateToPage(1, duration: Duration(milliseconds: 500),
-                //             curve: Curves.linear);
-                //       },
-                //       child: Container(
-                //           padding: EdgeInsets.all(12),
-                //           decoration: BoxDecoration(
-                //               borderRadius: BorderRadius.circular(100),
-                //               color: Colors.grey.withOpacity(.4)
-                //           ),
-                //           child: Icon(Icons.arrow_forward_ios)),
-                //     ),
-                //   ),
-                // if(page==1)
-                //   Align(
-                //     alignment: Alignment.centerLeft,
-                //     child: GestureDetector(
-                //       onTap: (){
-                //         _controller.animateToPage(0, duration: Duration(milliseconds: 500),
-                //             curve: Curves.linear);
-                //       },
-                //       child: Container(
-                //           padding: EdgeInsets.all(12),
-                //           decoration: BoxDecoration(
-                //               borderRadius: BorderRadius.circular(100),
-                //               color: Colors.grey.withOpacity(.4)
-                //           ),
-                //           child: Icon(Icons.arrow_back_ios_new)),
-                //     ),
-                //   ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: widget.images
+                        .map((e) => Container(
+                          width: doubleWidth(10,screenWidth),
+                          height: doubleWidth(10,screenWidth),
+                              decoration:
+                                  BoxDecoration(
+                                    image: DecorationImage(image: makeImage(e))),
+                            ))
+                        .toList(),
+                  ),
+                )
               ],
             ));
       },

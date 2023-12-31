@@ -25,20 +25,43 @@ String toolsmakeDurationToString(DateTime date) {
   }
 }
 
+String toolsmakeDurationToStringP(DateTime date) {
+  if (date.isAfter(DateTime.now())) {
+    return '';
+  }
+  DateTimeRange range = DateTimeRange(start: date, end: DateTime.now());
+  Duration duration = range.duration;
+  if (duration.inDays > 365) {
+    return '${duration.inDays ~/ 365} سال پیش';
+  } else if (duration.inDays > 30) {
+    return '${duration.inDays ~/ 30} ماه پیش';
+  } else if (duration.inDays > 0) {
+    return '${duration.inDays} روز پیش';
+  } else if (duration.inHours > 0) {
+    return '${duration.inHours} ساعت پیش';
+  } else if (duration.inMinutes > 0) {
+    return '${duration.inMinutes} دقیقه پیش';
+  } else if (duration.inSeconds > 0) {
+    return '${duration.inSeconds} ثانیه پیش';
+  } else {
+    return '';
+  }
+}
+
 String toolsintToWeekDayJalali(int index) {
   switch (index) {
     case 1:
       return 'شنبه';
     case 2:
-      return 'یک شنبه';
+      return 'یک‌شنبه';
     case 3:
-      return 'دو شنبه';
+      return 'دوشنبه';
     case 4:
-      return 'سه شنبه';
+      return 'سه‌شنبه';
     case 5:
-      return 'چهار شنبه';
+      return 'چهارشنبه';
     case 6:
-      return 'پنج شنبه';
+      return 'پنج‌شنبه';
     case 7:
       return 'جمعه';
     default:
@@ -116,6 +139,8 @@ class YMDW {
 
 String makeHourMin(int hour, int min) =>
     '${hour.toString().padLeft(2, '0')}:${min.toString().padLeft(2, '0')}';
+
+String numberZero(int data) => data.toString().padLeft(2, '0');
 
 String toolsMakeDate(
     {dynamic date,

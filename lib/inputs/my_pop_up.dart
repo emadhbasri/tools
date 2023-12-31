@@ -15,9 +15,9 @@ class ToolsPopUp<T> extends StatelessWidget {
       this.dividerHeight = 16.0,
       this.menuItemHeight = 48.0,
       this.offset = Offset.zero,
-      this.shape = const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10))),
-      this.tooltip,
+      this.shape =
+          const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+      this.tooltip = 'انتخاب کنید',
       this.onCanceled,
       required this.onSelected,
       this.padding = const EdgeInsets.all(8.0),
@@ -30,8 +30,10 @@ class ToolsPopUp<T> extends StatelessWidget {
       this.textDirection = TextDirection.rtl,
       this.decorDirection = TextDirection.rtl,
       this.checkColor = Colors.blue,
+      this.borderColor,
       this.iconSize = 20,
       this.hintTitle,
+      this.borderWidth,
       this.screenHeight})
       : super(key: key);
   // final List<String> titles;
@@ -42,6 +44,8 @@ class ToolsPopUp<T> extends StatelessWidget {
   final Widget icon;
   final Color? backgroundColor;
   final Color checkColor;
+  final Color? borderColor;
+  final double? borderWidth;
   final ShapeBorder shape;
   final String? tooltip;
   final double elevation, dividerHeight, menuItemHeight;
@@ -128,8 +132,11 @@ class ToolsPopUp<T> extends StatelessWidget {
               style: toolstitleStyle(screenWidth: screenWidth, num: 3),
             ),
           ToolsContainerBox(
+            width: double.maxFinite,
             padHorizontal: 1,
             padVertical: 3,
+            borderWidth: borderWidth ?? 1,
+            borderColor: borderColor ?? Colors.black,
             screenWidth: screenWidth,
             screenHeight: screenHeight,
             child: out,

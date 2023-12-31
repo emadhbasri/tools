@@ -453,8 +453,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
   // Title View
   Widget _renderTitleActionsView() {
-    String done = "تایید";
-    String cancel = "لغو";
+    String done = "انجام";
+    String cancel = "بستن";
 
     Widget? cancelWidget = widget.cancel;
     cancelWidget ??= Text(
