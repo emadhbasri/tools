@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:tools/size_plus.dart';
 
-import '../size.dart';
 
 class ToolsContainerBox extends StatelessWidget {
   const ToolsContainerBox(
       {Key? key,
-      this.screenWidth,
       this.width,
       this.height,
-      this.screenHeight,
       this.padHorizontal = 2,
       this.padVertical = .5,
       this.borderWidth = 1,
@@ -17,7 +15,7 @@ class ToolsContainerBox extends StatelessWidget {
       this.color = Colors.white,
       required this.child})
       : super(key: key);
-  final double? screenWidth, screenHeight,width,height;
+  final double? width,height;
   final double padHorizontal, padVertical, borderWidth, radius;
   final Color borderColor,color;
   final Widget child;
@@ -32,12 +30,8 @@ class ToolsContainerBox extends StatelessWidget {
         borderRadius: BorderRadius.circular(radius),
       ),
       padding: EdgeInsets.symmetric(
-        horizontal: screenWidth != null
-            ? doubleWidth(padHorizontal, screenWidth!)
-            : doubleWidth(padHorizontal),
-        vertical: screenWidth != null
-            ? doubleHeight(padVertical, screenWidth!)
-            : doubleHeight(padVertical),
+        horizontal: padHorizontal.w,
+        vertical: padVertical.w,
       ),
       child: child,
     );

@@ -382,59 +382,59 @@ TextStyle toolstitleStyle(
     Color? color,
     FontWeight fontWeight = FontWeight.bold,
     double? fontSize,
-    double? screenWidth}) {
+    }) {
 color??=mainColor;
   switch (num) {
     case 1:
-      fontSize ??= w4(screenWidth);
+      fontSize ??= w4();
       break;
     case 15:
-      fontSize ??= w4(screenWidth) + w2(screenWidth);
+      fontSize ??= w4() + w2();
       break;
     case 2:
-      fontSize ??= w8(screenWidth);
+      fontSize ??= w8();
       break;
     case 25:
-      fontSize ??= w8(screenWidth) + w2(screenWidth);
+      fontSize ??= w8() + w2();
       break;
     case 3:
-      fontSize ??= w12(screenWidth);
+      fontSize ??= w12();
       break;
     case 35:
-      fontSize ??= w12(screenWidth) + w2(screenWidth);
+      fontSize ??= w12() + w2();
       break;
     case 4:
-      fontSize ??= w16(screenWidth);
+      fontSize ??= w16();
       break;
     case 45:
-      fontSize ??= w16(screenWidth) + w2(screenWidth);
+      fontSize ??= w16() + w2();
       break;
     case 5:
-      fontSize ??= w20(screenWidth);
+      fontSize ??= w20();
       break;
     case 55:
-      fontSize ??= w20(screenWidth) + w2(screenWidth);
+      fontSize ??= w20() + w2();
       break;
     case 6:
-      fontSize ??= w24(screenWidth);
+      fontSize ??= w24();
       break;
     case 65:
-      fontSize ??= w24(screenWidth) + w2(screenWidth);
+      fontSize ??= w24() + w2();
       break;
     case 7:
-      fontSize ??= w28(screenWidth);
+      fontSize ??= w28();
       break;
     case 75:
-      fontSize ??= w28(screenWidth) + w2(screenWidth);
+      fontSize ??= w28() + w2();
       break;
     case 8:
-      fontSize ??= w32(screenWidth);
+      fontSize ??= w32();
       break;
     case 85:
-      fontSize ??= w32(screenWidth) + w2(screenWidth);
+      fontSize ??= w32() + w2();
       break;
   }
-  fontSize ??= w32(screenWidth);
+  fontSize ??= w32();
   return TextStyle(color: color, fontWeight: fontWeight, fontSize: fontSize);
 }
 
@@ -444,59 +444,59 @@ TextStyle toolscontentStyle(
     FontWeight fontWeight = FontWeight.normal,
     String? fontFamily,
     double? fontSize,
-    double? screenWidth}) {
+    }) {
       color??=mainColor;
   switch (num) {
     case 1:
-      fontSize ??= w4(screenWidth);
+      fontSize ??= w4();
       break;
     case 15:
-      fontSize ??= w4(screenWidth) + w2(screenWidth);
+      fontSize ??= w4() + w2();
       break;
     case 2:
-      fontSize ??= w8(screenWidth);
+      fontSize ??= w8();
       break;
     case 25:
-      fontSize ??= w8(screenWidth) + w2(screenWidth);
+      fontSize ??= w8() + w2();
       break;
     case 3:
-      fontSize ??= w12(screenWidth);
+      fontSize ??= w12();
       break;
     case 35:
-      fontSize ??= w12(screenWidth) + w2(screenWidth);
+      fontSize ??= w12() + w2();
       break;
     case 4:
-      fontSize ??= w16(screenWidth);
+      fontSize ??= w16();
       break;
     case 45:
-      fontSize ??= w16(screenWidth) + w2(screenWidth);
+      fontSize ??= w16() + w2();
       break;
     case 5:
-      fontSize ??= w20(screenWidth);
+      fontSize ??= w20();
       break;
     case 55:
-      fontSize ??= w20(screenWidth) + w2(screenWidth);
+      fontSize ??= w20() + w2();
       break;
     case 6:
-      fontSize ??= w24(screenWidth);
+      fontSize ??= w24();
       break;
     case 65:
-      fontSize ??= w24(screenWidth) + w2(screenWidth);
+      fontSize ??= w24() + w2();
       break;
     case 7:
-      fontSize ??= w28(screenWidth);
+      fontSize ??= w28();
       break;
     case 75:
-      fontSize ??= w28(screenWidth) + w2(screenWidth);
+      fontSize ??= w28() + w2();
       break;
     case 8:
-      fontSize ??= w32(screenWidth);
+      fontSize ??= w32();
       break;
     case 85:
-      fontSize ??= w32(screenWidth) + w2(screenWidth);
+      fontSize ??= w32() + w2();
       break;
   }
-  fontSize ??= w32(screenWidth);
+  fontSize ??= w32();
   return TextStyle(
       color: color, fontWeight: fontWeight, fontSize: fontSize, fontFamily: fontFamily);
 }

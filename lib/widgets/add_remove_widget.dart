@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tools/size.dart';
+import 'package:tools/size_plus.dart';
 import 'package:tools/tools.dart';
 
 
@@ -73,13 +73,13 @@ class _ToolsAddRemoveWidgetState extends State<ToolsAddRemoveWidget> {
             ),
           ),
         ),
-        SizedBox(width: doubleWidth(3)),
+        SizedBox(width: 3.w),
         Text(
           count.toString(),
           style: widget.textStyle,
           textDirection: TextDirection.ltr,
         ),
-        SizedBox(width: doubleWidth(3)),
+        SizedBox(width: 3.w),
         GestureDetector(
           onTap: () {
             if (widget.removeFunc != null) {

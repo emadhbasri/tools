@@ -26,7 +26,6 @@ class ToolsPopUp<T> extends StatelessWidget {
       this.hasDecorBorder = true,
       this.icon = const Icon(Icons.arrow_drop_down_sharp),
       required this.title,
-      this.screenWidth,
       this.textDirection = TextDirection.rtl,
       this.decorDirection = TextDirection.rtl,
       this.checkColor = Colors.blue,
@@ -34,7 +33,7 @@ class ToolsPopUp<T> extends StatelessWidget {
       this.iconSize = 20,
       this.hintTitle,
       this.borderWidth,
-      this.screenHeight})
+      })
       : super(key: key);
   // final List<String> titles;
   // final List<T> values;
@@ -53,7 +52,7 @@ class ToolsPopUp<T> extends StatelessWidget {
   final Offset offset;
   final void Function()? onCanceled;
   final void Function(T) onSelected;
-  final double? splashRadius, screenWidth, screenHeight;
+  final double? splashRadius;
   final EdgeInsets padding, menuItemPadding;
   final Widget title;
   final bool hasDecorBorder;
@@ -88,7 +87,7 @@ class ToolsPopUp<T> extends StatelessWidget {
                         color: checkColor,
                         size: iconSize,
                       ),
-                    sw1(screenWidth),
+                    sw1(),
                     Text(
                       data.titles[index],
                       textDirection: textDirection,
@@ -129,7 +128,7 @@ class ToolsPopUp<T> extends StatelessWidget {
           if (hintTitle != null)
             Text(
               hintTitle!,
-              style: toolstitleStyle(screenWidth: screenWidth, num: 3),
+              style: toolstitleStyle( num: 3),
             ),
           ToolsContainerBox(
             width: double.maxFinite,
@@ -137,8 +136,6 @@ class ToolsPopUp<T> extends StatelessWidget {
             padVertical: 3,
             borderWidth: borderWidth ?? 1,
             borderColor: borderColor ?? Colors.black,
-            screenWidth: screenWidth,
-            screenHeight: screenHeight,
             child: out,
           ),
         ],
@@ -151,7 +148,7 @@ class ToolsPopUp<T> extends StatelessWidget {
           if (hintTitle != null)
             Text(
               hintTitle!,
-              style: toolstitleStyle(screenWidth: screenWidth, num: 3),
+              style: toolstitleStyle( num: 3),
             ),
           out,
         ],

@@ -27,8 +27,6 @@ class ToolsDropDown<T> extends StatelessWidget {
     // required this.value,
     this.icon = const Icon(Icons.arrow_drop_down),
     this.dropdownColor,
-    this.screenWidth,
-    this.screenHeight,
     this.borderWidth,
     this.borderColor,
     this.hasDecorBorder = true,
@@ -53,7 +51,6 @@ class ToolsDropDown<T> extends StatelessWidget {
   final int elevation;
   final double itemHeight;
   final TextStyle? textStyle;
-  final double? screenWidth, screenHeight;
   final bool allowNull;
   // final T? value;
 
@@ -67,7 +64,7 @@ class ToolsDropDown<T> extends StatelessWidget {
           if (hintTitle != null)
             Text(
               hintTitle!,
-              style: toolstitleStyle(screenWidth: screenWidth, num: 3),
+              style: toolstitleStyle(num: 3),
             ),
           ToolsContainerBox(
             padHorizontal: 1,
@@ -75,8 +72,6 @@ class ToolsDropDown<T> extends StatelessWidget {
             padVertical: 0,
             borderColor: borderColor ?? Colors.black,
             color: Colors.transparent,
-            screenWidth: screenWidth,
-            screenHeight: screenHeight,
             child: DropdownButton<T>(
               items: [
                 if (allowNull)
@@ -140,7 +135,7 @@ class ToolsDropDown<T> extends StatelessWidget {
           if (hintTitle != null)
             Text(
               hintTitle!,
-              style: toolstitleStyle(screenWidth: screenWidth, num: 3),
+              style: toolstitleStyle(num: 3),
             ),
           DropdownButton<T>(
             items: [

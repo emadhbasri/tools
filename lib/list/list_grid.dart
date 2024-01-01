@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:tools/size_plus.dart';
 import '../text.dart';
-import '../size.dart';
 import 'infinite_scroll.dart';
 import 'dart:math' as math;
 
@@ -10,8 +10,6 @@ class ToolsSliverBuilder<T> extends StatefulWidget {
       {Key? key,
       required this.onLoad,
       required this.itemBuilder,
-      required this.realHeight,
-      required this.screenWidth,
       this.separatorBuilder,
       this.animateTransitions = false,
       this.transitionDuration = const Duration(milliseconds: 500),
@@ -46,7 +44,6 @@ class ToolsSliverBuilder<T> extends StatefulWidget {
   final Axis scrollDirection;
   final EdgeInsets padding;
   final ScrollPhysics? physics;
-  final double realHeight, screenWidth;
   final ScrollController? scrollController;
   final Widget? firstPageProgressIndicatorBuilder,
       newPageProgressIndicatorBuilder,
@@ -169,7 +166,7 @@ class _ToolsSliverBuilderState<T> extends State<ToolsSliverBuilder<T>> {
                       ? widget.noItemsFoundIndicatorBuilder!
                       : SizedBox(
                           width: double.maxFinite,
-                          height: doubleHeight(100, widget.realHeight),
+                          height: 100.h,
                           child: Center(
                               child: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -177,7 +174,7 @@ class _ToolsSliverBuilderState<T> extends State<ToolsSliverBuilder<T>> {
                               ToolsText(
                                 'متاسفانه محتوایی جهت نمایش وجود ندارد',
                                 style: toolstitleStyle(
-                                    screenWidth: widget.screenWidth),
+                                    ),
                               ),
                               TextButton.icon(
                                   onPressed: () {
@@ -187,7 +184,7 @@ class _ToolsSliverBuilderState<T> extends State<ToolsSliverBuilder<T>> {
                                   label: ToolsText(
                                     'تلاش دوباره',
                                     style: toolscontentStyle(
-                                        screenWidth: widget.screenWidth,
+
                                         color: Colors.blue),
                                   ))
                             ],

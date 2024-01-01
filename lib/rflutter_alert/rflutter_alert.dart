@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tools/colors.dart';
 import 'package:tools/navigator.dart';
 import 'package:tools/size.dart';
+import 'package:tools/size_plus.dart';
 import 'package:tools/text.dart';
 
 import 'rflutter_alert.dart';
@@ -16,7 +17,6 @@ myAlertDialog(context,
     {AlertType type = AlertType.warning,
     String title = 'هشدار',
     String? content,
-    double? screenWidth,
     Color yesColor = green,
     Color noColor = pink,
     required String yes,
@@ -26,7 +26,7 @@ myAlertDialog(context,
     type: type,
     title: title,
     desc: content,
-    padding: EdgeInsets.symmetric(horizontal: doubleWidth(4)).copyWith(top: doubleHeight(3)),
+    padding: EdgeInsets.symmetric(horizontal: 4.w).copyWith(top: 3.h),
     style: AlertStyle(
         animationType: AnimationType.grow,
         isCloseButton: false,
@@ -37,7 +37,7 @@ myAlertDialog(context,
           onPressed: () => Go.pop(context, false),
           color: noColor,
           child: Text(no,
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
+              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
         ),
       DialogButton(
           onPressed: () {
@@ -46,7 +46,7 @@ myAlertDialog(context,
           color: yesColor,
           child: Text(
             yes,
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
+            style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
           ))
     ],
   ).show();

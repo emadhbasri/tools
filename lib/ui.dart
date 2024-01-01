@@ -3,18 +3,18 @@ import 'package:flutter/services.dart';
 import 'package:tools/colors.dart';
 import 'package:tools/size.dart';
 import 'package:tools/text.dart';
-import 'package:flutter/material.dart';
 
 class DividerName extends StatelessWidget {
   const DividerName(
       {Key? key,
       this.textDirection = TextDirection.rtl,
       required this.text,
-      required this.screenWidth, this.size=2, this.color=colorGray156})
+      this.size = 2,
+      this.color = colorGray156})
       : super(key: key);
   final TextDirection textDirection;
   final Widget text;
-  final double screenWidth,size;
+  final double size;
   final Color color;
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class DividerName extends StatelessWidget {
       textDirection: textDirection,
       children: [
         text,
-        sw2(screenWidth),
+        sw2(),
         Expanded(
           child: Container(
             width: double.maxFinite,
@@ -38,17 +38,12 @@ class DividerName extends StatelessWidget {
   }
 }
 
-
-MaterialStateProperty<T> toolsmakeStyle<T>(value) =>
-    MaterialStateProperty.all<T>(value);
+MaterialStateProperty<T> toolsmakeStyle<T>(value) => MaterialStateProperty.all<T>(value);
 
 Widget toolscircleLoader([Color? color]) =>
-    Scaffold(body: Center(child: CircularProgressIndicator(color:color)));
+    Scaffold(body: Center(child: CircularProgressIndicator(color: color)));
 
-Widget toolsprogressSimple(
-    {Color? color, double? size, bool justProgress = false}) {
-
-
+Widget toolsprogressSimple({Color? color, double? size, bool justProgress = false}) {
   if (size != null) {
     if (justProgress) {
       return SizedBox(
@@ -124,24 +119,23 @@ toolsstatusSet({
 }
 
 Widget toolsphoneText(String data,
-    {
-      TextDirection textDirection =TextDirection.ltr,
-      TextAlign? textAlign,
-      TextStyle? style, Color differetColor = Colors.pink,bool hasSpace=true}) {
+    {TextDirection textDirection = TextDirection.ltr,
+    TextAlign? textAlign,
+    TextStyle? style,
+    Color differetColor = Colors.pink,
+    bool hasSpace = true}) {
   style ??= const TextStyle();
   if (data.length < 11) return Text(data);
   return ToolsRichText(
     textAlign: textAlign,
-
     [
-      DataRich(text: data.substring(0, 4), style: style,),
-      if(hasSpace)
-      DataRich(text: ' ', style: style),
       DataRich(
-          text: data.substring(4, 7),
-          style: style.copyWith(color: differetColor)),
-      if(hasSpace)
-      DataRich(text: ' ', style: style),
+        text: data.substring(0, 4),
+        style: style,
+      ),
+      if (hasSpace) DataRich(text: ' ', style: style),
+      DataRich(text: data.substring(4, 7), style: style.copyWith(color: differetColor)),
+      if (hasSpace) DataRich(text: ' ', style: style),
       DataRich(text: data.substring(7, 11), style: style),
     ],
     style: style,
@@ -155,35 +149,31 @@ String toolsmakePhoneStar(String phoneNumber) {
   return '$pre***$suff';
 }
 
+// class asds extends StatefulWidget {
+//   const asds({Key? key}) : super(key: key);
 
-class asds extends StatefulWidget {
-    const asds({Key? key}) : super(key: key);
+//   @override
+//   State<asds> createState() => _asdsState();
+// }
 
-  @override
-  State<asds> createState() => _asdsState();
-}
-
-class _asdsState extends State<asds> {
-    @override
-    Widget build(BuildContext context) {
-    return MySizer(builder: (context,
-    deviceType, screenWidth, screenHeight, realWidth, realHeight) {
-    return Scaffold(
-          body: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: h8(screenHeight),
-              horizontal: w8(screenWidth)
-            ),
-            child: Column(
-              children: [
-                Text('asd'),
-                sh8(screenHeight),
-              Text('asd'),
-              ],
-            ),
-          ),
-         );
-       },
-    );
-  }
-}
+// class _asdsState extends State<asds> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MySizer(
+//       builder: (context, deviceType, screenWidth, screenHeight, realWidth, realHeight) {
+//         return Scaffold(
+//           body: Padding(
+//             padding: EdgeInsets.symmetric(vertical: h8(screenHeight), horizontal: w8(screenWidth)),
+//             child: Column(
+//               children: [
+//                 Text('asd'),
+//                 sh8(screenHeight),
+//                 Text('asd'),
+//               ],
+//             ),
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }

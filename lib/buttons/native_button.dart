@@ -15,8 +15,6 @@ class ToolsButtonNative extends StatelessWidget {
       this.elevation,
       this.side,
       this.textStyle,
-      this.screenWidth,
-      this.screenHeight,
       this.loading = false,
       this.padding})
       : super(key: key);
@@ -31,8 +29,6 @@ class ToolsButtonNative extends StatelessWidget {
   final BorderSide? side;
   final TextStyle? textStyle;
   final EdgeInsets? padding;
-  final double? screenWidth;
-  final double? screenHeight;
   @override
   Widget build(BuildContext context) {
     ButtonStyle style = ButtonStyle(
@@ -42,7 +38,7 @@ class ToolsButtonNative extends StatelessWidget {
       elevation: MaterialStatePropertyAll(elevation),
       side: MaterialStatePropertyAll(side),
       textStyle: MaterialStatePropertyAll(textStyle),
-      padding: MaterialStatePropertyAll(padding??EdgeInsets.symmetric(vertical: h12(screenHeight),horizontal: w8(screenWidth),)),
+      padding: MaterialStatePropertyAll(padding??EdgeInsets.symmetric(vertical: h12(),horizontal: w8(),)),
       shadowColor: MaterialStatePropertyAll(shadowColor),
     );
 
@@ -53,8 +49,8 @@ class ToolsButtonNative extends StatelessWidget {
         onHover: onHover,
         style: style,
         child: SizedBox(
-          width: w12(screenWidth),
-          height: w12(screenWidth),
+          width: w12(),
+          height: w12(),
           child: const CircularProgressIndicator(
             strokeWidth: 2,
             valueColor: AlwaysStoppedAnimation(

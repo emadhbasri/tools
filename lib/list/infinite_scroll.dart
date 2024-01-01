@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:tools/size_plus.dart';
 import '../text.dart';
-import '../size.dart';
 
 class ToolsListViewData<T> {
   List<T>? data;
@@ -19,30 +19,27 @@ class ToolMyPagingController<T> {
 }
 
 class ToolsListView<T> extends StatefulWidget {
-  const ToolsListView(
-      {Key? key,
-      required this.onLoad,
-      required this.itemBuilder,
-      required this.realHeight,
-      required this.screenWidth,
-      this.separatorBuilder,
-      this.animateTransitions = false,
-      this.transitionDuration = const Duration(milliseconds: 500),
-      this.firstPage = 0,
-      this.reverse = false,
-      this.shrinkWrap = false,
-      this.separated = false,
-      this.scrollDirection = Axis.vertical,
-      this.padding = EdgeInsets.zero,
-      this.physics,
-      this.scrollController,
-      this.firstPageProgressIndicatorBuilder,
-      this.newPageProgressIndicatorBuilder,
-      this.noItemsFoundIndicatorBuilder,
-      this.noMoreItemsIndicatorBuilder,
-      this.pageController,
-      })
-      : super(key: key);
+  const ToolsListView({
+    Key? key,
+    required this.onLoad,
+    required this.itemBuilder,
+    this.separatorBuilder,
+    this.animateTransitions = false,
+    this.transitionDuration = const Duration(milliseconds: 500),
+    this.firstPage = 0,
+    this.reverse = false,
+    this.shrinkWrap = false,
+    this.separated = false,
+    this.scrollDirection = Axis.vertical,
+    this.padding = EdgeInsets.zero,
+    this.physics,
+    this.scrollController,
+    this.firstPageProgressIndicatorBuilder,
+    this.newPageProgressIndicatorBuilder,
+    this.noItemsFoundIndicatorBuilder,
+    this.noMoreItemsIndicatorBuilder,
+    this.pageController,
+  }) : super(key: key);
   final Future<ToolsListViewData<T>> Function(int page) onLoad;
   final Widget Function(
     BuildContext context,
@@ -57,13 +54,12 @@ class ToolsListView<T> extends StatefulWidget {
   final Axis scrollDirection;
   final EdgeInsets padding;
   final ScrollPhysics? physics;
-  final double realHeight, screenWidth;
   final ScrollController? scrollController;
   final Widget? firstPageProgressIndicatorBuilder,
       newPageProgressIndicatorBuilder,
       noItemsFoundIndicatorBuilder,
       noMoreItemsIndicatorBuilder;
-final ToolMyPagingController<T>? pageController;
+  final ToolMyPagingController<T>? pageController;
 
   @override
   State<ToolsListView<T>> createState() => _ToolsListViewState<T>();
@@ -169,14 +165,14 @@ class _ToolsListViewState<T> extends State<ToolsListView<T>> {
                           ? widget.noItemsFoundIndicatorBuilder!
                           : SizedBox(
                               width: double.maxFinite,
-                              height: doubleHeight(100, widget.realHeight),
+                              height: 100.h,
                               child: Center(
                                   child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   ToolsText(
                                     'متاسفانه محتوایی جهت نمایش وجود ندارد',
-                                    style: toolstitleStyle(screenWidth: widget.screenWidth),
+                                    style: toolstitleStyle(),
                                   ),
                                   TextButton.icon(
                                       onPressed: () {
@@ -185,8 +181,7 @@ class _ToolsListViewState<T> extends State<ToolsListView<T>> {
                                       icon: const Icon(Icons.refresh),
                                       label: ToolsText(
                                         'تلاش دوباره',
-                                        style: toolscontentStyle(
-                                            screenWidth: widget.screenWidth, color: Colors.blue),
+                                        style: toolscontentStyle(color: Colors.blue),
                                       ))
                                 ],
                               ))),
@@ -220,14 +215,14 @@ class _ToolsListViewState<T> extends State<ToolsListView<T>> {
                           ? widget.noItemsFoundIndicatorBuilder!
                           : SizedBox(
                               width: double.maxFinite,
-                              height: doubleHeight(100, widget.realHeight),
+                              height: 100.h,
                               child: Center(
                                   child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   ToolsText(
                                     'متاسفانه محتوایی جهت نمایش وجود ندارد',
-                                    style: toolstitleStyle(screenWidth: widget.screenWidth),
+                                    style: toolstitleStyle(),
                                   ),
                                   TextButton.icon(
                                       onPressed: () {
@@ -236,8 +231,7 @@ class _ToolsListViewState<T> extends State<ToolsListView<T>> {
                                       icon: const Icon(Icons.refresh),
                                       label: ToolsText(
                                         'تلاش دوباره',
-                                        style: toolscontentStyle(
-                                            screenWidth: widget.screenWidth, color: Colors.blue),
+                                        style: toolscontentStyle(color: Colors.blue),
                                       ))
                                 ],
                               ))),
@@ -266,8 +260,6 @@ class ToolsGridView<T> extends StatefulWidget {
       {Key? key,
       required this.onLoad,
       required this.itemBuilder,
-      required this.realHeight,
-      required this.screenWidth,
       this.separatorBuilder,
       this.animateTransitions = false,
       this.transitionDuration = const Duration(milliseconds: 500),
@@ -304,7 +296,6 @@ class ToolsGridView<T> extends StatefulWidget {
   final Axis scrollDirection;
   final EdgeInsets padding;
   final ScrollPhysics? physics;
-  final double realHeight, screenWidth;
   final ScrollController? scrollController;
   final Widget? firstPageProgressIndicatorBuilder,
       newPageProgressIndicatorBuilder,
@@ -405,14 +396,14 @@ class _ToolsGridViewState<T> extends State<ToolsGridView<T>> {
                   ? widget.noItemsFoundIndicatorBuilder!
                   : SizedBox(
                       width: double.maxFinite,
-                      height: doubleHeight(100, widget.realHeight),
+                      height: 100.h,
                       child: Center(
                           child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           ToolsText(
                             'متاسفانه محتوایی جهت نمایش وجود ندارد',
-                            style: toolstitleStyle(screenWidth: widget.screenWidth),
+                            style: toolstitleStyle(),
                           ),
                           TextButton.icon(
                               onPressed: () {
@@ -421,8 +412,7 @@ class _ToolsGridViewState<T> extends State<ToolsGridView<T>> {
                               icon: const Icon(Icons.refresh),
                               label: ToolsText(
                                 'تلاش دوباره',
-                                style: toolscontentStyle(
-                                    screenWidth: widget.screenWidth, color: Colors.blue),
+                                style: toolscontentStyle(color: Colors.blue),
                               ))
                         ],
                       ))),

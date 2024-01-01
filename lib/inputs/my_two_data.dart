@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tools/date.dart';
+import 'package:tools/size_plus.dart';
 import 'package:tools/text.dart';
 
 import '../size.dart';
@@ -10,7 +11,6 @@ import 'tools_input_date.dart';
 class ToolsInputTwoData extends StatelessWidget {
   const ToolsInputTwoData(
       {Key? key,
-      required this.screenWidth,
       this.onChangedStart,
       this.onChangedEnd,
       this.keyboardTypeStart = TextInputType.number,
@@ -23,7 +23,6 @@ class ToolsInputTwoData extends StatelessWidget {
       : super(key: key);
   final TextInputType keyboardTypeStart, keyboardTypeEnd;
   final TextDirection textDirectionStart, textDirectionEnd;
-  final double screenWidth;
   final ValueChanged<String>? onChangedStart, onChangedEnd;
   final TextEditingController? controllerStart, controllerEnd;
   final Widget title;
@@ -31,9 +30,9 @@ class ToolsInputTwoData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(children: [
       title,
-      sw3(screenWidth),
+      sw3(),
       SizedBox(
-        width: doubleWidth(10, screenWidth),
+        width: 10.w,
         child: ToolsInput(
           controller: controllerStart,
           onChanged: onChangedStart,
@@ -43,11 +42,11 @@ class ToolsInputTwoData extends StatelessWidget {
           isDense: true,
         ),
       ),
-      sw2(screenWidth),
+      sw2(),
       const Center(child: Text('تا')),
-      sw2(screenWidth),
+      sw2(),
       SizedBox(
-        width: doubleWidth(10, screenWidth),
+        width: 10.w,
         child: ToolsInput(
           controller: controllerEnd,
           onChanged: onChangedEnd,
@@ -64,7 +63,6 @@ class ToolsInputTwoData extends StatelessWidget {
 class ToolsInputTwoData1 extends StatelessWidget {
   const ToolsInputTwoData1(
       {Key? key,
-      required this.screenWidth,
       this.onChangedStart,
       this.onChangedEnd,
       this.keyboardTypeStart = TextInputType.number,
@@ -77,7 +75,6 @@ class ToolsInputTwoData1 extends StatelessWidget {
       : super(key: key);
   final TextInputType keyboardTypeStart, keyboardTypeEnd;
   final TextDirection textDirectionStart, textDirectionEnd;
-  final double screenWidth;
   final ValueChanged<String>? onChangedStart, onChangedEnd;
   final TextEditingController? controllerStart, controllerEnd;
   final Widget title;
@@ -85,7 +82,7 @@ class ToolsInputTwoData1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(children: [
       title,
-      sw3(screenWidth),
+      sw3(),
       Expanded(
         child: ToolsInput(
           decorDirection: TextDirection.rtl,
@@ -98,9 +95,9 @@ class ToolsInputTwoData1 extends StatelessWidget {
           isDense: true,
         ),
       ),
-      sw2(screenWidth),
+      sw2(),
       const Center(child: Text('تا')),
-      sw2(screenWidth),
+      sw2(),
       Expanded(
         child: ToolsInput(
           decorDirection: TextDirection.rtl,
@@ -118,8 +115,7 @@ class ToolsInputTwoData1 extends StatelessWidget {
 }
 
 class ToolsInputTwoDataDate extends StatelessWidget {
-  const ToolsInputTwoDataDate({Key? key, required this.screenWidth, required this.screenHeight, required this.onChangedStart, required this.onChangedEnd, required this.title, required this.data}) : super(key: key);
-  final double screenWidth, screenHeight;
+  const ToolsInputTwoDataDate({Key? key,  required this.onChangedStart, required this.onChangedEnd, required this.title, required this.data}) : super(key: key);
   final ValueChanged<DateTime> onChangedStart, onChangedEnd;
   final ToolsDataTwo<DateTime?> data;
   final Widget title;
@@ -127,23 +123,19 @@ class ToolsInputTwoDataDate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(children: [
       title,
-      sw3(screenWidth),
+      sw3(),
       ToolsInputDate(
           text: '',
-          screenWidth: screenWidth,
-          screenHeight: screenHeight,
           onChange: (year, month, day) {
             DateTime tempDate = DateTime(year, month, day);
             onChangedStart(tempDate);
           },
           showText: data.data1 != null ? ToolsText(toolsMakeDate(isJalali: false, date: data.data1)) : null),
-      sw2(screenWidth),
+      sw2(),
       const Center(child: Text('تا')),
-      sw2(screenWidth),
+      sw2(),
       ToolsInputDate(
           text: '',
-          screenWidth: screenWidth,
-          screenHeight: screenHeight,
           onChange: (year, month, day) {
             DateTime tempDate = DateTime(year, month, day);
             onChangedEnd(tempDate);

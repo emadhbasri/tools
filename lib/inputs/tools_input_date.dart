@@ -9,7 +9,7 @@ import '../text.dart';
 import '../tools.dart';
 
 class ToolsInputDate extends StatelessWidget {
-   ToolsInputDate(
+  ToolsInputDate(
       {Key? key,
       this.padding,
       this.hasDecorBorder = true,
@@ -18,14 +18,13 @@ class ToolsInputDate extends StatelessWidget {
       this.icon,
       this.iconColor,
       this.iconSize,
-      this.screenWidth,
       this.text,
       this.textWidget,
       this.iconWidget,
       this.maxYear,
       required this.onChange,
       required this.showText,
-      this.screenHeight})
+      })
       : super(key: key);
 
   final EdgeInsets? padding;
@@ -36,7 +35,6 @@ class ToolsInputDate extends StatelessWidget {
   final Color? iconColor, borderColor;
   final double? iconSize;
 
-  final double? screenWidth, screenHeight;
 
   final String? text;
   final Widget? textWidget, iconWidget;
@@ -46,9 +44,7 @@ class ToolsInputDate extends StatelessWidget {
   int? maxYear;
   @override
   Widget build(BuildContext context) {
-    if(maxYear==null){
-      maxYear=Jalali.now().year;
-    }
+    maxYear ??= Jalali.now().year;
     Widget out = Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         textDirection: TextDirection.rtl,
@@ -80,13 +76,13 @@ class ToolsInputDate extends StatelessWidget {
                       color: iconColor ?? mainColor,
                       size: iconSize,
                     ),
-                  sw2(screenWidth),
+                  sw2(),
                   if (textWidget != null)
                     textWidget!
                   else
                     Text(
                       text ?? '',
-                      style: toolscontentStyle(num: 35, screenWidth: screenWidth),
+                      style: toolscontentStyle(num: 35),
                     )
                 ],
               ),
@@ -97,7 +93,7 @@ class ToolsInputDate extends StatelessWidget {
           else
             Text(
               '0000/00/00',
-              style: toolscontentStyle(num: 35, screenWidth: screenWidth, color: colorGray6),
+              style: toolscontentStyle(num: 35, color: colorGray6),
             )
         ]);
 
@@ -105,12 +101,10 @@ class ToolsInputDate extends StatelessWidget {
       return Padding(
         padding: padding ?? EdgeInsets.zero,
         child: ToolsContainerBox(
-          color: backColor??Colors.transparent,
+          color: backColor ?? Colors.transparent,
           borderColor: borderColor ?? Colors.black,
           padHorizontal: 1,
           padVertical: 2.3,
-          screenWidth: screenWidth,
-          screenHeight: screenHeight,
           child: out,
         ),
       );

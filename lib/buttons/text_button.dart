@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tools/size.dart';
+import 'package:tools/size_plus.dart';
 
 class ToolsButtonText extends StatelessWidget {
   const ToolsButtonText(
@@ -17,7 +17,7 @@ class ToolsButtonText extends StatelessWidget {
   final GestureLongPressCallback? onLongPress;
   final BorderRadius? borderRadius;
   final Color? splashColor,backgroundColor;
-  
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -27,8 +27,8 @@ class ToolsButtonText extends StatelessWidget {
       onDoubleTap: onDoubleTap,
       onTap: (){},
       child: Ink(
-        width: doubleWidth(10),
-        height: doubleHeight(10),
+        width: 10.w,
+        height: 10.h,
         // padding: EdgeInsets.symmetric(
         //   horizontal: 10,
         //   vertical: 10
