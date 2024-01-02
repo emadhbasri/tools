@@ -23,6 +23,9 @@ class ToolsSizer extends StatelessWidget {
   }
 }
 
+double percentMake(data1, data2) {
+  return (data1 * data2) / 100;
+}
 
 extension ToolsSizerExt on num {
   double get maxH => this * ToolsSize.boxConstraints.maxHeight / 100;

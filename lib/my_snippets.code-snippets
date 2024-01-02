@@ -1,11 +1,480 @@
 {
-	// Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
-	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
-	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
-	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
-	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
 	// Placeholders with the same ids are connected.
 	// Example:
+
+	"local":{
+		"scope": "flutter,dart",
+		"prefix": "local",
+		"body": [
+			"AppLocalizations.of(context).$1"
+		]
+	},
+
+	"convertFormClass": {
+		"scope": "flutter,dart",
+		"prefix": "convertFormClass",
+		"body": [
+			"class Data$1Form {",
+			"   late TextEditingController data1, data2, data3, data4, data5, data6, data7, data8, data9, data10;",
+            "",
+			"   Data$1Form([Data$1? data]) {",
+			"     data1 = TextEditingController(text: data?.data1);",
+			"     data2 = TextEditingController(text: data?.data2);",
+			"     data3 = TextEditingController(text: data?.data3);",
+			"     data4 = TextEditingController(text: data?.data4);",
+			"     data5 = TextEditingController(text: data?.data5);",
+			"     data6 = TextEditingController(text: data?.data6);",
+			"     data7 = TextEditingController(text: data?.data7);",
+			"     data8 = TextEditingController(text: data?.data8);",
+			"     data9 = TextEditingController(text: data?.data9);",
+			"     data10 = TextEditingController(text: data?.data10);",
+			"   }",
+			"",
+			"   Map<String, dynamic> toSend() {",
+			"     return {",
+			"      'data1': data1.value.text,",
+			"      'data2': data2.value.text,",
+			"      'data3': data3.value.text,",
+			"      'data4': data4.value.text,",
+			"      'data5': data5.value.text,",
+			"      'data6': data6.value.text,",
+			"      'data7': data7.value.text,",
+			"      'data8': data8.value.text,",
+			"      'data9': data9.value.text,",
+			"      'data10': data10.value.text,",
+			"     };",
+			"   }",
+			" }"
+		],
+		"description": "convertFormClass"
+	},
+
+
+
+	"dclassMongo": {
+		"scope": "flutter,dart",
+		"prefix": "dclassMongo",
+		"body": [
+			"class Data$1 {",
+			"  late String id;",
+			"  ",
+			"  late DateTime createdAt;",
+			"  late DateTime updatedAt;",
+			"  Data$1.fromJson(Map<String, dynamic> data) {",
+			"    id = convertData(data, '_id', DataType.string);",
+			"    ",
+			"    createdAt = convertData(data, 'createdAt', DataType.datetime);",
+			"    updatedAt = convertData(data, 'updatedAt', DataType.datetime);",
+			"  }",
+			"}"
+		],
+		"description": "dclassMongo"
+	},
+
+
+	"convertcifNull": {
+		"scope": "flutter,dart",
+		"prefix": "convertcifNull",
+		"body": [
+			"if (data.containsKey('$1') && data['$1'] != null) {",
+			"  if (data['$1'] is! String) {",
+			"    $1 = convertData(data, '$1', DataType.clas, classType: '$2');",
+			"    $1Id = $1!.id;",
+			"  } else {",
+			"    $1Id = convertData(data, '$1', DataType.string);",
+			"  }",
+			"}"
+		],
+		"description": "convertcif"
+	},
+	"convertcif": {
+		"scope": "flutter,dart",
+		"prefix": "convertcif",
+		"body": [
+			"if (data['$1'] is! String) {",
+			"  $1 = convertData(data, '$1', DataType.clas, classType: '$2');",
+			"  $1Id = $1!.id;",
+			"} else {",
+			"  $1Id = convertData(data, '$1', DataType.string);",
+			"}"
+		],
+		"description": "convertcif"
+	},
+
+	"makeD": {
+		"scope": "flutter,dart",
+		"prefix": "makeD",
+		"body": [
+			"toolsMakeDate(",
+			"  isJalali: true,",
+			"  dateIsJalali: false,",
+			"  isWeekDay: ${2|true,false|},",
+			"  date: $1)"
+		],
+		"description": "toolsMakeDate"
+	},
+
+	"dw": {
+		"scope": "flutter,dart",
+		"prefix": "dw",
+		"body": [
+			"doubleWidth($1,screenWidth),"
+		],
+		"description": "doubleWidth(,screenWidth)"
+	},
+	"dh": {
+		"scope": "flutter,dart",
+		"prefix": "dh",
+		"body": [
+			"doubleHeight($1,screenHeight),"
+		],
+		"description": "doubleHeight(,screenHeight)"
+	},
+
+	"h2": {
+		"scope": "flutter,dart",
+		"prefix": "h2",
+		"body": [
+			"h2(screenHeight),"
+		],
+		"description": "h2(screenHeight)"
+	},
+	"h4": {
+		"scope": "flutter,dart",
+		"prefix": "h4",
+		"body": [
+			"h4(screenHeight),"
+		],
+		"description": "h4(screenHeight)"
+	},
+	"h8": {
+		"scope": "flutter,dart",
+		"prefix": "h8",
+		"body": [
+			"h8(screenHeight),"
+		],
+		"description": "h8(screenHeight)"
+	},
+	"h12": {
+		"scope": "flutter,dart",
+		"prefix": "h12",
+		"body": [
+			"h12(screenHeight),"
+		],
+		"description": "h12(screenHeight)"
+	},
+	"h16": {
+		"scope": "flutter,dart",
+		"prefix": "h16",
+		"body": [
+			"h16(screenHeight),"
+		],
+		"description": "h16(screenHeight)"
+	},
+	"h20": {
+		"scope": "flutter,dart",
+		"prefix": "h20",
+		"body": [
+			"h20(screenHeight),"
+		],
+		"description": "h20(screenHeight)"
+	},
+	"h24": {
+		"scope": "flutter,dart",
+		"prefix": "h24",
+		"body": [
+			"h24(screenHeight),"
+		],
+		"description": "h24(screenHeight)"
+	},
+	"h28": {
+		"scope": "flutter,dart",
+		"prefix": "h28",
+		"body": [
+			"h28(screenHeight),"
+		],
+		"description": "h28(screenHeight)"
+	},
+	"h32": {
+		"scope": "flutter,dart",
+		"prefix": "h32",
+		"body": [
+			"h32(screenHeight),"
+		],
+		"description": "h32(screenHeight)"
+	},
+
+
+
+	"w2": {
+		"scope": "flutter,dart",
+		"prefix": "w2",
+		"body": [
+			"w2(screenWidth),"
+		],
+		"description": "w2(screenWidth)"
+	},
+	"w4": {
+		"scope": "flutter,dart",
+		"prefix": "w4",
+		"body": [
+			"w4(screenWidth),"
+		],
+		"description": "w4(screenWidth)"
+	},
+	"w8": {
+		"scope": "flutter,dart",
+		"prefix": "w8",
+		"body": [
+			"w8(screenWidth),"
+		],
+		"description": "w8(screenWidth)"
+	},
+	"w12": {
+		"scope": "flutter,dart",
+		"prefix": "w12",
+		"body": [
+			"w12(screenWidth),"
+		],
+		"description": "w12(screenWidth)"
+	},
+	"w16": {
+		"scope": "flutter,dart",
+		"prefix": "w16",
+		"body": [
+			"w16(screenWidth),"
+		],
+		"description": "w16(screenWidth)"
+	},
+	"w20": {
+		"scope": "flutter,dart",
+		"prefix": "w20",
+		"body": [
+			"w20(screenWidth),"
+		],
+		"description": "w20(screenWidth)"
+	},
+	"w24": {
+		"scope": "flutter,dart",
+		"prefix": "w24",
+		"body": [
+			"w24(screenWidth),"
+		],
+		"description": "w24(screenWidth)"
+	},
+	"w28": {
+		"scope": "flutter,dart",
+		"prefix": "w28",
+		"body": [
+			"w28(screenWidth),"
+		],
+		"description": "w28(screenWidth)"
+	},
+	"w32": {
+		"scope": "flutter,dart",
+		"prefix": "w32",
+		"body": [
+			"w32(screenWidth),"
+		],
+		"description": "w32(screenWidth)"
+	},
+
+
+	"sh1": {
+		"scope": "flutter,dart",
+		"prefix": "sh1",
+		"body": [
+			"sh1(screenHeight),"
+		],
+		"description": "sh1(screenHeight)"
+	},
+	"sh2": {
+		"scope": "flutter,dart",
+		"prefix": "sh2",
+		"body": [
+			"sh2(screenHeight),"
+		],
+		"description": "sh2(screenHeight)"
+	},
+	"sh3": {
+		"scope": "flutter,dart",
+		"prefix": "sh3",
+		"body": [
+			"sh3(screenHeight),"
+		],
+		"description": "sh3(screenHeight)"
+	},
+	"sh4": {
+		"scope": "flutter,dart",
+		"prefix": "sh4",
+		"body": [
+			"sh4(screenHeight),"
+		],
+		"description": "sh4(screenHeight)"
+	},
+	"sh5": {
+		"scope": "flutter,dart",
+		"prefix": "sh5",
+		"body": [
+			"sh5(screenHeight),"
+		],
+		"description": "sh5(screenHeight)"
+	},
+	"sh6": {
+		"scope": "flutter,dart",
+		"prefix": "sh6",
+		"body": [
+			"sh6(screenHeight),"
+		],
+		"description": "sh6(screenHeight)"
+	},
+	"sh7": {
+		"scope": "flutter,dart",
+		"prefix": "sh7",
+		"body": [
+			"sh7(screenHeight),"
+		],
+		"description": "sh7(screenHeight)"
+	},
+	"sh8": {
+		"scope": "flutter,dart",
+		"prefix": "sh8",
+		"body": [
+			"sh8(screenHeight),"
+		],
+		"description": "sh8(screenHeight)"
+	},
+
+
+	"sw1": {
+		"scope": "flutter,dart",
+		"prefix": "sw1",
+		"body": [
+			"sw1(screenWidth),"
+		],
+		"description": "sw1(screenWidth)"
+	},
+	"sw2": {
+		"scope": "flutter,dart",
+		"prefix": "sw2",
+		"body": [
+			"sw2(screenWidth),"
+		],
+		"description": "sw2(screenWidth)"
+	},
+	"sw3": {
+		"scope": "flutter,dart",
+		"prefix": "sw3",
+		"body": [
+			"sw3(screenWidth),"
+		],
+		"description": "sw3(screenWidth)"
+	},
+	"sw4": {
+		"scope": "flutter,dart",
+		"prefix": "sw4",
+		"body": [
+			"sw4(screenWidth),"
+		],
+		"description": "sw4(screenWidth)"
+	},
+	"sw5": {
+		"scope": "flutter,dart",
+		"prefix": "sw5",
+		"body": [
+			"sw5(screenWidth),"
+		],
+		"description": "sw5(screenWidth)"
+	},
+	"sw6": {
+		"scope": "flutter,dart",
+		"prefix": "sw6",
+		"body": [
+			"sw6(screenWidth),"
+		],
+		"description": "sw6(screenWidth)"
+	},
+	"sw7": {
+		"scope": "flutter,dart",
+		"prefix": "sw7",
+		"body": [
+			"sw7(screenWidth),"
+		],
+		"description": "sw7(screenWidth)"
+	},
+	"sw8": {
+		"scope": "flutter,dart",
+		"prefix": "sw8",
+		"body": [
+			"sw8(screenWidth),"
+		],
+		"description": "sw8(screenWidth)"
+	},
+
+
+
+	"msd": {
+		"scope": "flutter,dart",
+		"prefix": "msd",
+		"body": [
+			"Map<String,dynamic> "
+		],
+		"description": "Map<String,dynamic>"
+	},
+
+	"re": {
+		"scope": "flutter,dart",
+		"prefix": "re",
+		"body": [
+			"ToolsRowExpand(firstSpace: true, children: [",
+			"   $1",
+			"]),"
+		],
+		"description": "ToolsRowExpand"
+	},
+	"ref": {
+		"scope": "flutter,dart",
+		"prefix": "ref",
+		"body": [
+			"ToolsRowExpandForce(firstSpace: true, children: [",
+			"   $1",
+			"]),"
+		],
+		"description": "ToolsRowExpandForce"
+	},
+	"zero": {
+		"scope": "flutter,dart",
+		"prefix": "zero",
+		"body": [
+			"EdgeInsets.zero"
+		],
+		"description": "EdgeInsets.zero"
+	},
+	"text": {
+		"scope": "flutter,dart",
+		"prefix": "text",
+		"body": [
+			"ToolsText('$1',",
+			"    style: toolstitleStyle(",
+			"        screenWidth: screenWidth, color: black1)),"
+		],
+		"description": "ToolsText('$1',style: toolstitleStyle(screenWidth: screenWidth,color: black1)),"
+	},
+	"textc": {
+		"scope": "flutter,dart",
+		"prefix": "textc",
+		"body": [
+			"ToolsText('$1',",
+			"    style: toolscontentStyle(",
+			"        screenWidth: screenWidth, color: black1)),"
+		],
+		"description": "ToolsText('$1',style: toolscontentStyle(screenWidth: screenWidth,color: black1)),"
+	},
 
 	"mainb": {
 		"scope": "flutter,dart",
@@ -32,7 +501,7 @@
 		],
 		"description": "mainc"
 	},
-	
+
 	"min": {
 		"scope": "flutter,dart",
 		"prefix": "min",
@@ -214,7 +683,15 @@
 		"description": "box"
 	},
 
-	
+
+	"convertc": {
+		"scope": "flutter,dart",
+		"prefix": "convertc",
+		"body": [
+			"$1 = convertData(data, '$1', DataType.clas, classType: '$2');"
+		],
+		"description": "convertc"
+	},
 	"convert": {
 		"scope": "flutter,dart",
 		"prefix": "convert",
@@ -225,19 +702,19 @@
 	},
 	"convert1": {
 		"scope": "flutter,dart",
-		"prefix": "convert",
+		"prefix": "convert1",
 		"body": [
 			"$1=convertData(data, '$2', DataType.string);"
 		],
-		"description": "convert"
+		"description": "convert1"
 	},
 	"convert2": {
 		"scope": "flutter,dart",
-		"prefix": "convert",
+		"prefix": "conver2",
 		"body": [
 			"$1=convertData(data, '$1', DataType.string);"
 		],
-		"description": "convert"
+		"description": "conver2"
 	},
 
 	"convertl": {
@@ -250,27 +727,27 @@
 	},
 	"convertl2": {
 		"scope": "flutter,dart",
-		"prefix": "convertl",
+		"prefix": "convertl2",
 		"body": [
 			"$1=convertDataList<$2>(data, '$1', '$2');"
 		],
-		"description": "convertl"
+		"description": "convertl2"
 	},
 	"convertlraw": {
 		"scope": "flutter,dart",
-		"prefix": "convertl",
+		"prefix": "convertlraw",
 		"body": [
 			"convertDataListRaw<$1>(data, '$1');"
 		],
-		"description": "convertl"
+		"description": "convertlraw"
 	},
 	"convertlraw2": {
 		"scope": "flutter,dart",
-		"prefix": "convertl",
+		"prefix": "convertlraw2",
 		"body": [
 			"$1=convertDataListRaw<$1>(data, '$1');"
 		],
-		"description": "convertl"
+		"description": "convertlraw2"
 	},
 
 	"for": {
@@ -303,12 +780,60 @@
 		],
 		"description": "default_state"
 	},
+	"stful_my_list": {
+		"scope": "flutter,dart",
+		"prefix": "stful_my_list",
+		"body": [
+			"import 'package:flutter/material.dart';",
+			"import 'package:tools/ui.dart';",
+			"",
+			"class $1 extends StatefulWidget {",
+			"  const $1({Key? key}) : super(key: key);",
+			"",
+			"  @override",
+			"  State<$1> createState() => _$1State();",
+			"}",
+			"",
+			"class _$1State extends State<$1> {",
+			"  List list = [];",
+			"  bool loading = true;",
+			"",
+			"  @override",
+			"  void initState() {",
+			"    super.initState();",
+			"    getData();",
+			"  }",
+			"",
+			"  getData() async {",
+			"    if (loading == false) {",
+			"      setState(() {",
+			"        loading = true;",
+			"      });",
+			"    }",
+			"    //TODO await",
+			"",
+			"    setState(() {",
+			"      loading = false;",
+			"    });",
+			"  }",
+			"",
+			"  @override",
+			"  Widget build(BuildContext context) {",
+			"    return Scaffold(",
+			"      appBar: AppBar(),",
+			"      body: loading ? toolscircleLoader() : const SizedBox.shrink(),",
+			"    );",
+			"  }",
+			"}",
+		],
+		"description": "stful_my_list"
+	},
 	"stful_my": {
 		"scope": "flutter,dart",
 		"prefix": "stful_my",
 		"body": [
 			"import 'package:flutter/material.dart';",
-			
+
 			"class $1 extends StatefulWidget {",
 			"    const $1({Key? key}) : super(key: key);",
 			"",
@@ -344,10 +869,10 @@
 			"class _$1State extends State<$1> {",
 				"    @override",
 				"    Widget build(BuildContext context) {",
-					"    return MySizer(builder: (context, widgets,",
+					"    return MySizer(builder: (context,",
 					"    deviceType, screenWidth, screenHeight, realWidth, realHeight) {",
 						"    return Scaffold(",
-						"           $2",	
+						"           $2",
 						"         ); ",
 						"       },",
 						"    );",
@@ -356,6 +881,59 @@
 			""
 		],
 		"description": "stful_res_my"
+	},
+	"stful_res_my_list": {
+		"scope": "flutter,dart",
+		"prefix": "stful_res_my_list",
+		"body": [
+			"import 'package:flutter/material.dart';",
+			"import 'package:tools/size.dart';",
+			"import 'package:tools/ui.dart';",
+			"",
+			"class $1 extends StatefulWidget {",
+			"  const $1({Key? key}) : super(key: key);",
+			"",
+			"  @override",
+			"  State<$1> createState() => _$1State();",
+			"}",
+			"",
+			"class _$1State extends State<$1> {",
+			"  List list = [];",
+			"  bool loading = true;",
+			"",
+			"  @override",
+			"  void initState() {",
+			"    super.initState();",
+			"    getData();",
+			"  }",
+			"",
+			"  getData() async {",
+			"    if (loading == false) {",
+			"      setState(() {",
+			"        loading = true;",
+			"      });",
+			"    }",
+			"    //TODO await",
+			"",
+			"    setState(() {",
+			"      loading = false;",
+			"    });",
+			"  }",
+			"",
+			"  @override",
+			"  Widget build(BuildContext context) {",
+			"    return MySizer(",
+			"      builder: (context, deviceType, screenWidth, screenHeight, realWidth, realHeight) {",
+			"        return Scaffold(",
+			"          appBar: AppBar(),",
+			"          body: loading ? toolscircleLoader() : const SizedBox.shrink(),",
+			"        );",
+			"      },",
+			"    );",
+			"  }",
+			"}",
+		],
+		"description": "stful_res_my_list"
 	},
 	"stless_my": {
 		"scope": "flutter,dart",
@@ -375,7 +953,7 @@
 		"description": "stless_my"
 	},
 
-	
+
 
 	"inputDate": {
 		"scope": "flutter,dart",
@@ -399,7 +977,7 @@
                 "state.notify();",
               "},",
               "showText: $2 != null",
-                  "? ToolsText(toolsmakeDate(",
+                  "? ToolsText(toolsMakeDate(",
                       "isJalali: false, date: $2))",
                   ": null),",
 		],
@@ -432,7 +1010,7 @@
 		"prefix": "inputTextWN",
 		"body": [
 			"ToolsInput(",
-            	"textDirection: TextDirection.rtl,",
+            	"textDirection: TextDirection.ltr,",
 				"decorDirection: TextDirection.rtl,",
 				"keyboardType: TextInputType.number,",
             	"controller: $2,",
@@ -495,6 +1073,8 @@
 		"body": [
 			"ToolsDropDown<String>(",
               "isExpanded: true,",
+			  "screenWidth: screenWidth,",
+              "screenHeight: screenHeight,",
               "hint: const Text('$1'),",
               "onChanged: (String e) {",
                 "$2.value = e;",
