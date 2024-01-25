@@ -3,7 +3,6 @@ import 'package:tools/date.dart';
 import 'package:tools/size_plus.dart';
 import 'package:tools/text.dart';
 
-import '../size.dart';
 import 'my_input.dart';
 import 'my_input_maker.dart';
 import 'tools_input_date.dart';
@@ -130,7 +129,7 @@ class ToolsInputTwoDataDate extends StatelessWidget {
             DateTime tempDate = DateTime(year, month, day);
             onChangedStart(tempDate);
           },
-          showText: data.data1 != null ? ToolsText(toolsMakeDate(isJalali: false, date: data.data1)) : null),
+          showText: data.data1 != null ? ToolsText(toolsMakeDate(isJalali: false, date: data.data1),style: toolscontentStyle(num:3)) : null),
       sw2(),
       const Center(child: Text('تا')),
       sw2(),
@@ -140,7 +139,7 @@ class ToolsInputTwoDataDate extends StatelessWidget {
             DateTime tempDate = DateTime(year, month, day);
             onChangedEnd(tempDate);
           },
-          showText: data.data2 != null ? ToolsText(toolsMakeDate(isJalali: false, date: data.data2)) : null),
+          showText: data.data2 != null ? ToolsText(toolsMakeDate(isJalali: false, date: data.data2),style: toolscontentStyle(num:3)) : null),
     ]);
   }
 }

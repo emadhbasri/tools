@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tools/size_plus.dart';
 
-import '../size.dart';
-
 class ToolsRowExpand extends StatelessWidget {
   ToolsRowExpand({
     super.key,
@@ -49,15 +47,17 @@ class ToolsRowExpand extends StatelessWidget {
         if (flexs.isNotEmpty) {
           fflex = flexs[j];
         }
-        if (ToolsSize.maxW <= 700)
+        if (ToolsSize.maxW <= 700) {
           out.add(child);
-        else
+        } else {
           out.add(Expanded(flex: fflex, child: child));
+        }
         if (child != children.last) {
-          if (ToolsSize.maxW <= 700)
+          if (ToolsSize.maxW <= 700) {
             out.add(SizedBox(height: space));
-          else
+          } else {
             out.add(SizedBox(width: space));
+          }
         }
       }
 
@@ -71,7 +71,7 @@ class ToolsRowExpand extends StatelessWidget {
 
       if (ToolsSize.maxW <= 700) {
         return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(
             mainAxisAlignment: mainAxisAlignment,
             mainAxisSize: mainAxisSize,
@@ -168,7 +168,7 @@ class ToolsRowExpandForce extends StatelessWidget {
         }
       }
 
-      if (firstSpace) {
+      if (lastSpace) {
         out.add(SizedBox(width: spaceLast));
       }
 

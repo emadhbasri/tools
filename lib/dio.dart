@@ -58,7 +58,7 @@ class Services {
       headers: headers,
     );
     FutureOr<Response> fail =
-        Response(requestOptions: RequestOptions(path: url), data: 'nonet catch', statusCode: 400);
+        Response(requestOptions: RequestOptions(path: url), data: 'nonet1 catch', statusCode: 400);
     switch (kind) {
       case ServiceKind.get:
         return await dio
@@ -117,7 +117,7 @@ class Services {
         });
       default:
         return Response(
-            requestOptions: RequestOptions(path: url), data: 'nonet default', statusCode: 400);
+            requestOptions: RequestOptions(path: url), data: 'nonet2 default', statusCode: 400);
     }
   }
 
@@ -143,6 +143,7 @@ class Services {
     doPrint ??= this.doPrint;
     kind ??= this.kind;
     url = '$server$url';
+    print('urlurl $url');
 
     if (doPrint) {
       debugPrint('start');

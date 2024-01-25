@@ -47,6 +47,29 @@ String toolsmakeDurationToStringP(DateTime date) {
     return '';
   }
 }
+String toolsmakeDurationToStringP1(DateTime date) {
+  if (date.isAfter(DateTime.now())) {
+    return '';
+  }
+  DateTimeRange range = DateTimeRange(start: date, end: DateTime.now());
+  Duration duration = range.duration;
+  if (duration.inDays > 365) {
+    return '${duration.inDays ~/ 365} سال';
+  } else if (duration.inDays > 30) {
+    return '${duration.inDays ~/ 30} ماه';
+  } else if (duration.inDays > 0) {
+    return '${duration.inDays} روز';
+  } else if (duration.inHours > 0) {
+    return '${duration.inHours} ساعت';
+  } else if (duration.inMinutes > 0) {
+    return '${duration.inMinutes} دقیقه';
+  } else if (duration.inSeconds > 0) {
+    return '${duration.inSeconds} ثانیه';
+  } else {
+    return '';
+  }
+}
+
 
 String toolsintToWeekDayJalali(int index) {
   switch (index) {

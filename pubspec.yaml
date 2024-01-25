@@ -39,6 +39,7 @@ dependencies:
   flutter_inset_box_shadow: 1.0.8
   flutter_rating_bar: 4.0.1
   logging: 1.1.1
+  universal_platform: 1.0.0+1
   # motion_toast: 2.6.7
 
   # get_it: 7.6.0

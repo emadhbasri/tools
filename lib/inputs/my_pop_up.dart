@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tools/size.dart';
+import 'package:tools/size_plus.dart';
 
 import '../layouts.dart';
 import '../text.dart';
