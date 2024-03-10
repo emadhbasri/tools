@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../size.dart';
+
 class ToolsButtonNative extends StatelessWidget {
   const ToolsButtonNative(
       {Key? key,
@@ -15,6 +16,8 @@ class ToolsButtonNative extends StatelessWidget {
       this.elevation,
       this.side,
       this.textStyle,
+      required this.screenWidth,
+      required this.screenHeight,
       this.loading = false,
       this.padding})
       : super(key: key);
@@ -24,7 +27,7 @@ class ToolsButtonNative extends StatelessWidget {
   final VoidCallback? onPressed, onLongPress;
   final bool loading;
   final Color? backgroundColor, shadowColor;
-  final double radius;
+  final double radius, screenWidth, screenHeight;
   final double? elevation;
   final BorderSide? side;
   final TextStyle? textStyle;
@@ -38,7 +41,11 @@ class ToolsButtonNative extends StatelessWidget {
       elevation: MaterialStatePropertyAll(elevation),
       side: MaterialStatePropertyAll(side),
       textStyle: MaterialStatePropertyAll(textStyle),
-      padding: MaterialStatePropertyAll(padding??EdgeInsets.symmetric(vertical: h12(),horizontal: w8(),)),
+      padding: MaterialStatePropertyAll(padding ??
+          EdgeInsets.symmetric(
+            vertical: h12(screenHeight),
+            horizontal: w8(screenWidth),
+          )),
       shadowColor: MaterialStatePropertyAll(shadowColor),
     );
 
@@ -49,8 +56,8 @@ class ToolsButtonNative extends StatelessWidget {
         onHover: onHover,
         style: style,
         child: SizedBox(
-          width: w12(),
-          height: w12(),
+          width: w12(screenWidth),
+          height: w12(screenWidth),
           child: const CircularProgressIndicator(
             strokeWidth: 2,
             valueColor: AlwaysStoppedAnimation(

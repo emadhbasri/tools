@@ -188,7 +188,7 @@ class ScrollViewHV extends StatelessWidget {
 List<DataColumn> makeColumn(List<DataTableMy> data) => data
     .map(
       (e) => DataColumn(
-        label: Text(e.head),
+        label: Text(e.head,style: e.style,),
         numeric: e.numeric,
       ),
     )
@@ -212,7 +212,13 @@ DataRow makeRow(
         cells: [
           if (firstCells != null) ...firstCells,
           ...data
-              .map((e) => DataCell(e.child == null ? Text(e.content) : e.child!,
+              .map((e) => DataCell(
+                  e.child == null
+                      ? Text(
+                          e.content,
+                          style: e.style,
+                        )
+                      : e.child!,
                   onTap: e.doIt != null
                       ? () {
                           e.doIt!();
@@ -234,10 +240,12 @@ class DataTableMy {
   final Widget? child;
   final bool numeric, editIcon, click;
   final String tooltip;
+  final TextStyle? style;
 
   DataTableMy(this.head, this.content,
       {this.numeric = false,
       this.click = false,
+      this.style,
       this.child,
       this.tooltip = '',
       this.doIt,

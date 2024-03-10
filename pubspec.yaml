@@ -14,7 +14,7 @@ dependencies:
   flutter_adaptive_ui: 0.8.0+1
   url_launcher: 6.1.14
   shared_preferences: 2.1.1
-  cached_network_image: 3.3.0
+  cached_network_image: 3.3.1
   toast: 0.3.0
 
   # share_plus: 6.3.1

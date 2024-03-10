@@ -141,9 +141,9 @@
 	  "body": [
 		"ToolsText('$1',",
 		"    style: toolstitleStyle(",
-		"        screenWidth: screenWidth, color: black1)),"
+		"        color: black1)),"
 	  ],
-	  "description": "ToolsText('$1',style: toolstitleStyle(screenWidth: screenWidth,color: black1)),"
+	  "description": "ToolsText('$1',style: toolstitleStyle(olor: black1)),"
 	},
 	"textc": {
 	  "scope": "flutter,dart",
@@ -151,9 +151,9 @@
 	  "body": [
 		"ToolsText('$1',",
 		"    style: toolscontentStyle(",
-		"        screenWidth: screenWidth, color: black1)),"
+		"        color: black1)),"
 	  ],
-	  "description": "ToolsText('$1',style: toolscontentStyle(screenWidth: screenWidth,color: black1)),"
+	  "description": "ToolsText('$1',style: toolscontentStyle(olor: black1)),"
 	},
 
 	"mainb": {
@@ -259,8 +259,8 @@
 		"  borderRadius: BorderRadius.circular(10),",
 		"),",
 		"padding: EdgeInsets.symmetric(",
-		"  horizontal: doubleWidth(2, $2screenWidth),",
-		"  vertical: doubleHeight(0.5, $2screenHeight)",
+		"  horizontal: 2.w,",
+		"  vertical: 1.h",
 		"),",
 		"  child: $1,",
 		"),"
@@ -445,8 +445,6 @@
 	  "body": [
 		"ToolsInputDate(",
 		"text: '$1',",
-		"screenWidth: screenWidth,",
-		"screenHeight: screenHeight,",
 		"onChange: (year, month, day) {",
 		"DateTime tempDate = DateTime(year, month, day);",
 		"$2 = tempDate;",
@@ -512,8 +510,6 @@
 		"ToolsPopUp<String>(",
 		"textDirection: TextDirection.rtl,",
 		"title: const Text('$1'),",
-		"screenWidth: screenWidth,",
-		"screenHeight: screenHeight,",
 		"data: $2,",
 		"onSelected: (String e) {",
 		"if ($2.enables.contains(e)) {",
@@ -544,8 +540,6 @@
 	  "body": [
 		"ToolsDropDown<String>(",
 		"isExpanded: true,",
-		"screenWidth: screenWidth,",
-		"screenHeight: screenHeight,",
 		"hint: const Text('$1'),",
 		"onChanged: (String e) {",
 		"$2.value = e;",
@@ -567,9 +561,8 @@
 	  "prefix": "inputTwoDataW",
 	  "body": [
 		"ToolsInputTwoData(",
-		"    screenWidth: screenWidth,",
 		"    title: Text('$1',",
-		"        style: toolstitleStyle(screenWidth: screenWidth, num: 3)),",
+		"        style: toolstitleStyle(num: 3)),",
 		"    onChangedStart: (e) {",
 		"      $2.start = int.parse(e);",
 		"    },",
@@ -599,7 +592,7 @@
 		"value: $2,",
 		"isMaterial: false,",
 		"text: '$1',",
-		"textStyle: toolstitleStyle(num: 3, screenWidth: screenWidth)",
+		"textStyle: toolstitleStyle(num: 3)",
 		"    .copyWith(color: black1),",
 		"),"
 	  ],
@@ -618,6 +611,12 @@
 	  "description": "consumer"
 	},
 
+	"alertdelete": {
+	  "scope": "flutter,dart",
+	  "prefix": "alertdelete",
+	  "body": ["if((await toolsAlertDelete(context, strS: '$1'))==false)return;"],
+	  "description": "alertdelete"
+	},
 	"default": {
 	  "scope": "flutter,dart",
 	  "prefix": "default",

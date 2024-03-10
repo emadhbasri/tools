@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tools/text.dart';
 
 import '../input.dart';
+import '../tools.dart';
 
 class ToolsInput extends StatelessWidget {
   const ToolsInput(
@@ -40,9 +41,10 @@ class ToolsInput extends StatelessWidget {
       this.onChanged,
       this.onEditingComplete,
       this.onSubmitted,
+      this.errorText,
       this.clearSuffix = false})
       : super(key: key);
-  final String? labelText, hintText, prefixText, suffixText;
+  final String? labelText, hintText, prefixText, suffixText, errorText;
   final TextInputType keyboardType;
   final TextEditingController? controller;
   final TextDirection textDirection;
@@ -144,8 +146,12 @@ class ToolsInput extends StatelessWidget {
             focusedBorder: inputBorder1,
             enabledBorder: inputBorder1,
             disabledBorder: inputBorder1,
+            errorBorder: inputBorder1,
+            focusedErrorBorder: inputBorder1,
             contentPadding: contentPadding,
-            labelText: labelText),
+            errorText: errorText,
+            labelText: labelText,
+            labelStyle: const TextStyle(color: Colors.black)),
       ),
     );
   }

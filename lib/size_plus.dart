@@ -72,24 +72,50 @@ class ToolsSize extends ChangeNotifier {
     // Sets boxconstraints and orientation
     boxConstraints = constraints;
 
-    maxH = ToolsSize.boxConstraints.maxHeight ;
-    maxW = ToolsSize.boxConstraints.maxWidth ;
+    maxH = constraints.maxHeight;
+    maxW = constraints.maxWidth;
 
-    minH = ToolsSize.boxConstraints.minHeight ;
-    minW = ToolsSize.boxConstraints.minWidth ;
+    minH = constraints.minHeight;
+    minW = constraints.minWidth;
 
-    h = ToolsSize.boxConstraints.maxHeight ;
-    hh = makeWidth(ToolsSize.boxConstraints.maxHeight);
-    w = makeWidth(ToolsSize.boxConstraints.maxWidth);
+    h = constraints.maxHeight;
+    hh = makeWidth(constraints.maxHeight);
+    w = makeWidth(constraints.maxWidth);
 
     landscape = orientation == Orientation.landscape;
     portrait = orientation == Orientation.portrait;
 
-    if (constraints.maxWidth <= 500) mobile = true;
-    if (constraints.maxWidth > 500 && constraints.maxWidth <= 700) mobileTablet = true;
-    if (constraints.maxWidth > 700 && constraints.maxWidth <= 1000) tablet = true;
-    if (constraints.maxWidth > 1000 && constraints.maxWidth <= 1200) tabletDesktop = true;
-    if (constraints.maxWidth > 1200) desktop = true;
+    if (constraints.maxWidth <= 500) {
+      mobile = true;
+      mobileTablet = false;
+      tablet = false;
+      tabletDesktop = false;
+      desktop = false;
+    } else if (constraints.maxWidth > 500 && constraints.maxWidth <= 700) {
+      mobile = false;
+      mobileTablet = true;
+      tablet = false;
+      tabletDesktop = false;
+      desktop = false;
+    } else if (constraints.maxWidth > 700 && constraints.maxWidth <= 1000) {
+      mobile = false;
+      mobileTablet = false;
+      tablet = true;
+      tabletDesktop = false;
+      desktop = false;
+    } else if (constraints.maxWidth > 1000 && constraints.maxWidth <= 1200) {
+      mobile = false;
+      mobileTablet = false;
+      tablet = false;
+      tabletDesktop = true;
+      desktop = false;
+    } else if (constraints.maxWidth > 1200) {
+      mobile = false;
+      mobileTablet = false;
+      tablet = false;
+      tabletDesktop = false;
+      desktop = true;
+    }
 
     if (kIsWeb) {
       web = true;
@@ -101,10 +127,6 @@ class ToolsSize extends ChangeNotifier {
     }
   }
 }
-
-
-
-
 
 double h8() => 0.95.maxH;
 double h4() => h8() / 2;
@@ -144,7 +166,6 @@ Widget sw6() => SizedBox(width: w24());
 Widget sw7() => SizedBox(width: w28());
 Widget sw8() => SizedBox(width: w32());
 
-
 Widget sizeh(double h) {
   return SizedBox(height: h);
 }
@@ -153,6 +174,4 @@ Widget sizew(double w) {
   return SizedBox(width: w);
 }
 
-
-double? sizeText(double? mobile, double? other) =>
-    ToolsSize.desktop ? mobile : other;
+double? sizeText(double? mobile, double? other) => ToolsSize.desktop ? mobile : other;
