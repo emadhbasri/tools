@@ -101,6 +101,8 @@ toolsstatusSet({
   try {
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemStatusBarContrastEnforced: true,
+      systemNavigationBarContrastEnforced: true,
       statusBarColor: statusBar,
       statusBarBrightness: (statusBarIconIsWhite != null)
           ? (statusBarIconIsWhite ? Brightness.light : Brightness.dark)

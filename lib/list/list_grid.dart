@@ -36,8 +36,9 @@ class ToolsSliverBuilder<T> extends StatefulWidget {
     BuildContext context,
     int index,
   )? separatorBuilder;
-  final Widget Function(BuildContext context, int index, T item,
-      PagingController<int, T> pagingController) itemBuilder;
+  final Widget Function(
+          BuildContext context, int index, T item, PagingController<int, T> pagingController)
+      itemBuilder;
   final int firstPage;
   final bool animateTransitions, reverse, shrinkWrap, separated;
   final Duration transitionDuration;
@@ -87,10 +88,11 @@ class _ToolsSliverBuilderState<T> extends State<ToolsSliverBuilder<T>> {
         onRefresh: () async {
           _pagingController.refresh();
         },
-        child: PagedSliverBuilder<int, T>(
+        child: PagedLayoutBuilder<int, T>(
+            layoutProtocol: PagedLayoutProtocol.box,//TODO
             pagingController: _pagingController,
-            completedListingBuilder: (context, itemWidgetBuilder, itemCount,
-                noMoreItemsIndicatorBuilder) {
+            completedListingBuilder:
+                (context, itemWidgetBuilder, itemCount, noMoreItemsIndicatorBuilder) {
               return SliverGrid(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     childAspectRatio: widget.childAspectRatio,
@@ -116,8 +118,8 @@ class _ToolsSliverBuilderState<T> extends State<ToolsSliverBuilder<T>> {
               //   style: TextStyle(fontSize: 60),
               // );
             },
-            errorListingBuilder: (context, itemWidgetBuilder, itemCount,
-                newPageErrorIndicatorBuilder) {
+            errorListingBuilder:
+                (context, itemWidgetBuilder, itemCount, newPageErrorIndicatorBuilder) {
               return SliverGrid(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     childAspectRatio: widget.childAspectRatio,
@@ -134,8 +136,8 @@ class _ToolsSliverBuilderState<T> extends State<ToolsSliverBuilder<T>> {
               //   style: TextStyle(fontSize: 60),
               // );
             },
-            loadingListingBuilder: (context, itemWidgetBuilder, itemCount,
-                newPageProgressIndicatorBuilder) {
+            loadingListingBuilder:
+                (context, itemWidgetBuilder, itemCount, newPageProgressIndicatorBuilder) {
               return SliverGrid(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     childAspectRatio: widget.childAspectRatio,
@@ -153,51 +155,43 @@ class _ToolsSliverBuilderState<T> extends State<ToolsSliverBuilder<T>> {
               // );
             },
             builderDelegate: PagedChildBuilderDelegate(
-              firstPageProgressIndicatorBuilder:
-                  widget.firstPageProgressIndicatorBuilder != null
-                      ? (context) => widget.firstPageProgressIndicatorBuilder!
-                      : null,
-              newPageProgressIndicatorBuilder:
-                  widget.newPageProgressIndicatorBuilder != null
-                      ? (context) => widget.newPageProgressIndicatorBuilder!
-                      : null,
-              noItemsFoundIndicatorBuilder: (context) =>
-                  widget.noItemsFoundIndicatorBuilder != null
-                      ? widget.noItemsFoundIndicatorBuilder!
-                      : SizedBox(
-                          width: double.maxFinite,
-                          height: 100.h,
-                          child: Center(
-                              child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              ToolsText(
-                                'متاسفانه محتوایی جهت نمایش وجود ندارد',
-                                style: toolstitleStyle(
-                                    ),
-                              ),
-                              TextButton.icon(
-                                  onPressed: () {
-                                    _pagingController.refresh();
-                                  },
-                                  icon: const Icon(Icons.refresh),
-                                  label: ToolsText(
-                                    'تلاش دوباره',
-                                    style: toolscontentStyle(
-
-                                        color: Colors.blue),
-                                  ))
-                            ],
-                          ))),
-              noMoreItemsIndicatorBuilder:
-                  widget.noMoreItemsIndicatorBuilder != null
-                      ? (context) => widget.noMoreItemsIndicatorBuilder!
-                      : null,
+              firstPageProgressIndicatorBuilder: widget.firstPageProgressIndicatorBuilder != null
+                  ? (context) => widget.firstPageProgressIndicatorBuilder!
+                  : null,
+              newPageProgressIndicatorBuilder: widget.newPageProgressIndicatorBuilder != null
+                  ? (context) => widget.newPageProgressIndicatorBuilder!
+                  : null,
+              noItemsFoundIndicatorBuilder: (context) => widget.noItemsFoundIndicatorBuilder != null
+                  ? widget.noItemsFoundIndicatorBuilder!
+                  : SizedBox(
+                      width: double.maxFinite,
+                      height: 100.h,
+                      child: Center(
+                          child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ToolsText(
+                            'متاسفانه محتوایی جهت نمایش وجود ندارد',
+                            style: toolstitleStyle(),
+                          ),
+                          TextButton.icon(
+                              onPressed: () {
+                                _pagingController.refresh();
+                              },
+                              icon: const Icon(Icons.refresh),
+                              label: ToolsText(
+                                'تلاش دوباره',
+                                style: toolscontentStyle(color: Colors.blue),
+                              ))
+                        ],
+                      ))),
+              noMoreItemsIndicatorBuilder: widget.noMoreItemsIndicatorBuilder != null
+                  ? (context) => widget.noMoreItemsIndicatorBuilder!
+                  : null,
               animateTransitions: widget.animateTransitions,
               transitionDuration: widget.transitionDuration,
               itemBuilder: (context, T item, index) {
-                return widget.itemBuilder(
-                    context, index, item, _pagingController);
+                return widget.itemBuilder(context, index, item, _pagingController);
               },
             )),
       ),
