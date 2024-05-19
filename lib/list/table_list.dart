@@ -37,7 +37,7 @@ class ToolsTableCellCenterPadding extends StatelessWidget {
       {super.key,
       required this.child,
       this.alignment = Alignment.center,
-      this.padding = const EdgeInsets.all(8)});
+      this.padding = const EdgeInsets.all(5)});
   final Widget child;
   final EdgeInsets padding;
   final Alignment alignment;
@@ -50,6 +50,27 @@ class ToolsTableCellCenterPadding extends StatelessWidget {
           alignment: alignment,
           child: child,
         ),
+      ),
+    );
+  }
+}
+
+class ToolsCenterPadding extends StatelessWidget {
+  const ToolsCenterPadding(
+      {super.key,
+      required this.child,
+      this.alignment = Alignment.center,
+      this.padding = const EdgeInsets.all(5)});
+  final Widget child;
+  final EdgeInsets padding;
+  final Alignment alignment;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: padding,
+      child: Align(
+        alignment: alignment,
+        child: child,
       ),
     );
   }
@@ -188,7 +209,10 @@ class ScrollViewHV extends StatelessWidget {
 List<DataColumn> makeColumn(List<DataTableMy> data) => data
     .map(
       (e) => DataColumn(
-        label: Text(e.head,style: e.style,),
+        label: Text(
+          e.head,
+          style: e.style,
+        ),
         numeric: e.numeric,
       ),
     )

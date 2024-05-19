@@ -41,7 +41,7 @@ class ToolsText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double minFontSize1 = minFontSize ?? 12;
-    double maxFontSize1 = minFontSize ?? double.infinity;
+    double maxFontSize1 = maxFontSize ?? double.infinity;
     return AutoSizeText(
       text,
       textAlign: textAlign,

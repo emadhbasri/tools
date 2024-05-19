@@ -7,7 +7,7 @@ import 'dart:math' as math;
 
 class ToolsSliverBuilder<T> extends StatefulWidget {
   const ToolsSliverBuilder(
-      {Key? key,
+      {super.key,
       required this.onLoad,
       required this.itemBuilder,
       this.separatorBuilder,
@@ -28,8 +28,7 @@ class ToolsSliverBuilder<T> extends StatefulWidget {
       this.crossAxisCount = 3,
       this.childAspectRatio = 3,
       this.crossAxisSpacing = 10,
-      this.mainAxisSpacing = 10})
-      : super(key: key);
+      this.mainAxisSpacing = 10});
   final Future<ToolsListViewData<T>> Function(int page) onLoad;
 
   final Widget Function(

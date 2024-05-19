@@ -16,12 +16,15 @@ Widget imageNetwork(String url,
     Color? loadingColor,
     Widget? errorImage,
     String? type,
+    double? height,width,
     bool noCatch = false}) {
   if (noCatch) {
     return Image.network(
       url,
       color: color,
       fit: fit,
+      height:height,
+      width: width,
       loadingBuilder: (context, child, progress) {
         if (progress != null && progress.expectedTotalBytes != null) {
           return Center(
@@ -61,10 +64,13 @@ Widget imageNetwork(String url,
       },
     );
   }
+
   return CachedNetworkImage(
       imageUrl: url,
       color: color,
       fit: fit,
+      height:height,
+      width: width,
       progressIndicatorBuilder: (context, url, DownloadProgress progress) {
         if (progress.totalSize != null) {
           return Center(

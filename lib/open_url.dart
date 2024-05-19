@@ -1,4 +1,5 @@
 import 'package:url_launcher/url_launcher.dart';
+export 'package:url_launcher/url_launcher.dart';
 
 toolsUrlLauncher(String url,{LaunchMode launchMode = LaunchMode.externalApplication}) async {
   if (await canLaunchUrl(Uri.parse(url))) {
