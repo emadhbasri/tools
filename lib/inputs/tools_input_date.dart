@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tools/colors.dart';
 import 'package:tools/size_plus.dart';
 
+import '../buttons/outline_button.dart';
 import '../date.dart';
 import '../jalali_calendar.dart';
 import '../layouts/container_box.dart';
@@ -42,7 +43,7 @@ class ToolsInputDate extends StatelessWidget {
   int? maxYear;
   @override
   Widget build(BuildContext context) {
-    maxYear ??= Jalali.now().year;
+    maxYear ??= Jalali.now().year+3;
     Widget out = InkWell(
         onTap: () {
           DatePicker.showDatePicker(context,
@@ -110,5 +111,76 @@ class ToolsInputDate extends StatelessWidget {
         child: out,
       );
     }
+  }
+}
+
+
+
+class ToolsInputDateSuper extends StatelessWidget {
+  const ToolsInputDateSuper({super.key, required this.title,required this.value, required this.onChange});
+  final String title;
+  final DateTime? value;
+  final Function(DateTime) onChange;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        IconButton(
+            onPressed: () async {
+              DateTime? back = await showDatePicker(
+
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime.now().add(const Duration(days: -365)),
+                  lastDate: DateTime.now().add(const Duration(days: 365)));
+              if (back != null) {
+                TimeOfDay time = TimeOfDay.now();
+                onChange(DateTime(back.year, back.month, back.day, time.hour, time.minute));
+              }
+            },
+            icon: const Icon(
+              Icons.edit_calendar_outlined,
+              color: black1,
+            )),
+        ToolsButtonOutLine(
+            padding: EdgeInsets.symmetric(
+              horizontal: w8(),
+              vertical: h20(),
+            ),
+            onPressed: () {
+              DateTime now = DateTime.now();
+              onChange(DateTime(now.year, now.month, now.day, 0, 0, 0));
+            },
+            child: const Text('امروز')),
+        sw1(),
+        ToolsButtonOutLine(
+            padding: EdgeInsets.symmetric(
+              horizontal: w8(),
+              vertical: h20(),
+            ),
+            onPressed: () {
+              onChange(DateTime.now());
+            },
+            child: const Text('الان')),
+        sw2(),
+        Expanded(
+          child: ToolsInputDate(
+              text: title,
+              onChange: (year, month, day) {
+                TimeOfDay time = TimeOfDay.now();
+                DateTime tempDate = Jalali(year, month, day, time.hour, time.minute).toDateTime();
+                onChange(tempDate);
+              },
+              showText: value != null
+                  ? ToolsText(
+                      '${toolsMakeDate(isJalali: true, date: value, isWeekDay: true, isWeekDayLeft: false)}'
+                      ' ${makeHourMin(value!.hour, value!.minute)}',
+                      textDirection: TextDirection.rtl,
+                    )
+                  : null),
+        ),
+      ],
+    );
   }
 }

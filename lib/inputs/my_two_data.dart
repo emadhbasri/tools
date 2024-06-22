@@ -3,6 +3,7 @@ import 'package:tools/date.dart';
 import 'package:tools/size_plus.dart';
 import 'package:tools/text.dart';
 
+import '../layouts/row_expand.dart';
 import 'my_input.dart';
 import 'my_input_maker.dart';
 import 'tools_input_date.dart';
@@ -114,7 +115,13 @@ class ToolsInputTwoData1 extends StatelessWidget {
 }
 
 class ToolsInputTwoDataDate extends StatelessWidget {
-  const ToolsInputTwoDataDate({Key? key,  required this.onChangedStart, required this.onChangedEnd, required this.title, required this.data}) : super(key: key);
+  const ToolsInputTwoDataDate(
+      {Key? key,
+      required this.onChangedStart,
+      required this.onChangedEnd,
+      required this.title,
+      required this.data})
+      : super(key: key);
   final ValueChanged<DateTime> onChangedStart, onChangedEnd;
   final ToolsDataTwo<DateTime?> data;
   final Widget title;
@@ -126,20 +133,66 @@ class ToolsInputTwoDataDate extends StatelessWidget {
       ToolsInputDate(
           text: '',
           onChange: (year, month, day) {
-            DateTime tempDate = DateTime(year, month, day);
+            TimeOfDay time = TimeOfDay.now();
+            DateTime tempDate = Jalali(year, month, day, time.hour, time.minute).toDateTime();
             onChangedStart(tempDate);
           },
-          showText: data.data1 != null ? ToolsText(toolsMakeDate(isJalali: false, date: data.data1),style: toolscontentStyle(num:3)) : null),
+          showText: data.data1 != null
+              ? ToolsText(toolsMakeDate(isJalali: true, date: data.data1, isWeekDayLeft: false),
+                  style: toolscontentStyle(num: 3))
+              : null),
       sw2(),
       const Center(child: Text('تا')),
       sw2(),
       ToolsInputDate(
           text: '',
           onChange: (year, month, day) {
-            DateTime tempDate = DateTime(year, month, day);
+            TimeOfDay time = TimeOfDay.now();
+            DateTime tempDate = Jalali(year, month, day, time.hour, time.minute).toDateTime();
             onChangedEnd(tempDate);
           },
-          showText: data.data2 != null ? ToolsText(toolsMakeDate(isJalali: false, date: data.data2),style: toolscontentStyle(num:3)) : null),
+          showText: data.data2 != null
+              ? ToolsText(toolsMakeDate(isJalali: true, date: data.data2, isWeekDayLeft: false),
+                  style: toolscontentStyle(num: 3))
+              : null),
+    ]);
+  }
+}
+
+class ToolsInputTwoDataDateExpand extends StatefulWidget {
+  const ToolsInputTwoDataDateExpand({super.key, required this.title, required this.data});
+  final ToolsDataTwo<DateTime?> data;
+  final Widget title;
+
+  @override
+  State<ToolsInputTwoDataDateExpand> createState() => _ToolsInputTwoDataDateExpandState();
+}
+
+class _ToolsInputTwoDataDateExpandState extends State<ToolsInputTwoDataDateExpand> {
+  @override
+  Widget build(BuildContext context) {
+    return ToolsRowExpand(firstSpace: true, flexs: const [
+      1,
+      2,
+      2
+    ], children: [
+      widget.title,
+      ToolsInputDateSuper(
+          title: 'آغاز',
+          value: widget.data.data1,
+          onChange: (e) {
+            setState(() {
+              widget.data.data1 = e;
+            });
+          }),
+      ToolsInputDateSuper(
+          title: 'پایان',
+          value: widget.data.data2,
+          onChange: (e) {
+            setState(() {
+              widget.data.data2 = e;
+            });
+          }),
     ]);
   }
 }

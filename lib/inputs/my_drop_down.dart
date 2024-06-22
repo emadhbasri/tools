@@ -31,6 +31,7 @@ class ToolsDropDown<T> extends StatelessWidget {
     this.borderColor,
     this.hasDecorBorder = true,
     this.allowNull = false,
+    this.padHorizontal = 1,
     required this.data,
   }) : super(key: key);
   final ToolsDataDropDown data;
@@ -52,6 +53,7 @@ class ToolsDropDown<T> extends StatelessWidget {
   final double itemHeight;
   final TextStyle? textStyle;
   final bool allowNull;
+  final double padHorizontal;
   // final T? value;
 
   @override
@@ -67,7 +69,7 @@ class ToolsDropDown<T> extends StatelessWidget {
               style: toolstitleStyle(num: 3),
             ),
           ToolsContainerBox(
-            padHorizontal: 1,
+            padHorizontal: padHorizontal,
             borderWidth: borderWidth ?? 1,
             padVertical: 0,
             borderColor: borderColor ?? Colors.black,
@@ -112,6 +114,7 @@ class ToolsDropDown<T> extends StatelessWidget {
               style: textStyle,
               underline: const SizedBox.shrink(),
               value: data.value,
+
             ),
           ),
         ],
