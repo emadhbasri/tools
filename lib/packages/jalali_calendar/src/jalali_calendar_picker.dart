@@ -413,7 +413,7 @@ class DayPicker extends StatelessWidget {
             (selectableDayPredicate != null && !selectableDayPredicate!(dayToBuild));
 
         BoxDecoration? decoration;
-        TextStyle? itemStyle = themeData.textTheme.bodyText1;
+        TextStyle? itemStyle = themeData.textTheme.bodyMedium;
 
         final bool isSelectedDay = selectedPersainDate.year == getPearData.year &&
             selectedPersainDate.month == getPearData.month &&
@@ -482,7 +482,7 @@ class DayPicker extends StatelessWidget {
                   child: ExcludeSemantics(
                     child: Text(
                       "${pdate.monthname}  ${pdate.year}",
-                      style: themeData.textTheme.subtitle1,
+                      style: themeData.textTheme.bodySmall,
                     ),
                   ),
                 ),
@@ -822,7 +822,7 @@ class YearPickerState extends State<YearPicker> {
   Widget build(BuildContext context) {
     assert(debugCheckHasMaterial(context));
     final ThemeData themeData = Theme.of(context);
-    final TextStyle? style = themeData.textTheme.bodyText1;
+    final TextStyle? style = themeData.textTheme.bodyMedium;
 
     return ListView.builder(
       controller: scrollController,
