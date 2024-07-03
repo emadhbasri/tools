@@ -81,17 +81,21 @@ abstract class ToolsTableData {
 }
 
 class ToolsTableList extends StatefulWidget {
-  const ToolsTableList(
-      {Key? key,
-      required this.list,
-      this.step = 20,
-      required this.isLastPage,
-      required this.loadMore})
-      : super(key: key);
+  const ToolsTableList({
+    Key? key,
+    required this.list,
+    this.step = 20,
+    required this.isLastPage,
+    required this.loadMore,
+    this.onLongPress,
+    this.onTap,
+  }) : super(key: key);
   final List<ToolsTableData> list;
   final bool isLastPage;
   final int step;
   final VoidCallback loadMore;
+  final Function(int)? onLongPress;
+  final Function(int)? onTap;
   @override
   State<ToolsTableList> createState() => _ToolsTableListState();
 }
@@ -170,7 +174,8 @@ class _ToolsTableListState extends State<ToolsTableList> with AutomaticKeepAlive
               columns: makeColumn(widget.list.first.headers(0)),
               rows: List.generate(out.length, (index) {
                 ToolsTableData item = out[index];
-                return makeRow(item.headers(index));
+                return makeRow(item.headers(index), index,
+                    onLongPress: widget.onLongPress, onTap: widget.onTap);
               }),
             ),
           ),
@@ -219,18 +224,23 @@ List<DataColumn> makeColumn(List<DataTableMy> data) => data
     .toList();
 
 DataRow makeRow(
-  List<DataTableMy> data, {
-  Function? onTap,
+  List<DataTableMy> data,
+  int index, {
+  Function(int)? onTap,
   List<DataCell>? firstCells,
   List<DataCell>? addCells,
   ValueChanged<bool?>? onSelectChanged,
-  GestureLongPressCallback? onLongPress,
+  Function(int)? onLongPress,
   bool selected = false,
   Color? color,
 }) =>
     DataRow(
         selected: selected,
-        onLongPress: onLongPress,
+        onLongPress: () {
+          if (onLongPress != null) {
+            onLongPress(index);
+          }
+        },
         onSelectChanged: onSelectChanged,
         color: color != null ? MaterialStatePropertyAll(color) : null,
         cells: [
@@ -247,9 +257,9 @@ DataRow makeRow(
                       ? () {
                           e.doIt!();
                         }
-                      : e.click == true
+                      : e.click == true || onTap !=null
                           ? () {
-                              onTap!();
+                              onTap!(index);
                             }
                           : null,
                   showEditIcon: e.editIcon))
