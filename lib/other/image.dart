@@ -6,7 +6,7 @@ ImageProvider networkImage(String url, {bool noCatch = false}) {
   if (noCatch) {
     return NetworkImage(url);
   }
-  return CachedNetworkImageProvider(url);
+  return CachedNetworkImageProvider(url,cacheKey: url);
 }
 
 Widget imageNetwork(String url,

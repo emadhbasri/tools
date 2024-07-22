@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tools/size_plus.dart';
+import 'package:tools/other/size_plus.dart';
 
 class ToolsRowExpand extends StatelessWidget {
   ToolsRowExpand({

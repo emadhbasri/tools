@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tools/text.dart';
+import 'package:tools/other/text.dart';
 
-import '../input.dart';
-import '../tools.dart';
+import '../other/input.dart';
+import '../other/tools.dart';
 
 class ToolsInput extends StatelessWidget {
   const ToolsInput(

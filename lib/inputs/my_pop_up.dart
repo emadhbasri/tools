@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tools/size_plus.dart';
+import 'package:tools/layouts/container_box.dart';
+import 'package:tools/other/size_plus.dart';
 
-import '../layouts.dart';
-import '../text.dart';
+import '../other/text.dart';
 import 'my_input_maker.dart';
 
 class ToolsPopUp<T> extends StatelessWidget {

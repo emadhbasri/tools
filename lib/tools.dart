@@ -1,44 +1,48 @@
-library tools;
+export './buttons/native_button.dart';
+export './buttons/outline_button.dart';
+export './buttons/selectable_scale.dart';
+export './buttons/text_button.dart';
 
-import 'dart:ui';
-import 'package:url_strategy/url_strategy.dart';
-import 'package:flutter/material.dart';
-import 'colors.dart';
+export './inputs/my_check_box.dart';
+export './inputs/my_drop_down.dart';
+export './inputs/my_input.dart';
+export './inputs/my_input_maker.dart';
+export './inputs/my_pop_up.dart';
+export './inputs/my_radio.dart';
+export './inputs/my_switch.dart';
+export './inputs/my_two_data.dart';
+export './inputs/tools_input_date.dart';
 
-Color mainColor = black1;
-toolsMain(kIsWeb, {Color? newmainColor}) async {
-  print('toolsMain');
-  if (newmainColor != null) mainColor = newmainColor;
-  if (kIsWeb) {
-    setPathUrlStrategy();
-    // webBrowserInfo = await DeviceInfoPlugin().webBrowserInfo;
-    // print('webBrowserInfowebBrowserInfo1 ${webBrowserInfo}');
-  }
-}
+export './layouts/column_expand.dart';
+export './layouts/container_box.dart';
+export './layouts/row_expand.dart';
 
+export './list/infinite_scroll.dart';
+export './list/list_grid.dart';
+export './list/table_list.dart';
 
-// toolsMain(kIsWeb, {Color? newmainColor}) async {
-//   print('toolsMain');
-//   if (newmainColor != null) mainColor = newmainColor;
-//   if (kIsWeb) {
-//     setPathUrlStrategy();
-//     webBrowserInfo = await DeviceInfoPlugin().webBrowserInfo;
-//     // print('webBrowserInfowebBrowserInfo1 ${webBrowserInfo}');
-//   }
-// }
-// toolsMain1(kIsWeb) async {
-//   print('toolsMain1');
-//   if (kIsWeb) {
-//     webBrowserInfo = await DeviceInfoPlugin().webBrowserInfo;
-//     print('webBrowserInfowebBrowserInfo1 ${webBrowserInfo}');
-//   }
-// }
+export './other/code.dart';
+export './other/colors.dart';
+export './other/copy_share.dart';
+export './other/date.dart';
+export './other/dio.dart';
+export './other/gal.dart';
+export './other/image_picker.dart';
+export './other/image.dart';
+export './other/input.dart';
+export './other/navigator.dart';
+export './other/open_url.dart';
+export './other/shared_pref.dart';
+export './other/size_plus.dart';
+export './other/text.dart';
+export './other/toast.dart';
+export './other/tools.dart';
+export './other/ui.dart';
 
-class MyCustomScrollBehavior extends MaterialScrollBehavior {
-  @override
-  Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.mouse,
-        PointerDeviceKind.trackpad,
-      };
-}
+export './other/jalali_calendar.dart';
+
+export './rflutter_alert/src/alert.dart';
+
+export './sidebar/src/src.dart';
+
+export './widgets/add_remove_widget.dart';

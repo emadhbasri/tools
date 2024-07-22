@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tools/size_plus.dart';
-import 'package:tools/tools.dart';
+import 'package:tools/other/size_plus.dart';
+import 'package:tools/other/tools.dart';
 
 
 class ToolsAddRemoveWidget extends StatefulWidget {
@@ -40,8 +40,8 @@ class _ToolsAddRemoveWidgetState extends State<ToolsAddRemoveWidget> {
   @override
   void initState() {
     super.initState();
-    widget.addIconColor ??= mainColor;
-    widget.removeIconColor ??= mainColor;
+    widget.addIconColor ??= toolsMainColor;
+    widget.removeIconColor ??= toolsMainColor;
     count = widget.count;
   }
 
@@ -64,11 +64,11 @@ class _ToolsAddRemoveWidgetState extends State<ToolsAddRemoveWidget> {
             padding: const EdgeInsets.all(3),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
-              border: Border.all(width: .5, color: mainColor),
+              border: Border.all(width: .5, color: toolsMainColor),
             ),
             child: Icon(
               widget.addIcon,
-              color: mainColor,
+              color: toolsMainColor,
               size: widget.addIconSize,
             ),
           ),
@@ -102,7 +102,7 @@ class _ToolsAddRemoveWidgetState extends State<ToolsAddRemoveWidget> {
             padding: const EdgeInsets.all(2),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
-              border: Border.all(width: .5, color: mainColor)
+              border: Border.all(width: .5, color: toolsMainColor)
             ),
             child: Icon(
               widget.removeIcon,

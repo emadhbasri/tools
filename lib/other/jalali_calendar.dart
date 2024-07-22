@@ -1,7 +1,7 @@
 
-export 'packages/jalali_calendar/src/jalali_calendar_picker.dart';
-export 'packages/jalali_calendar/src/date_picker.dart';
-export 'packages/jalali_calendar/src/persian_date.dart';
+export '../packages/jalali_calendar/src/jalali_calendar_picker.dart';
+export '../packages/jalali_calendar/src/date_picker.dart';
+export '../packages/jalali_calendar/src/persian_date.dart';
 
 /*
 

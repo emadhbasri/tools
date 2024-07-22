@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tools/size.dart';
+import 'package:tools/other/size.dart';
 
 class ToolsColumnExpand extends StatelessWidget {
   ToolsColumnExpand({

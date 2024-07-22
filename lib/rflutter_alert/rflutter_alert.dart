@@ -1,11 +1,11 @@
 library rflutter_alert;
 
 import 'package:flutter/material.dart';
-import 'package:tools/colors.dart';
-import 'package:tools/navigator.dart';
-import 'package:tools/size.dart';
-import 'package:tools/size_plus.dart';
-import 'package:tools/text.dart';
+import 'package:tools/other/colors.dart';
+import 'package:tools/other/navigator.dart';
+import 'package:tools/other/size.dart';
+import 'package:tools/other/size_plus.dart';
+import 'package:tools/other/text.dart';
 
 import 'rflutter_alert.dart';
 export 'src/alert.dart';

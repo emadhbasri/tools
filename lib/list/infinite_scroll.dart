@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:tools/size_plus.dart';
-import '../text.dart';
+import 'package:tools/other/size_plus.dart';
+import '../other/text.dart';
 
 class ToolsListViewData<T> {
   List<T>? data;

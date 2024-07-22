@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-import 'package:tools/size_plus.dart';
+import 'package:tools/other/size_plus.dart';
 
 export 'package:photo_view/photo_view.dart';
 export 'package:photo_view/photo_view_gallery.dart';
@@ -79,7 +79,7 @@ class ToolsGalMobileState extends State<ToolsGalMobile> {
           backgroundColor: Colors.white,
           title: ToolsText(
             widget.title ?? '',
-            style: TextStyle(color: mainColor),
+            style: TextStyle(color: toolsMainColor),
           ),
           leading: IconButton(
             onPressed: () {
@@ -87,7 +87,7 @@ class ToolsGalMobileState extends State<ToolsGalMobile> {
             },
             icon: Icon(
               Icons.arrow_back_ios,
-              color: mainColor,
+              color: toolsMainColor,
             ),
           ),
         ),

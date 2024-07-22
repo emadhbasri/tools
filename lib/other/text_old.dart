@@ -463,7 +463,7 @@ TextStyle toolstitleStyle(
     FontWeight fontWeight = FontWeight.bold,
     double? fontSize,
     double? screenWidth}) {
-color??=mainColor;
+color??=toolsMainColor;
   switch (num) {
     case 1:
       fontSize ??= w4(screenWidth);
@@ -525,7 +525,7 @@ TextStyle toolscontentStyle(
     String? fontFamily,
     double? fontSize,
     double? screenWidth}) {
-      color??=mainColor;
+      color??=toolsMainColor;
   switch (num) {
     case 1:
       fontSize ??= w4(screenWidth);

@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:tools/size_plus.dart';
+import 'package:tools/other/size_plus.dart';
 import 'tools.dart';
 
 const String yekan = 'IRANYekanMobileRegular';
@@ -463,7 +463,7 @@ TextStyle toolstitleStyle({
   FontWeight fontWeight = FontWeight.bold,
   double? fontSize,
 }) {
-  color ??= mainColor;
+  color ??= toolsMainColor;
   switch (num) {
     case 1:
       fontSize ??= w4();
@@ -525,7 +525,7 @@ TextStyle toolscontentStyle({
   String? fontFamily,
   double? fontSize,
 }) {
-  color ??= mainColor;
+  color ??= toolsMainColor;
   switch (num) {
     case 1:
       fontSize ??= w4();

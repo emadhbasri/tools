@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:tools/colors.dart';
-import 'package:tools/size.dart';
+import 'package:tools/other/colors.dart';
+import 'package:tools/other/size.dart';
 
-import '../date.dart';
-import '../jalali_calendar.dart';
+import '../other/date.dart';
+import '../other/jalali_calendar.dart';
 import '../layouts/container_box.dart';
-import '../text.dart';
-import '../tools.dart';
+import '../other/text.dart';
+import '../other/tools.dart';
 
 class ToolsInputDate extends StatelessWidget {
   ToolsInputDate(
@@ -77,7 +77,7 @@ class ToolsInputDate extends StatelessWidget {
                   else
                     Icon(
                       icon ?? Icons.calendar_month,
-                      color: iconColor ?? mainColor,
+                      color: iconColor ?? toolsMainColor,
                       size: iconSize,
                     ),
                   sw2(),

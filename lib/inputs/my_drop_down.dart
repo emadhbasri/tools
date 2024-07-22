@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tools/layouts.dart';
+import 'package:tools/layouts/container_box.dart';
 
-import '../text.dart';
+import '../other/text.dart';
 import 'my_input_maker.dart';
 
 // ignore: must_be_immutable

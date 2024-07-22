@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tools/colors.dart';
-import 'package:tools/size.dart';
-import 'package:tools/text.dart';
+import 'package:tools/other/colors.dart';
+import 'package:tools/other/size.dart';
+import 'package:tools/other/text.dart';
 
 class DividerName extends StatelessWidget {
   const DividerName(

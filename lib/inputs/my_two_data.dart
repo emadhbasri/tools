@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tools/date.dart';
-import 'package:tools/size_plus.dart';
-import 'package:tools/text.dart';
+import 'package:tools/other/date.dart';
+import 'package:tools/other/size_plus.dart';
+import 'package:tools/other/text.dart';
 
 import '../layouts/row_expand.dart';
 import 'my_input.dart';
