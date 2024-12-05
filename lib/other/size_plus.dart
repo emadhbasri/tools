@@ -138,7 +138,9 @@ double h24() => h12() * 2;
 double h28() => h24() + h4();
 double h32() => h16() * 2;
 
+Widget sh05() => SizedBox(height: h2());
 Widget sh1() => SizedBox(height: h4());
+Widget sh15() => SizedBox(height: h4()+h2());
 Widget sh2() => SizedBox(height: h8());
 Widget sh3() => SizedBox(height: h12());
 Widget sh4() => SizedBox(height: h16());
@@ -157,6 +159,7 @@ double w24() => w12() * 2;
 double w28() => w24() + w4();
 double w32() => w16() * 2;
 
+Widget sw05() => SizedBox(width: w2());
 Widget sw1() => SizedBox(width: w4());
 Widget sw2() => SizedBox(width: w8());
 Widget sw3() => SizedBox(width: w12());

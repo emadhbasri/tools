@@ -23,6 +23,7 @@ class ToolsInputDate extends StatelessWidget {
     this.textWidget,
     this.iconWidget,
     this.maxYear,
+    this.initValue,
     required this.onChange,
     required this.showText,
   }) : super(key: key);
@@ -36,6 +37,7 @@ class ToolsInputDate extends StatelessWidget {
   final double? iconSize;
 
   final String? text;
+  final DateTime? initValue;
   final Widget? textWidget, iconWidget;
   final Widget? showText;
   final void Function(int year, int month, int dya) onChange;
@@ -44,12 +46,13 @@ class ToolsInputDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     maxYear ??= Jalali.now().year+3;
+    Jalali initD = initValue!=null?Jalali.fromDateTime(initValue!):Jalali.now();
     Widget out = InkWell(
         onTap: () {
           DatePicker.showDatePicker(context,
-              initialDay: Jalali.now().day,
-              initialMonth: Jalali.now().month,
-              initialYear: Jalali.now().year,
+              initialDay: initD.day,
+              initialMonth: initD.month,
+              initialYear: initD.year,
               maxYear: maxYear!,
               // minYear: Jalali.now().year - ,
               onConfirm: (int? year, int? month, int? day) {
@@ -131,7 +134,7 @@ class ToolsInputDateSuper extends StatelessWidget {
               DateTime? back = await showDatePicker(
 
                   context: context,
-                  initialDate: DateTime.now(),
+                  initialDate: value??DateTime.now(),
                   firstDate: DateTime.now().add(const Duration(days: -365)),
                   lastDate: DateTime.now().add(const Duration(days: 365)));
               if (back != null) {
@@ -172,6 +175,7 @@ class ToolsInputDateSuper extends StatelessWidget {
                 DateTime tempDate = Jalali(year, month, day, time.hour, time.minute).toDateTime();
                 onChange(tempDate);
               },
+              initValue: value,
               showText: value != null
                   ? ToolsText(
                       '${toolsMakeDate(isJalali: true, date: value, isWeekDay: true, isWeekDayLeft: false)}'

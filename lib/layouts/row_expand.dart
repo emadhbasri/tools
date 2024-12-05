@@ -13,7 +13,7 @@ class ToolsRowExpand extends StatelessWidget {
     this.firstSpace = false,
     this.lastSpace = false,
     this.firstLastSpace = false,
-    this.textDirection = TextDirection.ltr,
+    this.textDirection = TextDirection.rtl,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.mainAxisSize = MainAxisSize.max,
     this.crossAxisAlignment = CrossAxisAlignment.end,
@@ -77,7 +77,7 @@ class ToolsRowExpand extends StatelessWidget {
             mainAxisSize: mainAxisSize,
             crossAxisAlignment: crossAxisAlignment,
             verticalDirection: verticalDirection,
-            textDirection: TextDirection.rtl,
+            textDirection: textDirection,
             children: out,
           ),
         );
@@ -87,7 +87,7 @@ class ToolsRowExpand extends StatelessWidget {
           mainAxisSize: mainAxisSize,
           crossAxisAlignment: crossAxisAlignment,
           verticalDirection: verticalDirection,
-          textDirection: TextDirection.rtl,
+          textDirection: textDirection,
           children: out,
         );
       }
@@ -98,7 +98,7 @@ class ToolsRowExpand extends StatelessWidget {
           mainAxisSize: mainAxisSize,
           crossAxisAlignment: crossAxisAlignment,
           verticalDirection: verticalDirection,
-          textDirection: TextDirection.rtl,
+          textDirection: textDirection,
           children: children,
         );
       } else {
@@ -107,7 +107,7 @@ class ToolsRowExpand extends StatelessWidget {
           mainAxisSize: mainAxisSize,
           crossAxisAlignment: crossAxisAlignment,
           verticalDirection: verticalDirection,
-          textDirection: TextDirection.rtl,
+          textDirection: textDirection,
           children: children,
         );
       }
@@ -127,7 +127,7 @@ class ToolsRowExpandForce extends StatelessWidget {
     this.firstSpace = false,
     this.lastSpace = false,
     this.firstLastSpace = false,
-    this.textDirection = TextDirection.ltr,
+    this.textDirection = TextDirection.rtl,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.mainAxisSize = MainAxisSize.max,
     this.crossAxisAlignment = CrossAxisAlignment.start,
@@ -177,7 +177,7 @@ class ToolsRowExpandForce extends StatelessWidget {
         mainAxisSize: mainAxisSize,
         crossAxisAlignment: crossAxisAlignment,
         verticalDirection: verticalDirection,
-        textDirection: TextDirection.rtl,
+        textDirection: textDirection,
         children: out,
       );
     } else {
@@ -186,7 +186,7 @@ class ToolsRowExpandForce extends StatelessWidget {
         mainAxisSize: mainAxisSize,
         crossAxisAlignment: crossAxisAlignment,
         verticalDirection: verticalDirection,
-        textDirection: TextDirection.rtl,
+        textDirection: textDirection,
         children: children,
       );
     }

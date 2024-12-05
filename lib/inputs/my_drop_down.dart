@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tools/layouts/container_box.dart';
 
 import '../other/text.dart';
+import '../other/tools.dart';
 import 'my_input_maker.dart';
 
 // ignore: must_be_immutable
@@ -33,11 +34,12 @@ class ToolsDropDown<T> extends StatelessWidget {
     this.allowNull = false,
     this.padHorizontal = 1,
     required this.data,
+    this.handleError = true,
   }) : super(key: key);
   final ToolsDataDropDown data;
   // final List<String> titles;
   // final List<T> values;
-  final bool hasDecorBorder;
+  final bool hasDecorBorder, handleError;
   final AlignmentGeometry itemAlignment, mainAlignment;
   final ValueChanged<T> onChanged;
   final ValueChanged<T?>? onChangedNull;
@@ -58,16 +60,26 @@ class ToolsDropDown<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String outHint = '';
+    outHint = hintTitle != null ? hintTitle! : '';
+    if (doHint == true && hintTitle == null && hint is Text) {
+      outHint = (hint as Text).data ?? '';
+    }
+
+    if (handleError && (data.value != null && !data.values.contains(data.value))) {
+      outHint += '- ${data.value.toString()}';
+      data.value=null;
+    }
+
     if (hasDecorBorder) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (hintTitle != null)
-            Text(
-              hintTitle!,
-              style: toolstitleStyle(num: 3),
-            ),
+          Text(
+            outHint,
+            style: toolstitleStyle(num: 3),
+          ),
           ToolsContainerBox(
             padHorizontal: padHorizontal,
             borderWidth: borderWidth ?? 1,
@@ -114,7 +126,6 @@ class ToolsDropDown<T> extends StatelessWidget {
               style: textStyle,
               underline: const SizedBox.shrink(),
               value: data.value,
-
             ),
           ),
         ],
@@ -135,11 +146,10 @@ class ToolsDropDown<T> extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (hintTitle != null)
-            Text(
-              hintTitle!,
-              style: toolstitleStyle(num: 3),
-            ),
+          Text(
+            outHint,
+            style: toolstitleStyle(num: 3),
+          ),
           DropdownButton<T>(
             items: [
               if (allowNull)

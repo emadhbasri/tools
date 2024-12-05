@@ -3,12 +3,17 @@ export 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class ToolsTableCellPadding extends StatelessWidget {
   const ToolsTableCellPadding(
-      {super.key, required this.child, this.padding = const EdgeInsets.all(8)});
+      {super.key,
+      required this.child,
+      this.verticalAlignment,
+      this.padding = const EdgeInsets.all(8)});
   final Widget child;
   final EdgeInsets padding;
+  final TableCellVerticalAlignment? verticalAlignment;
   @override
   Widget build(BuildContext context) {
     return TableCell(
+      verticalAlignment: verticalAlignment,
       child: Padding(
         padding: padding,
         child: child,
@@ -18,12 +23,15 @@ class ToolsTableCellPadding extends StatelessWidget {
 }
 
 class ToolsTableCellCenter extends StatelessWidget {
-  const ToolsTableCellCenter({super.key, required this.child, this.alignment = Alignment.center});
+  const ToolsTableCellCenter(
+      {super.key, required this.child, this.verticalAlignment, this.alignment = Alignment.center});
   final Widget child;
   final Alignment alignment;
+  final TableCellVerticalAlignment? verticalAlignment;
   @override
   Widget build(BuildContext context) {
     return TableCell(
+      verticalAlignment: verticalAlignment,
       child: Align(
         alignment: alignment,
         child: child,
@@ -36,14 +44,17 @@ class ToolsTableCellCenterPadding extends StatelessWidget {
   const ToolsTableCellCenterPadding(
       {super.key,
       required this.child,
+      this.verticalAlignment,
       this.alignment = Alignment.center,
       this.padding = const EdgeInsets.all(5)});
   final Widget child;
   final EdgeInsets padding;
   final Alignment alignment;
+  final TableCellVerticalAlignment? verticalAlignment;
   @override
   Widget build(BuildContext context) {
     return TableCell(
+      verticalAlignment: verticalAlignment,
       child: Padding(
         padding: padding,
         child: Align(
@@ -257,7 +268,7 @@ DataRow makeRow(
                       ? () {
                           e.doIt!();
                         }
-                      : e.click == true || onTap !=null
+                      : e.click == true || onTap != null
                           ? () {
                               onTap!(index);
                             }

@@ -25,11 +25,12 @@ String toolsmakeDurationToString(DateTime date) {
   }
 }
 
-String toolsmakeDurationToStringP(DateTime date) {
-  if (date.isAfter(DateTime.now())) {
-    return '';
+String toolsmakeDurationToStringP(DateTime date,[String? replace]) {
+  var now = DateTime.now();
+  if (date.isAfter(now)) {
+    return replace??'';
   }
-  DateTimeRange range = DateTimeRange(start: date, end: DateTime.now());
+  DateTimeRange range = DateTimeRange(start: date, end: now);
   Duration duration = range.duration;
   if (duration.inDays > 365) {
     return '${duration.inDays ~/ 365} سال پیش';
@@ -87,6 +88,27 @@ String toolsintToWeekDayJalali(int index) {
       return 'پنج‌شنبه';
     case 7:
       return 'جمعه';
+    default:
+      return '';
+  }
+}
+
+String toolsintToWeekDayMiladi(int index) {
+  switch (index) {
+    case 1:
+      return 'Monday';
+    case 2:
+      return 'Tuesday';
+    case 3:
+      return 'Wednesday';
+    case 4:
+      return 'Thursday';
+    case 5:
+      return 'Friday';
+    case 6:
+      return 'Saturday';
+    case 7:
+      return 'Sunday';
     default:
       return '';
   }
@@ -206,7 +228,7 @@ String toolsMakeDate(
         jal.day.toString().padLeft(2, '0'), toolsintToWeekDayJalali(jal.weekDay));
   } else {
     out = YMDW(outDate.year.toString().padLeft(4, '0'), outDate.month.toString().padLeft(2, '0'),
-        outDate.day.toString().padLeft(2, '0'));
+        outDate.day.toString().padLeft(2, '0'),toolsintToWeekDayMiladi(outDate.weekday));
   }
 
   if (isWeekDay) {

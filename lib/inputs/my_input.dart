@@ -25,6 +25,7 @@ class ToolsInput extends StatelessWidget {
       this.textAlign = TextAlign.start,
       this.minLines,
       this.maxLines,
+      this.maxLength,
       this.suffixText,
       this.prefixText,
       this.hintText,
@@ -42,6 +43,7 @@ class ToolsInput extends StatelessWidget {
       this.onEditingComplete,
       this.onSubmitted,
       this.errorText,
+      // this.buildCounter,
       this.clearSuffix = false})
       : super(key: key);
   final String? labelText, hintText, prefixText, suffixText, errorText;
@@ -49,7 +51,7 @@ class ToolsInput extends StatelessWidget {
   final TextEditingController? controller;
   final TextDirection textDirection;
   final TextDirection? decorDirection;
-  final int? minLines, maxLines;
+  final int? minLines, maxLines,maxLength;
   final ToolsInputBorder inputBorder;
   final BorderRadius borderRadius;
   final BorderSide borderSide;
@@ -64,7 +66,7 @@ class ToolsInput extends StatelessWidget {
   final GestureTapCallback? onTap;
   final VoidCallback? onEditingComplete;
   final ValueChanged<String>? onChanged, onSubmitted;
-
+// final InputCounterWidgetBuilder? buildCounter;
   final bool clearSuffix;
   @override
   Widget build(BuildContext context) {
@@ -81,6 +83,8 @@ class ToolsInput extends StatelessWidget {
     return Directionality(
       textDirection: decorDirection ?? textDirection,
       child: TextField(
+        maxLength: maxLength,
+        // buildCounter: buildCounter,
         expands: expands,
         focusNode: focusNode,
         obscureText: obscureText,

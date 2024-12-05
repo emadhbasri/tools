@@ -160,9 +160,11 @@ class ToolsInputTwoDataDate extends StatelessWidget {
 }
 
 class ToolsInputTwoDataDateExpand extends StatefulWidget {
-  const ToolsInputTwoDataDateExpand({super.key, required this.title, required this.data});
+  const ToolsInputTwoDataDateExpand(
+      {super.key, required this.title, required this.data, this.flexs = const [1, 2, 2]});
   final ToolsDataTwo<DateTime?> data;
   final Widget title;
+  final List<int> flexs;
 
   @override
   State<ToolsInputTwoDataDateExpand> createState() => _ToolsInputTwoDataDateExpandState();
@@ -171,11 +173,7 @@ class ToolsInputTwoDataDateExpand extends StatefulWidget {
 class _ToolsInputTwoDataDateExpandState extends State<ToolsInputTwoDataDateExpand> {
   @override
   Widget build(BuildContext context) {
-    return ToolsRowExpand(firstSpace: true, flexs: const [
-      1,
-      2,
-      2
-    ], children: [
+    return ToolsRowExpand(firstSpace: true, flexs: widget.flexs, children: [
       widget.title,
       ToolsInputDateSuper(
           title: 'آغاز',

@@ -433,12 +433,7 @@
 	  "description": "stless_my"
 	},
 
-	"inputDate": {
-	  "scope": "flutter,dart",
-	  "prefix": "inputDate",
-	  "body": ["DateTime? $1;"],
-	  "description": "inputDate"
-	},
+
 	"inputDateW": {
 	  "scope": "flutter,dart",
 	  "prefix": "inputDateW",
@@ -446,16 +441,51 @@
 		"ToolsInputDate(",
 		"text: '$1',",
 		"onChange: (year, month, day) {",
-		"DateTime tempDate = DateTime(year, month, day);",
+		"TimeOfDay time = TimeOfDay.now();",
+		"DateTime tempDate =",
+		"Jalali(year, month, day, time.hour, time.minute).toDateTime();",
 		"$2 = tempDate;",
 		"state.notify();",
 		"},",
 		"showText: $2 != null",
-		"? ToolsText(toolsMakeDate(",
-		"isJalali: false, date: $2))",
-		": null),"
+		"? ToolsText('${toolsMakeDate(isJalali: true, date: $2.cDate, isWeekDay: true, isWeekDayLeft: false)}'",
+		"' ${makeHourMin($2.cDate!.hour, $2.cDate!.minute)}',",
+		"textDirection: TextDirection.rtl,",
+		"): null),"
 	  ],
 	  "description": "inputDateW"
+	},
+	"inputDateWSuper": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputDateWSuper",
+	  "body": [
+		"ToolsInputDateSuper(",
+		"   title: '$1',",
+		"   value: $2,",
+		"   onChange: (e) {",
+		"     $2 = e;",
+		"     state.notify();",
+		"  }),"
+	  ],
+	  "description": "inputDateWSuper"
+	},
+	"inputDate1": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputDate1",
+	  "body": ["DateTime? $1;"],
+	  "description": "inputDate1"
+	},
+	"inputDate2": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputDate2",
+	  "body": ["$1 = data?.$1 ?? DateTime.now();"],
+	  "description": "inputDate2"
+	},
+	"inputDateS": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputDateS",
+	  "body": ["'$1': ($1 ?? DateTime.now()).toString()"],
+	  "description": "inputDateS"
 	},
 
 	"inputText": {
@@ -463,6 +493,36 @@
 	  "prefix": "inputText",
 	  "body": ["TextEditingController $1 = TextEditingController();"],
 	  "description": "inputText"
+	},
+	"inputTextS": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputTextS",
+	  "body": ["'$1': $1.value.text,"],
+	  "description": "inputTextS"
+	},
+	"inputTextSN": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputTextSN",
+	  "body": ["'$1': convertDataRaw($1.value.text, DataType.int, haveTo: true),"],
+	  "description": "inputTextSN"
+	},
+	"inputText1": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputText1",
+	  "body": ["late TextEditingController $1;"],
+	  "description": "inputText1"
+	},
+	"inputText2": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputText2",
+	  "body": ["$1 = TextEditingController(text: data?.$1);"],
+	  "description": "inputText2"
+	},
+	"inputText2N": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputText2N",
+	  "body": ["$1 = TextEditingController(text: data?.$1.toString());"],
+	  "description": "inputText2N"
 	},
 	"inputTextW": {
 	  "scope": "flutter,dart",
@@ -503,6 +563,34 @@
 	  ],
 	  "description": "inputPopUp"
 	},
+	"inputPopUpS": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputPopUpS",
+	  "body": [
+		"'$1': $1.enables,"
+	  ],
+	  "description": "inputPopUpS"
+	},
+	"inputPopUp1": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputPopUp1",
+	  "body": [
+		"late ToolsDataPopUp<String> $1;"
+	  ],
+	  "description": "inputPopUp1"
+	},
+	"inputPopUp2": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputPopUp2",
+	  "body": [
+		"$1 = ToolsDataPopUp(  ",
+		"['1', '2', '3', '4', '5'],",
+		"null,",
+		"enables: data?.$1 ?? []",
+		");"
+	  ],
+	  "description": "inputPopUp2"
+	},
 	"inputPopUpW": {
 	  "scope": "flutter,dart",
 	  "prefix": "inputPopUpW",
@@ -533,6 +621,33 @@
 		");"
 	  ],
 	  "description": "inputDropDown"
+	},
+	"inputDropDownS": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputDropDownS",
+	  "body": [
+		"'$1': $1.value,"
+	  ],
+	  "description": "inputDropDownS"
+	},
+	"inputDropDown1": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputDropDown1",
+	  "body": [
+		"late ToolsDataDropDown<String> $1;"
+	  ],
+	  "description": "inputDropDown1"
+	},
+	"inputDropDown2": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputDropDown2",
+	  "body": [
+		"$1 = ToolsDataDropDown(",
+		"['1', '2', '3', '4'],",
+		"data?.$1,",
+		");"
+	  ],
+	  "description": "inputDropDown2"
 	},
 	"inputDropDownW": {
 	  "scope": "flutter,dart",
@@ -580,6 +695,12 @@
 	  "body": ["bool $1 = false;"],
 	  "description": "inputSwitch"
 	},
+	"inputSwitch1": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputSwitch1",
+	  "body": ["$1 = data?.$1 ?? false;"],
+	  "description": "inputSwitch1"
+	},
 	"inputSwitchW": {
 	  "scope": "flutter,dart",
 	  "prefix": "inputSwitchW",
@@ -614,9 +735,122 @@
 	"alertdelete": {
 	  "scope": "flutter,dart",
 	  "prefix": "alertdelete",
-	  "body": ["if((await toolsAlertDelete(context, strS: '$1'))==false)return;"],
+	  "body": [
+				"if ((await toolsAlertDelete(context, strS: '$1')) == false) {",
+				"  return;",
+				"}",
+				"if ((await deleteDataPushe(",
+				"        model: '$2', context: context, id: $3.id)) ==",
+				"    false) {",
+				"  return;",
+				"}"
+			  ],
 	  "description": "alertdelete"
 	},
+
+	"inputL1": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputL1",
+	  "body": ["List<String> $1 = [];"],
+	  "description": "inputL1"
+	},
+	"inputL1C": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputL1C",
+	  "body": ["List<$2Form> $1 = [];"],
+	  "description": "inputL1C"
+	},
+	"inputL2": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputL2",
+	  "body": ["$1 = data?.$1 ?? [];"],
+	  "description": "inputL2"
+	},
+	"inputL2C": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputL2C",
+	  "body": ["$1 = data?.$1.map((e) => $2Form(e)).toList() ?? [];"],
+	  "description": "inputL2C"
+	},
+	"inputLS": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputLS",
+	  "body": ["'$1': $1,"],
+	  "description": "inputLS"
+	},
+	"inputLSC": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputLSC",
+	  "body": ["'$1': $1.map((e) => e.toSend()).toList(),"],
+	  "description": "inputLSC"
+	},
+
+	"inputC": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputC",
+	  "body": [
+		"class $1Form{",
+		"",
+		"  $1Form([$1? data]){",
+		"  ",
+		"  }",
+		"  ",
+		"  Map<String, dynamic> toSend() {",
+		"    return {",
+		"    ",
+		"    };",
+		"  }",
+		"}",
+	  ],
+	  "description": "inputClass"
+	},
+	"inputC1": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputC1",
+	  "body": ["$2? $1;"],
+	  "description": "inputC1"
+	},
+	"inputC2": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputC2",
+	  "body": ["$1 = $2Form(data?.$1);"],
+	  "description": "inputC2"
+	},
+	"inputCS": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputCS",
+	  "body": ["'$1':$1?.toSend(),"],
+	  "description": "inputCS"
+	},
+
+
+
+	"inputUser": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputUser",
+	  "body": ["$1 = DataUser.findDataUser(convertData(data, '$1', DataType.string))!;"],
+	  "description": "inputUser"
+	},
+	"inputUser1": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputUser1",
+	  "body": ["DataUser? $1;"],
+	  "description": "inputUser1"
+	},
+	"inputUser2": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputUser2",
+	  "body": ["$1 = data?.$1 ?? getIt<ParaxState>().me;"],
+	  "description": "inputUser2"
+	},
+	"inputUserS": {
+	  "scope": "flutter,dart",
+	  "prefix": "inputUserS",
+	  "body": ["'$1': $1?.id"],
+	  "description": "inputUserS"
+	},
+
+
 	"default": {
 	  "scope": "flutter,dart",
 	  "prefix": "default",

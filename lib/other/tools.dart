@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'colors.dart';
 
 Color toolsMainColor = black1;
-toolsMain(kIsWeb, {Color? newmainColor}) async {
-  print('toolsMain');
+bool doHint=false;
+toolsMain(kIsWeb, {Color? newmainColor,bool? doHint1}) async {
+  debugPrint('toolsMain');
+  if(doHint1!=null) doHint = doHint1;
   if (newmainColor != null) toolsMainColor = newmainColor;
   if (kIsWeb) {
     setPathUrlStrategy();

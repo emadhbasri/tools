@@ -3,38 +3,38 @@ import 'package:tools/layouts/container_box.dart';
 import 'package:tools/other/size_plus.dart';
 
 import '../other/text.dart';
+import '../other/tools.dart';
 import 'my_input_maker.dart';
 
 class ToolsPopUp<T> extends StatelessWidget {
-  const ToolsPopUp(
-      {Key? key,
-      required this.data,
-      this.elevation = 8,
-      this.position = PopupMenuPosition.over,
-      this.backgroundColor,
-      this.dividerHeight = 16.0,
-      this.menuItemHeight = 48.0,
-      this.offset = Offset.zero,
-      this.shape =
-          const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-      this.tooltip = 'انتخاب کنید',
-      this.onCanceled,
-      required this.onSelected,
-      this.padding = const EdgeInsets.all(8.0),
-      this.menuItemPadding = const EdgeInsets.symmetric(horizontal: 16),
-      this.splashRadius,
-      this.hasDecorBorder = true,
-      this.icon = const Icon(Icons.arrow_drop_down_sharp),
-      required this.title,
-      this.textDirection = TextDirection.rtl,
-      this.decorDirection = TextDirection.rtl,
-      this.checkColor = Colors.blue,
-      this.borderColor,
-      this.iconSize = 20,
-      this.hintTitle,
-      this.borderWidth,
-      })
-      : super(key: key);
+  const ToolsPopUp({
+    Key? key,
+    required this.data,
+    this.elevation = 8,
+    this.position = PopupMenuPosition.over,
+    this.backgroundColor,
+    this.dividerHeight = 16.0,
+    this.menuItemHeight = 48.0,
+    this.offset = Offset.zero,
+    this.shape = const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+    this.tooltip = 'انتخاب کنید',
+    this.onCanceled,
+    required this.onSelected,
+    this.padding = const EdgeInsets.all(8.0),
+    this.menuItemPadding = const EdgeInsets.symmetric(horizontal: 16),
+    this.splashRadius,
+    this.hasDecorBorder = true,
+    this.icon = const Icon(Icons.arrow_drop_down_sharp),
+    required this.title,
+    this.textDirection = TextDirection.rtl,
+    this.decorDirection = TextDirection.rtl,
+    this.checkColor = Colors.blue,
+    this.borderColor,
+    this.iconSize = 20,
+    this.hintTitle,
+    this.borderWidth,
+    this.handleError = true,
+  }) : super(key: key);
   // final List<String> titles;
   // final List<T> values;
   // final T? initialValue;
@@ -55,11 +55,35 @@ class ToolsPopUp<T> extends StatelessWidget {
   final double? splashRadius;
   final EdgeInsets padding, menuItemPadding;
   final Widget title;
-  final bool hasDecorBorder;
+  final bool hasDecorBorder, handleError;
   final TextDirection textDirection, decorDirection;
   final double iconSize;
+
   @override
   Widget build(BuildContext context) {
+    String outHint = '';
+    outHint = hintTitle != null ? hintTitle! : '';
+    if (doHint == true && hintTitle == null && title is Text) {
+      outHint = (title as Text).data ?? '';
+    }
+    if ((handleError) && (data.enables.isNotEmpty) && (T.toString() == 'String')) {
+      print('bbbb');
+      List<String> notHave = [];
+      List<String> have = [];
+
+      while (data.enables.isNotEmpty) {
+        var x = data.enables.first;
+        if (data.values.contains(x)) {
+          have.add(x.toString());
+        } else {
+          notHave.add(x.toString());
+        }
+        data.enables.remove(x);
+      }
+      if (notHave.isNotEmpty) outHint += '- ${notHave.join(',')}';
+      data.enables = have.toList().cast<T>();
+    }
+
     Widget out = PopupMenuButton<T>(
       initialValue: data.initialValue,
       itemBuilder: (context) => List.generate(data.titles.length, (index) {
@@ -125,11 +149,10 @@ class ToolsPopUp<T> extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (hintTitle != null)
-            Text(
-              hintTitle!,
-              style: toolstitleStyle( num: 3),
-            ),
+          Text(
+            outHint,
+            style: toolstitleStyle(num: 3),
+          ),
           ToolsContainerBox(
             width: double.maxFinite,
             padHorizontal: 1,
@@ -148,7 +171,7 @@ class ToolsPopUp<T> extends StatelessWidget {
           if (hintTitle != null)
             Text(
               hintTitle!,
-              style: toolstitleStyle( num: 3),
+              style: toolstitleStyle(num: 3),
             ),
           out,
         ],

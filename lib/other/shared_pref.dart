@@ -1,14 +1,23 @@
 import 'package:shared_preferences/shared_preferences.dart';
 export 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+export 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 Future<List<String>> getKeys() async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   return pref.getKeys().toList();
-} 
+}
 
 Future<void> deleteKey(String key) async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   pref.remove(key);
+}
+Future<void> deleteKeySec(String key) async {
+  const FlutterSecureStorage storage = FlutterSecureStorage(
+      aOptions: AndroidOptions(
+    encryptedSharedPreferences: true,
+  ));
+  await storage.delete(key: key);
 }
 
 Future<void> setBool(String key, bool value) async {
@@ -52,6 +61,22 @@ Future<String?> getString(String key, {String? def}) async {
   } else {
     return null;
   }
+}
+
+Future<void> setStringSec(String key, String value) async {
+  const storage = FlutterSecureStorage(
+      aOptions: AndroidOptions(
+    encryptedSharedPreferences: true,
+  ));
+  await storage.write(key: key, value: value);
+}
+
+Future<String?> getStringSec(String key, {String? def}) async {
+  const storage = FlutterSecureStorage(
+      aOptions: AndroidOptions(
+    encryptedSharedPreferences: true,
+  ));
+  return await storage.read(key: key);
 }
 
 Future<bool> setList(String key, List<String> value) async {
