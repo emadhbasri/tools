@@ -196,6 +196,9 @@ String toolsMakeDate(
     bool isWeekDay = false,
     bool isWeekDayLeft = false,
     bool weekEnter = false}) {
+
+dateIsJalali = date.toString().startsWith('14') || date.toString().startsWith('13')?true:false;
+
   DateTime outDate;
 
   if (date == null) return '';

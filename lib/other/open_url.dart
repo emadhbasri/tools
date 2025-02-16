@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 export 'package:url_launcher/url_launcher.dart';
 
@@ -5,7 +6,7 @@ toolsUrlLauncher(String url,{LaunchMode launchMode = LaunchMode.externalApplicat
   if (await canLaunchUrl(Uri.parse(url))) {
     launchUrl(Uri.parse(url),mode: launchMode);
   }else{
-    print('can not launch');
+    debugPrint('can not launch');
   }
 }
 

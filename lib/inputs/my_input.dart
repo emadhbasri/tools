@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tools/other/text.dart';
 
 import '../other/input.dart';
-import '../other/tools.dart';
 
 class ToolsInput extends StatelessWidget {
   const ToolsInput(

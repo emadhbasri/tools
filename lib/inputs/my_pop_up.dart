@@ -67,7 +67,7 @@ class ToolsPopUp<T> extends StatelessWidget {
       outHint = (title as Text).data ?? '';
     }
     if ((handleError) && (data.enables.isNotEmpty) && (T.toString() == 'String')) {
-      print('bbbb');
+      debugPrint('bbbb');
       List<String> notHave = [];
       List<String> have = [];
 

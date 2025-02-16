@@ -14,25 +14,25 @@ toolsMain(kIsWeb, {Color? newmainColor,bool? doHint1}) async {
   if (kIsWeb) {
     setPathUrlStrategy();
     // webBrowserInfo = await DeviceInfoPlugin().webBrowserInfo;
-    // print('webBrowserInfowebBrowserInfo1 ${webBrowserInfo}');
+    // debugPrint('webBrowserInfowebBrowserInfo1 ${webBrowserInfo}');
   }
 }
 
 
 // toolsMain(kIsWeb, {Color? newmainColor}) async {
-//   print('toolsMain');
+//   debugPrint('toolsMain');
 //   if (newmainColor != null) mainColor = newmainColor;
 //   if (kIsWeb) {
 //     setPathUrlStrategy();
 //     webBrowserInfo = await DeviceInfoPlugin().webBrowserInfo;
-//     // print('webBrowserInfowebBrowserInfo1 ${webBrowserInfo}');
+//     // debugPrint('webBrowserInfowebBrowserInfo1 ${webBrowserInfo}');
 //   }
 // }
 // toolsMain1(kIsWeb) async {
-//   print('toolsMain1');
+//   debugPrint('toolsMain1');
 //   if (kIsWeb) {
 //     webBrowserInfo = await DeviceInfoPlugin().webBrowserInfo;
-//     print('webBrowserInfowebBrowserInfo1 ${webBrowserInfo}');
+//     debugPrint('webBrowserInfowebBrowserInfo1 ${webBrowserInfo}');
 //   }
 // }
 

@@ -145,6 +145,10 @@ Widget toolsphoneText(String data,
   );
 }
 
+String toolsphoneTextStr(String data, {bool hasSpace = true}) {
+  if (data.length < 11) return data;
+  return '${data.substring(0, 4)}${hasSpace ? ' ' : ''}${data.substring(4, 7)}${hasSpace ? ' ' : ''}${data.substring(7, 11)}';
+}
 
 String toolsmakePhoneStar(String phoneNumber) {
   String pre = phoneNumber.substring(0, 4);

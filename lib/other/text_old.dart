@@ -163,8 +163,8 @@ String toFix(String str, int fix) {
 }
 
 // textrtl(String text) {
-//   print('webBrowserInfo!.platform ${webBrowserInfo}');
-//   if (webBrowserInfo != null) print('webBrowserInfo!.platform ${webBrowserInfo!.platform}');
+//   debugPrint('webBrowserInfo!.platform ${webBrowserInfo}');
+//   if (webBrowserInfo != null) debugPrint('webBrowserInfo!.platform ${webBrowserInfo!.platform}');
 //   if (webBrowserInfo != null &&
 //       webBrowserInfo!.platform != null &&
 //       (webBrowserInfo!.platform!.toString().toLowerCase().contains('ipho') ||
@@ -181,9 +181,9 @@ String toFix(String str, int fix) {
 //   return text;
 // }
 // textrtl(String text, {bool? kIsWeb}) {
-//   print('webBrowserInfo!.platform ${webBrowserInfo}');
+//   debugPrint('webBrowserInfo!.platform ${webBrowserInfo}');
 //   if (webBrowserInfo != null) {
-//     print('webBrowserInfo!.platform ${webBrowserInfo!.platform}');
+//     debugPrint('webBrowserInfo!.platform ${webBrowserInfo!.platform}');
 //   }
 //   if (webBrowserInfo != null && webBrowserInfo!.platform != null) {
 //     if ((webBrowserInfo!.platform!.toString().toLowerCase().contains('ipho') ||

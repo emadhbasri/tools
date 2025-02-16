@@ -153,7 +153,7 @@
 //             height);
 //       },
 //       small: (BuildContext context, Screen screen) {
-//         print('small');
+//         debugPrint('small');
 //         double width = screen.mediaQueryData.size.width;
 //         double height = screen.mediaQueryData.size.height;
 //         double screenHeight = height;
@@ -208,7 +208,7 @@
 //         }
 //       },
 //       defaultBuilder: (BuildContext context, Screen screen) {
-//         print('default');
+//         debugPrint('default');
 //         double width = screen.mediaQueryData.size.width;
 //         double height = screen.mediaQueryData.size.height;
 //         double screenHeight = height;

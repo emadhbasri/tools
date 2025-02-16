@@ -139,7 +139,8 @@ class ToolsInputDateSuper extends StatelessWidget {
                   lastDate: DateTime.now().add(const Duration(days: 365)));
               if (back != null) {
                 TimeOfDay time = TimeOfDay.now();
-                onChange(DateTime(back.year, back.month, back.day, time.hour, time.minute));
+                onChange(DateTime(back.year, back.month, back.day, 0, 0));
+                // onChange(DateTime(back.year, back.month, back.day, time.hour, time.minute));
               }
             },
             icon: const Icon(
@@ -156,23 +157,24 @@ class ToolsInputDateSuper extends StatelessWidget {
               onChange(DateTime(now.year, now.month, now.day, 0, 0, 0));
             },
             child: const Text('امروز')),
-        sw1(),
-        ToolsButtonOutLine(
-            padding: EdgeInsets.symmetric(
-              horizontal: w8(),
-              vertical: h20(),
-            ),
-            onPressed: () {
-              onChange(DateTime.now());
-            },
-            child: const Text('الان')),
+        // sw1(),
+        // ToolsButtonOutLine(
+        //     padding: EdgeInsets.symmetric(
+        //       horizontal: w8(),
+        //       vertical: h20(),
+        //     ),
+        //     onPressed: () {
+        //       onChange(DateTime.now());
+        //     },
+        //     child: const Text('الان')),
         sw2(),
         Expanded(
           child: ToolsInputDate(
               text: title,
               onChange: (year, month, day) {
                 TimeOfDay time = TimeOfDay.now();
-                DateTime tempDate = Jalali(year, month, day, time.hour, time.minute).toDateTime();
+                DateTime tempDate = Jalali(year, month, day, 0,0).toDateTime();
+                // DateTime tempDate = Jalali(year, month, day, time.hour, time.minute).toDateTime();
                 onChange(tempDate);
               },
               initValue: value,

@@ -36,18 +36,19 @@ class Services {
     //   }
     // }
     dynamic data;
-    print('parameters $parameters');
-    // print('parametersparameters ${parameters.runtimeType}');
-    // print('jsonEncode(parameters) ${jsonEncode(parameters).runtimeType}');
+    debugPrint('parameters $parameters');
+    // debugPrint('parametersparameters ${parameters.runtimeType}');
+    // debugPrint('jsonEncode(parameters) ${jsonEncode(parameters).runtimeType}');
     if (isDataJson) {
       headers ??= {};
       headers['Content-Type'] = 'application/json';
-      // print('parameters ${parameters}');
+      // debugPrint('parameters ${parameters}');
       data = jsonEncode(parameters);
-      // print('dataJson ${data}');
+      // debugPrint('dataJson ${data}');
     } else {
       data = parameters;
     }
+    debugPrint(data);
 
     // if(kind==ServiceKind.postForm){
     //   headers ??= {};
@@ -143,7 +144,7 @@ class Services {
     doPrint ??= this.doPrint;
     kind ??= this.kind;
     url = '$server$url';
-    print('urlurl $url');
+    debugPrint('urlurl $url');
 
     if (doPrint) {
       debugPrint('start');
